@@ -186,9 +186,76 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeMyGuestModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeMyGuestModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeMyGuestModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeMyGuestModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Discussion.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Group.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MessagesInDiscussion.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Occasion.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Photo.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Place.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlacePhotoView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Traveling.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserGroupView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserMessagerView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserOccasionView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPhotoView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPlaceView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserProfile.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserSityDiscussionView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserSityTravelsView.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -253,6 +320,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\BeMyGuestModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BeMyGuestModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BeMyGuestModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
+      <LastGenOutput>BeMyGuestModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BeMyGuestModels.edmx.diagram">
+      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\BeMyGuestModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
+      <LastGenOutput>BeMyGuestModels.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -298,6 +382,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Authentication\Registration.cshtml" />
+    <Content Include="Views\Authentication\Index.cshtml" />
+    <Content Include="Views\Authentication\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -307,7 +394,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
