@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="783f9091bbce4c7f9ac95cf82288107b" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Discussion" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Group" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Message" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MessagesInDiscussion" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Occasion" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Photo" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Place" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Traveling" Width="1.5" PointX="9.75" PointY="13.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MessagesRead_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MessagesWrite_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OccasionHost_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OccasionTraveler_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Place_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MessagesInDiscussion_ToDiscussion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DiscussionGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PhotoPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.TravelingOccasion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserDiscussion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserOccasion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserPhoto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserTraveling" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
