@@ -161,8 +161,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DiscussionsController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\OccasionsController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\TravelingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,7 +226,7 @@
     <Compile Include="Models\Place.cs">
       <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlacesController.cs" />
+    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Models\Traveling.cs">
       <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>
@@ -307,6 +313,36 @@
     <Content Include="Views\Places\Details.cshtml" />
     <Content Include="Views\Places\Edit.cshtml" />
     <Content Include="Views\Places\Index.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Discussions\Create.cshtml" />
+    <Content Include="Views\Discussions\Delete.cshtml" />
+    <Content Include="Views\Discussions\Details.cshtml" />
+    <Content Include="Views\Discussions\Edit.cshtml" />
+    <Content Include="Views\Discussions\Index.cshtml" />
+    <Content Include="Views\Occasions\Create.cshtml" />
+    <Content Include="Views\Occasions\Delete.cshtml" />
+    <Content Include="Views\Occasions\Details.cshtml" />
+    <Content Include="Views\Occasions\Edit.cshtml" />
+    <Content Include="Views\Occasions\Index.cshtml" />
+    <Content Include="Views\Photos\Create.cshtml" />
+    <Content Include="Views\Photos\Delete.cshtml" />
+    <Content Include="Views\Photos\Details.cshtml" />
+    <Content Include="Views\Photos\Edit.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
+    <Content Include="Views\Travelings\Create.cshtml" />
+    <Content Include="Views\Travelings\Delete.cshtml" />
+    <Content Include="Views\Travelings\Details.cshtml" />
+    <Content Include="Views\Travelings\Edit.cshtml" />
+    <Content Include="Views\Travelings\Index.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
