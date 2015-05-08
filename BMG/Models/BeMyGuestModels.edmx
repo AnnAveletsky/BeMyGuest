@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -65,6 +65,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IdPhoto" Type="int" />
         </EntityType>
         <EntityType Name="Discussion">
           <Key>
@@ -224,6 +225,18 @@
           <Property Name="IdUser" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IdTraveling" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AspNetUsers_ToPhoto">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdPhoto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -592,6 +605,10 @@
           <EntitySet Name="UserPhoto" EntityType="Self.UserPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPlace" EntityType="Self.UserPlace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTraveling" EntityType="Self.UserTraveling" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Self.FK_AspNetUsers_ToPhoto">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -705,8 +722,7 @@
             <End Role="UserTraveling" EntitySet="UserTraveling" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -779,6 +795,8 @@
           <NavigationProperty Name="Photos" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="Places1" Relationship="Self.UserPlace" FromRole="AspNetUsers" ToRole="Place" />
           <NavigationProperty Name="Travelings" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
+          <Property Name="IdPhoto" Type="Int32" />
+          <NavigationProperty Name="Photo" Relationship="Model.FK_AspNetUsers_ToPhoto" FromRole="AspNetUser" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Discussion">
           <Key>
@@ -857,6 +875,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Places" Relationship="Self.PhotoPlace" FromRole="Photo" ToRole="Place" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserPhoto" FromRole="Photo" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="Model.FK_AspNetUsers_ToPhoto" FromRole="Photo" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -1111,7 +1130,23 @@
             <End Role="Traveling" EntitySet="Travelings" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Model.FK_AspNetUsers_ToPhoto">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_AspNetUsers_ToPhoto">
+          <End Type="Model.Photo" Role="Photo" Multiplicity="0..1" />
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="IdPhoto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1158,6 +1193,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />

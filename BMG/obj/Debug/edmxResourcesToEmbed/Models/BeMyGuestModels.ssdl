@@ -60,6 +60,7 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="IdPhoto" Type="int" />
   </EntityType>
   <EntityType Name="Discussion">
     <Key>
@@ -219,6 +220,18 @@
     <Property Name="IdUser" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="IdTraveling" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_AspNetUsers_ToPhoto">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="IdPhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -587,6 +600,10 @@
     <EntitySet Name="UserPhoto" EntityType="Self.UserPhoto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserPlace" EntityType="Self.UserPlace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserTraveling" EntityType="Self.UserTraveling" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Self.FK_AspNetUsers_ToPhoto">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

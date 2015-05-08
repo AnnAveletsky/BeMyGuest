@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BMG.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "Профиль";
+}
+
+<h2>Профиль</h2>
+
+@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+{
+    foreach (var item in Model)
+    {
+        if (item.UserName == User.Identity.Name)
+        {
+            <div class="jumbotron">
+                <h1>@Html.DisplayFor(modelItem => item.UserName)</h1>
+
+                <div class="row">
+                    <div class="col-md-1">
+                        Email
+                    </div>
+                    <div class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </div>
+                 </div>
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </div>
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.Photo.Path)
+
+                </div>
+                    <div>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </div>
+                    <p class="lead">
+                        <a href="~/Messages/Index">Сообщения</a>
+                        <a href="~/Photos/Index">Фотографии</a>
+                        <a href="~/Places/Index">Места</a>
+                    </p>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2><a href="~/Occasions/Index">Мои события</a></h2>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2><a href="~/Travelings/Index">Путешествия в моём городе</a></h2>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2><a href="~/Groups/Index">Группы в моём городе</a></h2>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+            </div>
+
+}
+    }
+}

@@ -36,6 +36,7 @@
         <AssociationConnector Association="Model.UserPhoto" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UserPlace" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UserTraveling" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AspNetUsers_ToPhoto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

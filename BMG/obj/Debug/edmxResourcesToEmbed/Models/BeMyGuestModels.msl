@@ -41,6 +41,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="Model.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />

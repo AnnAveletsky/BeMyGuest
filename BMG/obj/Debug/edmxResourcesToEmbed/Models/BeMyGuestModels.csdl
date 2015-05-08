@@ -69,6 +69,8 @@
     <NavigationProperty Name="Photos" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
     <NavigationProperty Name="Places1" Relationship="Self.UserPlace" FromRole="AspNetUsers" ToRole="Place" />
     <NavigationProperty Name="Travelings" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
+    <Property Name="IdPhoto" Type="Int32" />
+    <NavigationProperty Name="Photo" Relationship="Model.FK_AspNetUsers_ToPhoto" FromRole="AspNetUser" ToRole="Photo" />
   </EntityType>
   <EntityType Name="Discussion">
     <Key>
@@ -147,6 +149,7 @@
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Places" Relationship="Self.PhotoPlace" FromRole="Photo" ToRole="Place" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.UserPhoto" FromRole="Photo" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Model.FK_AspNetUsers_ToPhoto" FromRole="Photo" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="Place">
     <Key>
@@ -401,5 +404,21 @@
       <End Role="Traveling" EntitySet="Travelings" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Model.FK_AspNetUsers_ToPhoto">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_AspNetUsers_ToPhoto">
+    <End Type="Model.Photo" Role="Photo" Multiplicity="0..1" />
+    <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="IdPhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

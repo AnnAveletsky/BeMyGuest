@@ -18,6 +18,7 @@ namespace BMG.Models
         {
             this.Places = new HashSet<Place>();
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.AspNetUsers1 = new HashSet<AspNetUser>();
         }
     
         public int Id { get; set; }
@@ -26,5 +27,6 @@ namespace BMG.Models
     
         public virtual ICollection<Place> Places { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers1 { get; set; }
     }
 }
