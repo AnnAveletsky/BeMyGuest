@@ -10,64 +10,67 @@
 {
     foreach (var item in Model)
     {
-        if (item.UserName == User.Identity.Name)
+        if (item.Email == User.Identity.Name)
         {
             <div class="jumbotron">
-                <h1>@Html.DisplayFor(modelItem => item.UserName)</h1>
+                <div class="row">
+                    <div class="col-lg-6">
 
-                <div class="row">
-                    <div class="col-md-1">
-                        Email
-                    </div>
-                    <div class="col-md-1">
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </div>
-                 </div>
-                <div class="row">
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </div>
-                <div class="row">
-                    @Html.DisplayFor(modelItem => item.Photo.Path)
+                        <h2>@Html.DisplayFor(modelItem => item.UserName)</h2>
 
-                </div>
-                    <div>
-                        @Html.ActionLink("Редактирование профиля", "Edit", new { id = item.Id }) |
+                        Email  @Html.DisplayFor(modelItem => item.Email)
+                        <br>
+                        Номер   @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        <br>
+                        @Html.ActionLink("Редактирование профиля", "Edit", new { id = item.Id })
+                        <br>
                         @Html.ActionLink("Удаление профиля", "Delete", new { id = item.Id })
-                    </div>
-                    <p class="lead">
-                        <a href="~/Messages/Index">Сообщения</a>
-                        <a href="~/Photos/Index">Фотографии</a>
-                        <a href="~/Places/Index">Места</a>
-                    </p>
-                
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
-                    <p>
-                        В разработке
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h2><a href="~/Occasions/Index">Мои события</a></h2>
-                    <p>
-                        В разработке
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h2><a href="~/Travelings/Index">Путешествия в моём городе</a></h2>
-                    <p>
-                        В разработке
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h2><a href="~/Groups/Index">Группы в моём городе</a></h2>
-                    <p>
-                        В разработке
-                    </p>
-                </div>
-            </div>
 
-}
+                        <br>
+                        <a href="~/Messages/Index">Сообщения</a>
+                        <br>
+                        <a href="~/Photos/Index">Фотографии</a>
+                        <br>
+                        <a href="~/Places/Index">Места</a>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="thumbnail">
+                            <img src="https://@Html.DisplayFor(modelItem => item.Photo.Path)" alt="@Html.DisplayFor(modelItem => item.Photo.Description)" width="100%">
+                        </a>
+                        <div class="caption">
+                            <p>@Html.DisplayFor(modelItem => item.Photo.Description)</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
+            <p>
+                В разработке
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2><a href="~/Occasions/Index">Мои события</a></h2>
+            <p>
+                В разработке
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2><a href="~/Travelings/Index">Путешествия в моём городе</a></h2>
+            <p>
+                В разработке
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2><a href="~/Groups/Index">Группы в моём городе</a></h2>
+            <p>
+                В разработке
+            </p>
+        </div>
+    </div>
+        }
     }
 }
