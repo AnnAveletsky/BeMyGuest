@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BMG.Models.Photo>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Фотографии";
 }
 
-<h2>Index</h2>
+<h2>Фотографии</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить картинку", "Create")
 </p>
 
 
@@ -20,9 +20,9 @@
                 <div class="caption">
                     <h3>@Html.DisplayFor(modelItem => item.Description)</h3>
                     <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
                      
                     </p>
                 </div>
