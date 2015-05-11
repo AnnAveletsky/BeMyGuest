@@ -21,12 +21,7 @@ namespace BMG.Controllers
             return View(occasions.ToList());
         }
 
-        // GET: Occasions
-        public ActionResult _Index()
-        {
-            var occasions = db.Occasions.Include(o => o.AspNetUser).Include(o => o.AspNetUser1);
-            return View(occasions.ToList());
-        }
+       
         // GET: Occasions/Details/5
         public ActionResult Details(int? id)
         {
