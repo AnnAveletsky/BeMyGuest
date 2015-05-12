@@ -69,6 +69,10 @@
           <Property Name="DataBirthday" Type="date" />
           <Property Name="IdCountry" Type="int" />
           <Property Name="IdCity" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="50" />
+          <Property Name="InfoAboutMe" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -985,6 +989,10 @@
           <Property Name="DataBirthday" Type="DateTime" Precision="0" />
           <Property Name="IdCountry" Type="Int32" />
           <Property Name="IdCity" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InfoAboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="City" Relationship="Self.FK_AspNetUsers_ToCity" FromRole="AspNetUsers" ToRole="City" />
@@ -1630,6 +1638,10 @@
                 <ScalarProperty Name="DataBirthday" ColumnName="DataBirthday" />
                 <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="InfoAboutMe" ColumnName="InfoAboutMe" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

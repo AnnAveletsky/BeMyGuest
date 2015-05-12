@@ -48,6 +48,10 @@ namespace BMG.Models
         public Nullable<System.DateTime> DataBirthday { get; set; }
         public Nullable<int> IdCountry { get; set; }
         public Nullable<int> IdCity { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string InfoAboutMe { get; set; }
+        public string Status { get; set; }
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }

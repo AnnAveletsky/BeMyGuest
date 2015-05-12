@@ -17,7 +17,8 @@ namespace BMG.Controllers
         // GET: Travelings
         public ActionResult Index()
         {
-            return View(db.Travelings.ToList());
+            var travelings = db.Travelings.Include(t => t.City).Include(t => t.Country);
+            return View(travelings.ToList());
         }
 
         // GET: Travelings/Details/5
@@ -38,6 +39,8 @@ namespace BMG.Controllers
         // GET: Travelings/Create
         public ActionResult Create()
         {
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
             return View();
         }
 
@@ -46,7 +49,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,Country,Sity")] Traveling traveling)
+        public ActionResult Create([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,IdCountry,IdCity")] Traveling traveling)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +58,8 @@ namespace BMG.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
             return View(traveling);
         }
 
@@ -70,6 +75,8 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
             return View(traveling);
         }
 
@@ -78,7 +85,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,Country,Sity")] Traveling traveling)
+        public ActionResult Edit([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,IdCountry,IdCity")] Traveling traveling)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +93,8 @@ namespace BMG.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
             return View(traveling);
         }
 

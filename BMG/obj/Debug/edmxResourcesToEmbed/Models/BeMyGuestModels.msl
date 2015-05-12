@@ -57,6 +57,10 @@
           <ScalarProperty Name="DataBirthday" ColumnName="DataBirthday" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+          <ScalarProperty Name="InfoAboutMe" ColumnName="InfoAboutMe" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -64,8 +68,8 @@
       <EntityTypeMapping TypeName="Model.City">
         <MappingFragment StoreEntitySet="City">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -81,10 +85,10 @@
       <EntityTypeMapping TypeName="Model.Discussion">
         <MappingFragment StoreEntitySet="Discussion">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="type" ColumnName="type" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Sity" ColumnName="Sity" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="DateTimeCreate" ColumnName="DateTimeCreate" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -96,8 +100,8 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Sity" ColumnName="Sity" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -155,6 +159,9 @@
           <ScalarProperty Name="Adress" ColumnName="Adress" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -166,8 +173,8 @@
           <ScalarProperty Name="DateComing" ColumnName="DateComing" />
           <ScalarProperty Name="DateDeparture" ColumnName="DateDeparture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Sity" ColumnName="Sity" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

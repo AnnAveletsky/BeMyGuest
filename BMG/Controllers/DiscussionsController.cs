@@ -17,7 +17,8 @@ namespace BMG.Controllers
         // GET: Discussions
         public ActionResult Index()
         {
-            return View(db.Discussions.ToList());
+            var discussions = db.Discussions.Include(d => d.City).Include(d => d.Country);
+            return View(discussions.ToList());
         }
 
         // GET: Discussions/Details/5
@@ -38,6 +39,8 @@ namespace BMG.Controllers
         // GET: Discussions/Create
         public ActionResult Create()
         {
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
             return View();
         }
 
@@ -46,7 +49,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,type,name,Country,Sity,DateTimeCreate")] Discussion discussion)
+        public ActionResult Create([Bind(Include = "Id,Type,Name,IdCountry,IdCity,DateTimeCreate")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +58,8 @@ namespace BMG.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", discussion.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", discussion.IdCountry);
             return View(discussion);
         }
 
@@ -70,6 +75,8 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", discussion.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", discussion.IdCountry);
             return View(discussion);
         }
 
@@ -78,7 +85,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,type,name,Country,Sity,DateTimeCreate")] Discussion discussion)
+        public ActionResult Edit([Bind(Include = "Id,Type,Name,IdCountry,IdCity,DateTimeCreate")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +93,8 @@ namespace BMG.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", discussion.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", discussion.IdCountry);
             return View(discussion);
         }
 

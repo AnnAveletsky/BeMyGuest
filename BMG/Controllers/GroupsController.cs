@@ -17,7 +17,8 @@ namespace BMG.Controllers
         // GET: Groups
         public ActionResult Index()
         {
-            return View(db.Groups.ToList());
+            var groups = db.Groups.Include(g => g.City).Include(g => g.Country);
+            return View(groups.ToList());
         }
 
         // GET: Groups/Details/5
@@ -38,6 +39,8 @@ namespace BMG.Controllers
         // GET: Groups/Create
         public ActionResult Create()
         {
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
             return View();
         }
 
@@ -46,7 +49,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,IdUserCreate,Description,Country,Sity")] Group group)
+        public ActionResult Create([Bind(Include = "Id,Name,IdUserCreate,Description,IdCountry,IdCity")] Group group)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +58,8 @@ namespace BMG.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", group.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", group.IdCountry);
             return View(group);
         }
 
@@ -70,6 +75,8 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", group.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", group.IdCountry);
             return View(group);
         }
 
@@ -78,7 +85,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IdUserCreate,Description,Country,Sity")] Group group)
+        public ActionResult Edit([Bind(Include = "Id,Name,IdUserCreate,Description,IdCountry,IdCity")] Group group)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +93,8 @@ namespace BMG.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", group.IdCity);
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", group.IdCountry);
             return View(group);
         }
 

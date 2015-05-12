@@ -21,7 +21,6 @@ namespace BMG.Controllers
             return View(occasions.ToList());
         }
 
-       
         // GET: Occasions/Details/5
         public ActionResult Details(int? id)
         {
