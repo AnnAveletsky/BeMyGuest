@@ -16,8 +16,8 @@ namespace BMG.Models
     {
         public Photo()
         {
-            this.AspNetUsers = new HashSet<AspNetUser>();
             this.Places = new HashSet<Place>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
             this.AspNetUsers1 = new HashSet<AspNetUser>();
         }
     
@@ -25,8 +25,8 @@ namespace BMG.Models
         public string Path { get; set; }
         public string Description { get; set; }
     
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual ICollection<Place> Places { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers1 { get; set; }
     }
 }

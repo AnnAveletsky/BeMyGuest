@@ -205,12 +205,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\City.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Country.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>
@@ -222,7 +216,6 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Models\Message.cs">
       <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>
@@ -238,6 +231,7 @@
     <Compile Include="Models\Place.cs">
       <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Models\Traveling.cs">
       <DependentUpon>BeMyGuestModels.tt</DependentUpon>
     </Compile>

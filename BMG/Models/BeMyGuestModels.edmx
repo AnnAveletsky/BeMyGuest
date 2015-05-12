@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -66,34 +66,16 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="IdPhoto" Type="int" />
-          <Property Name="DataBirthday" Type="date" />
-          <Property Name="IdCountry" Type="int" />
-          <Property Name="IdCity" Type="int" />
-        </EntityType>
-        <EntityType Name="City">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="IdCountry" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="Discussion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdCountry" Type="int" Nullable="false" />
-          <Property Name="IdCity" Type="int" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sity" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateTimeCreate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DiscussionGroup">
@@ -112,8 +94,8 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdUserCreate" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IdCountry" Type="int" Nullable="false" />
-          <Property Name="IdCity" Type="int" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sity" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -174,9 +156,6 @@
           <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IdCountry" Type="int" Nullable="false" />
-          <Property Name="IdCity" Type="int" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Traveling">
           <Key>
@@ -187,8 +166,8 @@
           <Property Name="DateComing" Type="datetime" Nullable="false" />
           <Property Name="DateDeparture" Type="datetime" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IdCountry" Type="int" Nullable="false" />
-          <Property Name="IdCity" Type="int" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sity" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TravelingOccasion">
           <Key>
@@ -246,30 +225,6 @@
           <Property Name="IdUser" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IdTraveling" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_AspNetUsers_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUsers_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AspNetUsers_ToPhoto">
           <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -279,18 +234,6 @@
             </Principal>
             <Dependent Role="AspNetUsers">
               <PropertyRef Name="IdPhoto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_City_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="IdCountry" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -350,30 +293,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Discussion_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Discussion" Type="Self.Discussion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Discussion">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Discussion_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Discussion" Type="Self.Discussion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Discussion">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DiscussionGroup_ToDiscussion">
           <End Role="Discussion" Type="Self.Discussion" Multiplicity="1" />
           <End Role="DiscussionGroup" Type="Self.DiscussionGroup" Multiplicity="*" />
@@ -395,30 +314,6 @@
             </Principal>
             <Dependent Role="DiscussionGroup">
               <PropertyRef Name="IdGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Group_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Group_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group">
-              <PropertyRef Name="IdCountry" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -506,30 +401,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Place_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Place" Type="Self.Place" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Place">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Place_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Place" Type="Self.Place" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Place">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Place_ToUser">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Place" Type="Self.Place" Multiplicity="*" />
@@ -539,30 +410,6 @@
             </Principal>
             <Dependent Role="Place">
               <PropertyRef Name="IdUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Traveling_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Traveling">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Traveling_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Traveling">
-              <PropertyRef Name="IdCountry" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -741,8 +588,6 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discussion" EntityType="Self.Discussion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiscussionGroup" EntityType="Self.DiscussionGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
@@ -760,21 +605,9 @@
           <EntitySet Name="UserPhoto" EntityType="Self.UserPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPlace" EntityType="Self.UserPlace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTraveling" EntityType="Self.UserTraveling" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AspNetUsers_ToCity" Association="Self.FK_AspNetUsers_ToCity">
-            <End Role="City" EntitySet="City" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_ToCountry" Association="Self.FK_AspNetUsers_ToCountry">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Self.FK_AspNetUsers_ToPhoto">
             <End Role="Photo" EntitySet="Photo" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_ToCountry" Association="Self.FK_City_ToCountry">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="City" EntitySet="City" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -792,14 +625,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Discussion_ToCity" Association="Self.FK_Discussion_ToCity">
-            <End Role="City" EntitySet="City" />
-            <End Role="Discussion" EntitySet="Discussion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Discussion_ToCountry" Association="Self.FK_Discussion_ToCountry">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Discussion" EntitySet="Discussion" />
-          </AssociationSet>
           <AssociationSet Name="FK_DiscussionGroup_ToDiscussion" Association="Self.FK_DiscussionGroup_ToDiscussion">
             <End Role="Discussion" EntitySet="Discussion" />
             <End Role="DiscussionGroup" EntitySet="DiscussionGroup" />
@@ -807,14 +632,6 @@
           <AssociationSet Name="FK_DiscussionGroup_ToGroup" Association="Self.FK_DiscussionGroup_ToGroup">
             <End Role="Group" EntitySet="Group" />
             <End Role="DiscussionGroup" EntitySet="DiscussionGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Group_ToCity" Association="Self.FK_Group_ToCity">
-            <End Role="City" EntitySet="City" />
-            <End Role="Group" EntitySet="Group" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Group_ToCountry" Association="Self.FK_Group_ToCountry">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Group" EntitySet="Group" />
           </AssociationSet>
           <AssociationSet Name="FK_MessagesInDiscussion_ToDiscussion" Association="Self.FK_MessagesInDiscussion_ToDiscussion">
             <End Role="Discussion" EntitySet="Discussion" />
@@ -844,25 +661,9 @@
             <End Role="Place" EntitySet="Place" />
             <End Role="PhotoPlace" EntitySet="PhotoPlace" />
           </AssociationSet>
-          <AssociationSet Name="FK_Place_ToCity" Association="Self.FK_Place_ToCity">
-            <End Role="City" EntitySet="City" />
-            <End Role="Place" EntitySet="Place" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Place_ToCountry" Association="Self.FK_Place_ToCountry">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Place" EntitySet="Place" />
-          </AssociationSet>
           <AssociationSet Name="FK_Place_ToUser" Association="Self.FK_Place_ToUser">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Place" EntitySet="Place" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Traveling_ToCity" Association="Self.FK_Traveling_ToCity">
-            <End Role="City" EntitySet="City" />
-            <End Role="Traveling" EntitySet="Traveling" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Traveling_ToCountry" Association="Self.FK_Traveling_ToCountry">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Traveling" EntitySet="Traveling" />
           </AssociationSet>
           <AssociationSet Name="FK_TravelingOccasion_ToOccasion" Association="Self.FK_TravelingOccasion_ToOccasion">
             <End Role="Occasion" EntitySet="Occasion" />
@@ -921,8 +722,7 @@
             <End Role="UserTraveling" EntitySet="UserTraveling" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -981,15 +781,8 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdPhoto" Type="Int32" />
-          <Property Name="DataBirthday" Type="DateTime" Precision="0" />
-          <Property Name="IdCountry" Type="Int32" />
-          <Property Name="IdCity" Type="Int32" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="City" Relationship="Self.FK_AspNetUsers_ToCity" FromRole="AspNetUsers" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_AspNetUsers_ToCountry" FromRole="AspNetUsers" ToRole="Country" />
-          <NavigationProperty Name="Photo" Relationship="Self.FK_AspNetUsers_ToPhoto" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_MessagesRead_ToUser" FromRole="AspNetUsers" ToRole="Messages" />
           <NavigationProperty Name="Messages1" Relationship="Self.FK_MessagesWrite_ToUser" FromRole="AspNetUsers" ToRole="Messages" />
           <NavigationProperty Name="Occasions" Relationship="Self.FK_OccasionHost_ToUser" FromRole="AspNetUsers" ToRole="Occasion" />
@@ -1002,46 +795,19 @@
           <NavigationProperty Name="Photos" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="Places1" Relationship="Self.UserPlace" FromRole="AspNetUsers" ToRole="Place" />
           <NavigationProperty Name="Travelings" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
-        </EntityType>
-        <EntityType Name="City">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdCountry" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToCity" FromRole="City" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_City_ToCountry" FromRole="City" ToRole="Country" />
-          <NavigationProperty Name="Discussions" Relationship="Self.FK_Discussion_ToCity" FromRole="City" ToRole="Discussion" />
-          <NavigationProperty Name="Groups" Relationship="Self.FK_Group_ToCity" FromRole="City" ToRole="Group" />
-          <NavigationProperty Name="Places" Relationship="Self.FK_Place_ToCity" FromRole="City" ToRole="Place" />
-          <NavigationProperty Name="Travelings" Relationship="Self.FK_Traveling_ToCity" FromRole="City" ToRole="Traveling" />
-        </EntityType>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToCountry" FromRole="Country" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_ToCountry" FromRole="Country" ToRole="City" />
-          <NavigationProperty Name="Discussions" Relationship="Self.FK_Discussion_ToCountry" FromRole="Country" ToRole="Discussion" />
-          <NavigationProperty Name="Groups" Relationship="Self.FK_Group_ToCountry" FromRole="Country" ToRole="Group" />
-          <NavigationProperty Name="Places" Relationship="Self.FK_Place_ToCountry" FromRole="Country" ToRole="Place" />
-          <NavigationProperty Name="Travelings" Relationship="Self.FK_Traveling_ToCountry" FromRole="Country" ToRole="Traveling" />
+          <Property Name="IdPhoto" Type="Int32" />
+          <NavigationProperty Name="Photo" Relationship="Model.FK_AspNetUsers_ToPhoto" FromRole="AspNetUser" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Discussion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdCountry" Type="Int32" Nullable="false" />
-          <Property Name="IdCity" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateTimeCreate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Discussion_ToCity" FromRole="Discussion" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Discussion_ToCountry" FromRole="Discussion" ToRole="Country" />
           <NavigationProperty Name="MessagesInDiscussions" Relationship="Self.FK_MessagesInDiscussion_ToDiscussion" FromRole="Discussion" ToRole="MessagesInDiscussion" />
           <NavigationProperty Name="Groups" Relationship="Self.DiscussionGroup" FromRole="Discussion" ToRole="Group" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserDiscussion" FromRole="Discussion" ToRole="AspNetUsers" />
@@ -1054,10 +820,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdUserCreate" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdCountry" Type="Int32" Nullable="false" />
-          <Property Name="IdCity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Group_ToCity" FromRole="Group" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Group_ToCountry" FromRole="Group" ToRole="Country" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Discussions" Relationship="Self.DiscussionGroup" FromRole="Group" ToRole="Discussion" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserGroup" FromRole="Group" ToRole="AspNetUsers" />
         </EntityType>
@@ -1109,9 +873,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToPhoto" FromRole="Photo" ToRole="AspNetUsers" />
           <NavigationProperty Name="Places" Relationship="Self.PhotoPlace" FromRole="Photo" ToRole="Place" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.UserPhoto" FromRole="Photo" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.UserPhoto" FromRole="Photo" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="Model.FK_AspNetUsers_ToPhoto" FromRole="Photo" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -1122,12 +886,7 @@
           <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdCountry" Type="Int32" Nullable="false" />
-          <Property Name="IdCity" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Place_ToUser" FromRole="Place" ToRole="AspNetUsers" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Place_ToCity" FromRole="Place" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Place_ToCountry" FromRole="Place" ToRole="Country" />
           <NavigationProperty Name="Photos" Relationship="Self.PhotoPlace" FromRole="Place" ToRole="Photo" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserPlace" FromRole="Place" ToRole="AspNetUsers" />
         </EntityType>
@@ -1140,10 +899,8 @@
           <Property Name="DateComing" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateDeparture" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdCountry" Type="Int32" Nullable="false" />
-          <Property Name="IdCity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Traveling_ToCity" FromRole="Traveling" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Traveling_ToCountry" FromRole="Traveling" ToRole="Country" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Occasions" Relationship="Self.TravelingOccasion" FromRole="Traveling" ToRole="Occasion" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserTraveling" FromRole="Traveling" ToRole="AspNetUsers" />
         </EntityType>
@@ -1172,42 +929,6 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUsers_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUsers_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUsers_ToPhoto">
-          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Photo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="IdPhoto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1271,114 +992,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_City_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Discussion_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Discussion" Type="Self.Discussion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Discussion">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Group_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Place_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Place" Type="Self.Place" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Place">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Traveling_ToCity">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Traveling">
-              <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Discussion_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Discussion" Type="Self.Discussion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Discussion">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Group_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Place_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Place" Type="Self.Place" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Place">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Traveling_ToCountry">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Traveling">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MessagesInDiscussion_ToDiscussion">
           <End Role="Discussion" Type="Self.Discussion" Multiplicity="1" />
           <End Role="MessagesInDiscussion" Type="Self.MessagesInDiscussion" Multiplicity="*" />
@@ -1437,8 +1050,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Discussions" EntityType="Self.Discussion" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
@@ -1454,18 +1065,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_ToCity" Association="Self.FK_AspNetUsers_ToCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_ToCountry" Association="Self.FK_AspNetUsers_ToCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Self.FK_AspNetUsers_ToPhoto">
-            <End Role="Photo" EntitySet="Photos" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_MessagesRead_ToUser" Association="Self.FK_MessagesRead_ToUser">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1486,42 +1085,6 @@
           <AssociationSet Name="FK_Place_ToUser" Association="Self.FK_Place_ToUser">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Place" EntitySet="Places" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_ToCountry" Association="Self.FK_City_ToCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Discussion_ToCity" Association="Self.FK_Discussion_ToCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Discussion" EntitySet="Discussions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Group_ToCity" Association="Self.FK_Group_ToCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Group" EntitySet="Groups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Place_ToCity" Association="Self.FK_Place_ToCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Place" EntitySet="Places" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Traveling_ToCity" Association="Self.FK_Traveling_ToCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Traveling" EntitySet="Travelings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Discussion_ToCountry" Association="Self.FK_Discussion_ToCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Discussion" EntitySet="Discussions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Group_ToCountry" Association="Self.FK_Group_ToCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Group" EntitySet="Groups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Place_ToCountry" Association="Self.FK_Place_ToCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Place" EntitySet="Places" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Traveling_ToCountry" Association="Self.FK_Traveling_ToCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Traveling" EntitySet="Travelings" />
           </AssociationSet>
           <AssociationSet Name="FK_MessagesInDiscussion_ToDiscussion" Association="Self.FK_MessagesInDiscussion_ToDiscussion">
             <End Role="Discussion" EntitySet="Discussions" />
@@ -1567,7 +1130,23 @@
             <End Role="Traveling" EntitySet="Travelings" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ToPhoto" Association="Model.FK_AspNetUsers_ToPhoto">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_AspNetUsers_ToPhoto">
+          <End Type="Model.Photo" Role="Photo" Multiplicity="0..1" />
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="IdPhoto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1614,6 +1193,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -1626,27 +1206,6 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
-                <ScalarProperty Name="DataBirthday" ColumnName="DataBirthday" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="Model.City">
-              <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="Model.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1654,10 +1213,10 @@
             <EntityTypeMapping TypeName="Model.Discussion">
               <MappingFragment StoreEntitySet="Discussion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Sity" ColumnName="Sity" />
                 <ScalarProperty Name="DateTimeCreate" ColumnName="DateTimeCreate" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1669,8 +1228,8 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Sity" ColumnName="Sity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1728,9 +1287,6 @@
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1742,8 +1298,8 @@
                 <ScalarProperty Name="DateComing" ColumnName="DateComing" />
                 <ScalarProperty Name="DateDeparture" ColumnName="DateDeparture" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Sity" ColumnName="Sity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -25,13 +25,8 @@ namespace BMG.Models
         public string Adress { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
-        public int IdCountry { get; set; }
-        public int IdCity { get; set; }
-        public string Status { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
