@@ -45,9 +45,15 @@ namespace BMG.Models
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public Nullable<int> IdPhoto { get; set; }
+        public Nullable<System.DateTime> DataBirthday { get; set; }
+        public Nullable<int> IdCountry { get; set; }
+        public Nullable<int> IdCity { get; set; }
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual City City { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Photo Photo { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Message> Messages1 { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
@@ -60,6 +66,5 @@ namespace BMG.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places1 { get; set; }
         public virtual ICollection<Traveling> Travelings { get; set; }
-        public virtual Photo Photo { get; set; }
     }
 }
