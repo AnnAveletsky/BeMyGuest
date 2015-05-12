@@ -35,40 +35,37 @@ namespace BMG.Controllers
             }
             return View(aspNetUser);
         }
-
-        // GET: Users/Create
-        public ActionResult Create()
+        // GET: Users/Details/5
+        public ActionResult AboutMe()
         {
-            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
-            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
-            ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path");
-            return View();
-        }
-
-        // POST: Users/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,IdPhoto,DataBirthday,IdCountry,IdCity")] AspNetUser aspNetUser)
-        {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated == false)
             {
-                db.AspNetUsers.Add(aspNetUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", aspNetUser.IdCity);
-            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", aspNetUser.IdCountry);
-            ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path", aspNetUser.IdPhoto);
+            string id = null;
+            for (int i = 0; i < db.AspNetUsers.ToList().Count; i++)
+            {
+                if (db.AspNetUsers.ToList()[i].UserName == User.Identity.Name)
+                {
+                    id = db.AspNetUsers.ToList()[i].Id;
+                }
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            if (aspNetUser == null)
+            {
+                return HttpNotFound();
+            }
             return View(aspNetUser);
         }
 
         // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (id == null || db.AspNetUsers.Find(id).UserName!=User.Identity.Name)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -88,16 +85,25 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,IdPhoto,DataBirthday,IdCountry,IdCity")] AspNetUser aspNetUser)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,SecondName,Status,Email,PhoneNumber,IdPhoto,DataBirthday,IdCountry,IdCity,InfoAboutMe")] AspNetUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUser).State = EntityState.Modified;
+                db.AspNetUsers.Find(aspNetUser.Id).FirstName = aspNetUser.FirstName;
+                db.AspNetUsers.Find(aspNetUser.Id).SecondName = aspNetUser.SecondName;
+                db.AspNetUsers.Find(aspNetUser.Id).Status = aspNetUser.Status;
+                db.AspNetUsers.Find(aspNetUser.Id).Email = aspNetUser.Email;
+                db.AspNetUsers.Find(aspNetUser.Id).PhoneNumber = aspNetUser.PhoneNumber;
+                db.AspNetUsers.Find(aspNetUser.Id).IdPhoto = aspNetUser.IdPhoto;
+                db.AspNetUsers.Find(aspNetUser.Id).DataBirthday = aspNetUser.DataBirthday;
+                db.AspNetUsers.Find(aspNetUser.Id).IdCountry = aspNetUser.IdCountry;
+                db.AspNetUsers.Find(aspNetUser.Id).IdCity = aspNetUser.IdCity;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AboutMe");
             }
-            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", aspNetUser.IdCity);
+            
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", aspNetUser.IdCountry);
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", aspNetUser.IdCity);
             ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path", aspNetUser.IdPhoto);
             return View(aspNetUser);
         }

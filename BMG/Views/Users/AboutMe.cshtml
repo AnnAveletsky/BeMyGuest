@@ -1,0 +1,141 @@
+﻿@model BMG.Models.AspNetUser
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-2">
+            <table class="table">
+                <tr>
+                    <a href="~/Messages/Index" class="list-group-item list-group-item-info">Мои сообщения</a>
+                </tr>
+                <tr>
+                    <a href="~/Photos/Index" class="list-group-item list-group-item-info">Мои фотографии</a>
+                </tr>
+                <tr>
+                    <a href="~/Places/Index" class="list-group-item list-group-item-info">Мои места</a>
+                </tr>
+                <tr>
+                    <a href="~/Occasions/Index" class="list-group-item list-group-item-info">Мои события</a>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-10">
+            <div class="jumbotron">
+                <center><h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.SecondName)</h1></center>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="thumbnail">
+                            <img src="https://@Html.DisplayFor(modelItem => Model.Photo.Path)" alt="@Html.DisplayFor(modelItem => Model.Photo.Description)" width="100%">
+                        </a>
+                        <div class="caption">
+                            <p>@Html.DisplayFor(modelItem => Model.Photo.Description)</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Email
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Email)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Номер
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.PhoneNumber)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Дата рождения
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.DataBirthday.Value.Day)
+                                    - @Html.DisplayFor(model => model.DataBirthday.Value.Month)
+                                    - @Html.DisplayFor(model => model.DataBirthday.Value.Year)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Страна
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Country.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Город
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.City.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Статус
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Status)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <center>
+                                        Подробная информация обо мне
+                                    </center>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <center>
+                                        @Html.DisplayFor(model => model.InfoAboutMe)
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="btn-group btn-group-justified">
+                                        @Html.ActionLink("Редактирование профиля", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+                                        @Html.ActionLink("Удаление профиля", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h3><a href="~/Travelings/Index">Путешествия в моём городе</a></h3>
+                    <p>
+                        @Html.DisplayFor(model => model.Travelings)
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h3><a href="~/Groups/Index">Группы в моём городе</a></h3>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h3><a href="~/Discussions/Index">Дисскусии в моём городе</a></h3>
+                    <p>
+                        В разработке
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

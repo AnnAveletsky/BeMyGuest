@@ -20,7 +20,7 @@
                 </button>
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("BeMyGuest", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("BeMyGuest", "AboutMe", "Users", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else
                 {
@@ -36,6 +36,7 @@
                     <li>@Html.ActionLink("События", "Index", "Occasions")</li>
                     <li>@Html.ActionLink("Путешествия", "Index", "Travelings")</li>
                     <li>@Html.ActionLink("Фотографии", "Index", "Photos")</li>
+                    <li>@Html.ActionLink("Люди", "Index", "Users")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
