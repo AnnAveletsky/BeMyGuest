@@ -25,9 +25,11 @@ namespace BMG.Models
         public System.DateTime DateComing { get; set; }
         public System.DateTime DateDeparture { get; set; }
         public string Description { get; set; }
-        public string Country { get; set; }
-        public string Sity { get; set; }
+        public int IdCountry { get; set; }
+        public int IdCity { get; set; }
     
+        public virtual City City { get; set; }
+        public virtual Country Country { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }

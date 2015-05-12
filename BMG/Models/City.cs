@@ -12,21 +12,26 @@ namespace BMG.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Photo
+    public partial class City
     {
-        public Photo()
+        public City()
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.Discussions = new HashSet<Discussion>();
+            this.Groups = new HashSet<Group>();
             this.Places = new HashSet<Place>();
-            this.AspNetUsers1 = new HashSet<AspNetUser>();
+            this.Travelings = new HashSet<Traveling>();
         }
     
         public int Id { get; set; }
-        public string Path { get; set; }
-        public string Description { get; set; }
+        public int IdCountry { get; set; }
+        public string Name { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual ICollection<Discussion> Discussions { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Place> Places { get; set; }
-        public virtual ICollection<AspNetUser> AspNetUsers1 { get; set; }
+        public virtual ICollection<Traveling> Travelings { get; set; }
     }
 }
