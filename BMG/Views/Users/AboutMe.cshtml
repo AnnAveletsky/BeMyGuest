@@ -114,7 +114,7 @@
                 <div class="col-md-3">
                     <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
                     <p>
-                        В разработке
+                        @Html.DisplayFor(model => model.Occasions)
                     </p>
                 </div>
                 <div class="col-md-3">
@@ -126,13 +126,13 @@
                 <div class="col-md-3">
                     <h3><a href="~/Groups/Index">Группы в моём городе</a></h3>
                     <p>
-                        В разработке
+                        @Html.DisplayFor(model => model.Groups)
                     </p>
                 </div>
                 <div class="col-md-3">
                     <h3><a href="~/Discussions/Index">Дисскусии в моём городе</a></h3>
                     <p>
-                        В разработке
+                        @Html.DisplayFor(model => model.Discussions)
                     </p>
                 </div>
             </div>

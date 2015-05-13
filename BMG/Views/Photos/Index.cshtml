@@ -4,36 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Фотографии</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Дабавить новую фотограцию", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Path)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="https://@Html.DisplayFor(modelItem => item.Path)" alt="@Html.DisplayFor(modelItem => item.Description)" />
+                <div class="caption">
+                    <h3>@Html.DisplayFor(modelItem => item.Description)</h3>
+                    <p>
+                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Подроюнее", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Path)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 }
-
-</table>
