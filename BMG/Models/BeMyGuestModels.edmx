@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -193,6 +193,7 @@
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IdCountry" Type="int" Nullable="false" />
           <Property Name="IdCity" Type="int" Nullable="false" />
+          <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="TravelingOccasion">
           <Key>
@@ -570,6 +571,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Traveling_ToUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Traveling">
+              <PropertyRef Name="IdUserCreate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TravelingOccasion_ToOccasion">
           <End Role="Occasion" Type="Self.Occasion" Multiplicity="1" />
           <End Role="TravelingOccasion" Type="Self.TravelingOccasion" Multiplicity="*" />
@@ -868,6 +881,10 @@
             <End Role="Country" EntitySet="Country" />
             <End Role="Traveling" EntitySet="Traveling" />
           </AssociationSet>
+          <AssociationSet Name="FK_Traveling_ToUser" Association="Self.FK_Traveling_ToUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Traveling" EntitySet="Traveling" />
+          </AssociationSet>
           <AssociationSet Name="FK_TravelingOccasion_ToOccasion" Association="Self.FK_TravelingOccasion_ToOccasion">
             <End Role="Occasion" EntitySet="Occasion" />
             <End Role="TravelingOccasion" EntitySet="TravelingOccasion" />
@@ -925,8 +942,7 @@
             <End Role="UserTraveling" EntitySet="UserTraveling" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1010,6 +1026,7 @@
           <NavigationProperty Name="Photos" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="Places1" Relationship="Self.UserPlace" FromRole="AspNetUsers" ToRole="Place" />
           <NavigationProperty Name="Travelings" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
+          <NavigationProperty Name="Travelings1" Relationship="Model.FK_Traveling_ToUser" FromRole="AspNetUser" ToRole="Traveling" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -1154,6 +1171,8 @@
           <NavigationProperty Name="Country" Relationship="Self.FK_Traveling_ToCountry" FromRole="Traveling" ToRole="Country" />
           <NavigationProperty Name="Occasions" Relationship="Self.TravelingOccasion" FromRole="Traveling" ToRole="Occasion" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserTraveling" FromRole="Traveling" ToRole="AspNetUsers" />
+          <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Traveling_ToUser" FromRole="Traveling" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -1575,7 +1594,23 @@
             <End Role="Traveling" EntitySet="Travelings" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Traveling_ToUser" Association="Model.FK_Traveling_ToUser">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Traveling" EntitySet="Travelings" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Traveling_ToUser">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="Model.Traveling" Role="Traveling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Traveling">
+              <PropertyRef Name="IdUserCreate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1749,6 +1784,7 @@
           <EntitySetMapping Name="Travelings">
             <EntityTypeMapping TypeName="Model.Traveling">
               <MappingFragment StoreEntitySet="Traveling">
+                <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateComing" ColumnName="DateComing" />

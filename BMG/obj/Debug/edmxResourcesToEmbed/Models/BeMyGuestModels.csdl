@@ -80,6 +80,7 @@
     <NavigationProperty Name="Photos" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
     <NavigationProperty Name="Places1" Relationship="Self.UserPlace" FromRole="AspNetUsers" ToRole="Place" />
     <NavigationProperty Name="Travelings" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
+    <NavigationProperty Name="Travelings1" Relationship="Model.FK_Traveling_ToUser" FromRole="AspNetUser" ToRole="Traveling" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -224,6 +225,8 @@
     <NavigationProperty Name="Country" Relationship="Self.FK_Traveling_ToCountry" FromRole="Traveling" ToRole="Country" />
     <NavigationProperty Name="Occasions" Relationship="Self.TravelingOccasion" FromRole="Traveling" ToRole="Occasion" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.UserTraveling" FromRole="Traveling" ToRole="AspNetUsers" />
+    <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Traveling_ToUser" FromRole="Traveling" ToRole="AspNetUser" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -645,5 +648,21 @@
       <End Role="Traveling" EntitySet="Travelings" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <AssociationSet Name="FK_Traveling_ToUser" Association="Model.FK_Traveling_ToUser">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Traveling" EntitySet="Travelings" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Traveling_ToUser">
+    <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="Model.Traveling" Role="Traveling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Traveling">
+        <PropertyRef Name="IdUserCreate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

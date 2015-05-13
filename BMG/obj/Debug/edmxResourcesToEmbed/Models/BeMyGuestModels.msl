@@ -168,6 +168,7 @@
     <EntitySetMapping Name="Travelings">
       <EntityTypeMapping TypeName="Model.Traveling">
         <MappingFragment StoreEntitySet="Traveling">
+          <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DateComing" ColumnName="DateComing" />

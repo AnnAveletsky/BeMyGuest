@@ -188,6 +188,7 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IdCountry" Type="int" Nullable="false" />
     <Property Name="IdCity" Type="int" Nullable="false" />
+    <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="TravelingOccasion">
     <Key>
@@ -565,6 +566,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Traveling_ToUser">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Traveling">
+        <PropertyRef Name="IdUserCreate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TravelingOccasion_ToOccasion">
     <End Role="Occasion" Type="Self.Occasion" Multiplicity="1" />
     <End Role="TravelingOccasion" Type="Self.TravelingOccasion" Multiplicity="*" />
@@ -861,6 +874,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Traveling_ToCountry" Association="Self.FK_Traveling_ToCountry">
       <End Role="Country" EntitySet="Country" />
+      <End Role="Traveling" EntitySet="Traveling" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Traveling_ToUser" Association="Self.FK_Traveling_ToUser">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Traveling" EntitySet="Traveling" />
     </AssociationSet>
     <AssociationSet Name="FK_TravelingOccasion_ToOccasion" Association="Self.FK_TravelingOccasion_ToOccasion">

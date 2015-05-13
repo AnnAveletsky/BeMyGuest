@@ -10,13 +10,22 @@
     @Html.ActionLink("Создать новое путешествие", "Create")
 </p>
 
-@foreach (var item in Model)
-{
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-3">
             <div class="thumbnail">
                 <center>
                     <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                    @if (item.AspNetUser.FirstName == null || item.AspNetUser.SecondName == null)
+                    {
+                        <h5>от @Html.ActionLink(item.AspNetUser.UserName, "/../Users/Details", new { id = item.IdUserCreate })</h5>
+                    }
+                    else
+                    {
+                        <h5>от @Html.ActionLink(item.AspNetUser.FirstName + " " + item.AspNetUser.SecondName, "/../Users/Details", new { id = item.IdUserCreate })</h5>
+                    }
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
                 </center>
                 <div class="caption">
@@ -25,13 +34,10 @@
                     <br />
                     Страна  @Html.DisplayFor(modelItem => item.Country.Name)
                     Город @Html.DisplayFor(modelItem => item.City.Name)
-                    @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
+
                 </div>
+                <p>@Html.ActionLink("Подробнее", "Details", new { id = item.Id })</p>
             </div>
         </div>
-    </div>
-
-
-}
-
-
+    }
+</div>

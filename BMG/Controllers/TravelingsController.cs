@@ -17,7 +17,7 @@ namespace BMG.Controllers
         // GET: Travelings
         public ActionResult Index()
         {
-            var travelings = db.Travelings.Include(t => t.City).Include(t => t.Country);
+            var travelings = db.Travelings.Include(t => t.City).Include(t => t.Country).Include(t => t.AspNetUser);
             return View(travelings.ToList());
         }
 
@@ -41,6 +41,7 @@ namespace BMG.Controllers
         {
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -49,17 +50,27 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,IdCountry,IdCity")] Traveling traveling)
+        public ActionResult Create([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,IdCountry,IdCity,IdUserCreate")] Traveling traveling)
         {
             if (ModelState.IsValid)
             {
-                db.Travelings.Add(traveling);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (AspNetUser i in db.AspNetUsers.ToList())
+                {
+                    if (User.Identity.Name == i.UserName)
+                    {
+                        traveling.IdUserCreate = i.Id;
+                        traveling.AspNetUser = i;
+                        db.Travelings.Add(traveling);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                
             }
 
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "UserName", traveling.IdUserCreate);
             return View(traveling);
         }
 
@@ -77,6 +88,7 @@ namespace BMG.Controllers
             }
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             return View(traveling);
         }
 
@@ -85,16 +97,25 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,IdCountry,IdCity")] Traveling traveling)
+        public ActionResult Edit([Bind(Include = "Id,Name,DateComing,DateDeparture,Description,IdCountry,IdCity,IdUserCreate")] Traveling traveling)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(traveling).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (AspNetUser i in db.AspNetUsers.ToList())
+                {
+                    if (User.Identity.Name == i.UserName)
+                    {
+                        traveling.IdUserCreate = i.Id;
+                        traveling.AspNetUser = i;
+                        db.Entry(traveling).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
             }
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             return View(traveling);
         }
 

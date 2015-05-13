@@ -27,10 +27,12 @@ namespace BMG.Models
         public string Description { get; set; }
         public int IdCountry { get; set; }
         public int IdCity { get; set; }
+        public string IdUserCreate { get; set; }
     
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

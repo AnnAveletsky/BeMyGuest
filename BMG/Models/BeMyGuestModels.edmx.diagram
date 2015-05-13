@@ -50,6 +50,7 @@
         <AssociationConnector Association="Model.UserPhoto" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UserPlace" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UserTraveling" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Traveling_ToUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

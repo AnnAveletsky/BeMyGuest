@@ -30,6 +30,7 @@ namespace BMG.Models
             this.Photos = new HashSet<Photo>();
             this.Places1 = new HashSet<Place>();
             this.Travelings = new HashSet<Traveling>();
+            this.Travelings1 = new HashSet<Traveling>();
         }
     
         public string Id { get; set; }
@@ -70,5 +71,6 @@ namespace BMG.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places1 { get; set; }
         public virtual ICollection<Traveling> Travelings { get; set; }
+        public virtual ICollection<Traveling> Travelings1 { get; set; }
     }
 }
