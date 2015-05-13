@@ -16,6 +16,7 @@
 
         <div class="col-md-3">
             <div class="thumbnail">
+               
                 <center>
                     <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
                     @if (item.AspNetUser.FirstName == null || item.AspNetUser.SecondName == null)
@@ -37,6 +38,10 @@
 
                 </div>
                 <p>@Html.ActionLink("Подробнее", "Details", new { id = item.Id })</p>
+                @if (User.Identity.Name == item.AspNetUser.UserName)
+                {
+                    @Html.ActionLink("Редактирование", "Edit", new { id = item.Id })
+                }
             </div>
         </div>
     }
