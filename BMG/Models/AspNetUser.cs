@@ -22,14 +22,15 @@ namespace BMG.Models
             this.Messages1 = new HashSet<Message>();
             this.Occasions = new HashSet<Occasion>();
             this.Occasions1 = new HashSet<Occasion>();
+            this.Photos = new HashSet<Photo>();
             this.Places = new HashSet<Place>();
+            this.Travelings = new HashSet<Traveling>();
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.Discussions = new HashSet<Discussion>();
             this.Groups = new HashSet<Group>();
             this.Occasions2 = new HashSet<Occasion>();
-            this.Photos = new HashSet<Photo>();
+            this.Photos1 = new HashSet<Photo>();
             this.Places1 = new HashSet<Place>();
-            this.Travelings = new HashSet<Traveling>();
             this.Travelings1 = new HashSet<Traveling>();
         }
     
@@ -63,14 +64,15 @@ namespace BMG.Models
         public virtual ICollection<Message> Messages1 { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<Occasion> Occasions1 { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places { get; set; }
+        public virtual ICollection<Traveling> Travelings { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<Discussion> Discussions { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Occasion> Occasions2 { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Photo> Photos1 { get; set; }
         public virtual ICollection<Place> Places1 { get; set; }
-        public virtual ICollection<Traveling> Travelings { get; set; }
         public virtual ICollection<Traveling> Travelings1 { get; set; }
     }
 }

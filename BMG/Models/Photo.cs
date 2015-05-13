@@ -19,14 +19,18 @@ namespace BMG.Models
             this.AspNetUsers = new HashSet<AspNetUser>();
             this.Places = new HashSet<Place>();
             this.AspNetUsers1 = new HashSet<AspNetUser>();
+            this.Travelings = new HashSet<Traveling>();
         }
     
         public int Id { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
+        public string IdUserCreate { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<Place> Places { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers1 { get; set; }
+        public virtual ICollection<Traveling> Travelings { get; set; }
     }
 }

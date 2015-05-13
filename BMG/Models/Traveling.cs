@@ -28,11 +28,13 @@ namespace BMG.Models
         public int IdCountry { get; set; }
         public int IdCity { get; set; }
         public string IdUserCreate { get; set; }
+        public int IdPhoto { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Photo Photo { get; set; }
     }
 }

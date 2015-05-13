@@ -337,11 +337,6 @@
     <Content Include="Views\Messages\Details.cshtml" />
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
-    <Content Include="Views\Photos\Create.cshtml" />
-    <Content Include="Views\Photos\Delete.cshtml" />
-    <Content Include="Views\Photos\Details.cshtml" />
-    <Content Include="Views\Photos\Edit.cshtml" />
-    <Content Include="Views\Photos\Index.cshtml" />
     <Content Include="Views\Places\Create.cshtml" />
     <Content Include="Views\Places\Delete.cshtml" />
     <Content Include="Views\Places\Details.cshtml" />
@@ -367,6 +362,11 @@
     <Content Include="Views\Travelings\Details.cshtml" />
     <Content Include="Views\Travelings\Edit.cshtml" />
     <Content Include="Views\Travelings\Index.cshtml" />
+    <Content Include="Views\Photos\Create.cshtml" />
+    <Content Include="Views\Photos\Delete.cshtml" />
+    <Content Include="Views\Photos\Details.cshtml" />
+    <Content Include="Views\Photos\Edit.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

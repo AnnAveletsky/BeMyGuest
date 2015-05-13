@@ -17,7 +17,7 @@ namespace BMG.Controllers
         // GET: Travelings
         public ActionResult Index()
         {
-            var travelings = db.Travelings.Include(t => t.City).Include(t => t.Country).Include(t => t.AspNetUser);
+            var travelings = db.Travelings.Include(t => t.AspNetUser).Include(t => t.City).Include(t => t.Country);
             return View(travelings.ToList());
         }
 
@@ -39,9 +39,9 @@ namespace BMG.Controllers
         // GET: Travelings/Create
         public ActionResult Create()
         {
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
-            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -65,12 +65,11 @@ namespace BMG.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                
             }
 
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
-            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "UserName", traveling.IdUserCreate);
             return View(traveling);
         }
 
@@ -86,9 +85,9 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
-            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             return View(traveling);
         }
 
@@ -113,9 +112,9 @@ namespace BMG.Controllers
                     }
                 }
             }
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", traveling.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", traveling.IdCountry);
-            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
             return View(traveling);
         }
 

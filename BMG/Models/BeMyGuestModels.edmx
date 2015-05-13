@@ -160,6 +160,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Path" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="PhotoPlace">
           <Key>
@@ -193,7 +194,8 @@
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IdCountry" Type="int" Nullable="false" />
           <Property Name="IdCity" Type="int" Nullable="false" />
-          <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" />
+          <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IdPhoto" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TravelingOccasion">
           <Key>
@@ -487,6 +489,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Photo_ToUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="IdUserCreate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PhotoPlace_ToPhoto">
           <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
           <End Role="PhotoPlace" Type="Self.PhotoPlace" Multiplicity="*" />
@@ -571,8 +585,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Traveling_ToPhoto">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Traveling">
+              <PropertyRef Name="IdPhoto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Traveling_ToUser">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -853,6 +879,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Occasion" EntitySet="Occasion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Photo_ToUser" Association="Self.FK_Photo_ToUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
           <AssociationSet Name="FK_PhotoPlace_ToPhoto" Association="Self.FK_PhotoPlace_ToPhoto">
             <End Role="Photo" EntitySet="Photo" />
             <End Role="PhotoPlace" EntitySet="PhotoPlace" />
@@ -879,6 +909,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Traveling_ToCountry" Association="Self.FK_Traveling_ToCountry">
             <End Role="Country" EntitySet="Country" />
+            <End Role="Traveling" EntitySet="Traveling" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traveling_ToPhoto" Association="Self.FK_Traveling_ToPhoto">
+            <End Role="Photo" EntitySet="Photo" />
             <End Role="Traveling" EntitySet="Traveling" />
           </AssociationSet>
           <AssociationSet Name="FK_Traveling_ToUser" Association="Self.FK_Traveling_ToUser">
@@ -1018,15 +1052,16 @@
           <NavigationProperty Name="Messages1" Relationship="Self.FK_MessagesWrite_ToUser" FromRole="AspNetUsers" ToRole="Messages" />
           <NavigationProperty Name="Occasions" Relationship="Self.FK_OccasionHost_ToUser" FromRole="AspNetUsers" ToRole="Occasion" />
           <NavigationProperty Name="Occasions1" Relationship="Self.FK_OccasionTraveler_ToUser" FromRole="AspNetUsers" ToRole="Occasion" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_Photo_ToUser" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="Places" Relationship="Self.FK_Place_ToUser" FromRole="AspNetUsers" ToRole="Place" />
+          <NavigationProperty Name="Travelings" Relationship="Self.FK_Traveling_ToUser" FromRole="AspNetUsers" ToRole="Traveling" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="Discussions" Relationship="Self.UserDiscussion" FromRole="AspNetUsers" ToRole="Discussion" />
           <NavigationProperty Name="Groups" Relationship="Self.UserGroup" FromRole="AspNetUsers" ToRole="Group" />
           <NavigationProperty Name="Occasions2" Relationship="Self.UserOccasion" FromRole="AspNetUsers" ToRole="Occasion" />
-          <NavigationProperty Name="Photos" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
+          <NavigationProperty Name="Photos1" Relationship="Self.UserPhoto" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="Places1" Relationship="Self.UserPlace" FromRole="AspNetUsers" ToRole="Place" />
-          <NavigationProperty Name="Travelings" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
-          <NavigationProperty Name="Travelings1" Relationship="Model.FK_Traveling_ToUser" FromRole="AspNetUser" ToRole="Traveling" />
+          <NavigationProperty Name="Travelings1" Relationship="Self.UserTraveling" FromRole="AspNetUsers" ToRole="Traveling" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -1134,9 +1169,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToPhoto" FromRole="Photo" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Photo_ToUser" FromRole="Photo" ToRole="AspNetUsers" />
           <NavigationProperty Name="Places" Relationship="Self.PhotoPlace" FromRole="Photo" ToRole="Place" />
           <NavigationProperty Name="AspNetUsers1" Relationship="Self.UserPhoto" FromRole="Photo" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Travelings" Relationship="Model.FK_Traveling_ToPhoto" FromRole="Photo" ToRole="Traveling" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -1167,12 +1205,14 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdCountry" Type="Int32" Nullable="false" />
           <Property Name="IdCity" Type="Int32" Nullable="false" />
+          <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Traveling_ToUser" FromRole="Traveling" ToRole="AspNetUsers" />
           <NavigationProperty Name="City" Relationship="Self.FK_Traveling_ToCity" FromRole="Traveling" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Traveling_ToCountry" FromRole="Traveling" ToRole="Country" />
           <NavigationProperty Name="Occasions" Relationship="Self.TravelingOccasion" FromRole="Traveling" ToRole="Occasion" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserTraveling" FromRole="Traveling" ToRole="AspNetUsers" />
-          <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Traveling_ToUser" FromRole="Traveling" ToRole="AspNetUser" />
+          <Property Name="IdPhoto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="Model.FK_Traveling_ToPhoto" FromRole="Traveling" ToRole="Photo" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -1286,6 +1326,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Photo_ToUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="IdUserCreate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Place_ToUser">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="Place" Type="Self.Place" Multiplicity="*" />
@@ -1295,6 +1347,18 @@
             </Principal>
             <Dependent Role="Place">
               <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traveling_ToUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Traveling" Type="Self.Traveling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Traveling">
+              <PropertyRef Name="IdUserCreate" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1510,9 +1574,17 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Occasion" EntitySet="Occasions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Photo_ToUser" Association="Self.FK_Photo_ToUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Place_ToUser" Association="Self.FK_Place_ToUser">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traveling_ToUser" Association="Self.FK_Traveling_ToUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Traveling" EntitySet="Travelings" />
           </AssociationSet>
           <AssociationSet Name="FK_City_ToCountry" Association="Self.FK_City_ToCountry">
             <End Role="Country" EntitySet="Countries" />
@@ -1594,20 +1666,20 @@
             <End Role="Traveling" EntitySet="Travelings" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Traveling_ToUser" Association="Model.FK_Traveling_ToUser">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          <AssociationSet Name="FK_Traveling_ToPhoto" Association="Model.FK_Traveling_ToPhoto">
+            <End Role="Photo" EntitySet="Photos" />
             <End Role="Traveling" EntitySet="Travelings" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Traveling_ToUser">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+        <Association Name="FK_Traveling_ToPhoto">
+          <End Type="Model.Photo" Role="Photo" Multiplicity="1" />
           <End Type="Model.Traveling" Role="Traveling" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="Photo">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Traveling">
-              <PropertyRef Name="IdUserCreate" />
+              <PropertyRef Name="IdPhoto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1764,6 +1836,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1784,7 +1857,7 @@
           <EntitySetMapping Name="Travelings">
             <EntityTypeMapping TypeName="Model.Traveling">
               <MappingFragment StoreEntitySet="Traveling">
-                <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
+                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateComing" ColumnName="DateComing" />
@@ -1792,6 +1865,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

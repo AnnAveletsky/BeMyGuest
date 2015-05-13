@@ -148,6 +148,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -168,7 +169,7 @@
     <EntitySetMapping Name="Travelings">
       <EntityTypeMapping TypeName="Model.Traveling">
         <MappingFragment StoreEntitySet="Traveling">
-          <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
+          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DateComing" ColumnName="DateComing" />
@@ -176,6 +177,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+          <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
