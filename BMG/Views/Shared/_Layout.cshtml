@@ -30,13 +30,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+                   
+                    <li>@Html.ActionLink("Люди", "Index", "Users")</li>
                     <li>@Html.ActionLink("Группы", "Index", "Groups")</li>
                     <li>@Html.ActionLink("События", "Index", "Occasions")</li>
                     <li>@Html.ActionLink("Путешествия", "Index", "Travelings")</li>
                     <li>@Html.ActionLink("Фотографии", "Index", "Photos")</li>
-                    <li>@Html.ActionLink("Люди", "Index", "Users")</li>
+                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
+                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
