@@ -1,17 +1,16 @@
 ﻿@model BMG.Models.Photo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Редактирование дорографий";
 }
 
-<h2>Details</h2>
+<h2>Редактирование дорографий</h2>
 
 <div>
-    <h4>Photo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Path)
+            Путь
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Описание
         </dt>
 
         <dd>
@@ -29,6 +28,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактирование", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад к фотографиям", "Index")
 </p>

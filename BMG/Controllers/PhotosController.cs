@@ -84,9 +84,17 @@ namespace BMG.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Photos.Add(photo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        photo.IdUserCreate = i.Id;
+                        db.Photos.Add(photo);
+                        db.SaveChanges();
+                        return RedirectToAction("MyPhotoAlbum");
+                    }
+                }
+                
             }
 
             return View(photo);
