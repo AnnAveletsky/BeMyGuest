@@ -19,7 +19,41 @@ namespace BMG.Controllers
         {
             return View(db.Photos.ToList());
         }
-
+        public ActionResult MyPhotoAlbum()
+        {
+            
+            foreach(BMG.Models.AspNetUser user in db.AspNetUsers.ToList()){
+                if (user.UserName == User.Identity.Name)
+                {
+                    return View(user);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        // POST: Photos/AddToPhotoAlbum/5
+        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
+        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToPhotoAlbum([Bind(Include = "Id,Path,Description,IdUserCreate")] Photo photo)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        i.Photos1.Add(photo);
+                        photo.AspNetUsers1.Add(i);
+                       db.Entry(i).State = EntityState.Modified;
+                       db.Entry(photo).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("MyPhotoAlbum");
+                    }
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {

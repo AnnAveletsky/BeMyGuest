@@ -61,6 +61,7 @@ namespace BMG.Controllers
             }
             return View(aspNetUser);
         }
+        
 
         // GET: Users/Edit/5
         public ActionResult Edit(string id)

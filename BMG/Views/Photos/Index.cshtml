@@ -18,9 +18,15 @@
                 <div class="caption">
                     <h3>@Html.DisplayFor(modelItem => item.Description)</h3>
                     <p>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Подроюнее", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        @if (User.Identity.Name == item.AspNetUser.UserName)
+                        {
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })
+                        }
+                        @Html.ActionLink("Подроюнее", "Details", new { id = item.Id })
+                        @if (User.Identity.Name == item.AspNetUser.UserName)
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        }
                     </p>
                 </div>
             </div>
