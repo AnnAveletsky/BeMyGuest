@@ -4,31 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="801ce5cd85c8412699f3830ba21bb4f5" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="17.875" PointY="9.5" IsExpanded="true" />
+      <Diagram DiagramId="801ce5cd85c8412699f3830ba21bb4f5" Name="Diagram1" ZoomLevel="34">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.625" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="2" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="2.5" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Discussion" Width="1.5" PointX="10" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Group" Width="1.5" PointX="19" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Message" Width="1.5" PointX="13.75" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Occasion" Width="1.5" PointX="22.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Photo" Width="1.5" PointX="12.875" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Place" Width="1.5" PointX="22.125" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Traveling" Width="1.5" PointX="14.875" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UsersDiscussion" Width="1.5" PointX="15.75" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UsersPlace" Width="1.5" PointX="23.375" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Discussion" Width="1.5" PointX="10.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Group" Width="1.5" PointX="18" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Message" Width="1.5" PointX="7.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Occasion" Width="1.5" PointX="22.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Photo" Width="1.5" PointX="12.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Place" Width="1.5" PointX="20.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Traveling" Width="1.5" PointX="15" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UsersDiscussion" Width="1.5" PointX="15.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UsersPlace" Width="1.5" PointX="22.5" PointY="18" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AspNetUsers_ToCities" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AspNetUsers_ToCountries" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AspNetUsers_ToPhotos" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Discussions_ToUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Groups_ToUsers" ManuallyRouted="false" >
-        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Groups_ToUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_MessagesRead_ToUser" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_MessagesWrite_ToUser" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_OccasionsHost_ToUser" ManuallyRouted="false" />
@@ -37,82 +36,17 @@
         <AssociationConnector Association="Model.FK_Places_ToUser" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Travelings_ToUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_UsersDiscussions_ToUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_UsersPlaces_ToUsers" ManuallyRouted="true" >
-          <ConnectorPoint PointX="6.75" PointY="20.007757278645823" />
-          <ConnectorPoint PointX="10.260414666666666" PointY="20.007757278645823" />
-          <ConnectorPoint PointX="10.427081333333334" PointY="20.007757278645823" />
-          <ConnectorPoint PointX="10.666666666666666" PointY="20.007757278645823" />
-          <ConnectorPoint PointX="10.833333333333334" PointY="20.007757278645823" />
-          <ConnectorPoint PointX="12.5559375" PointY="20.007757278645823" />
-          <ConnectorPoint PointX="12.5559375" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="13.197916666666666" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="13.364583333333334" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="18.541666666666668" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="18.708333333333332" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="19.666666666666668" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="19.833333333333332" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="20.958052043714368" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="21.124718710381032" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="22.235023479166667" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="22.401690145833332" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="22.61881569791667" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="22.785482364583334" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="24.34375" PointY="20.244384788820227" />
-          <ConnectorPoint PointX="24.34375" PointY="20.375" />
-        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_UsersPlaces_ToUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Cities_ToCountries" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Discussions_ToCities" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Groups_ToCities" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Photos_ToCities" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Places_ToCity" ManuallyRouted="false" >
-        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Places_ToCity" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Travelings_ToCities" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Discussions_ToCountries" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Groups_ToCountries" ManuallyRouted="true" >
-          <ConnectorPoint PointX="3.3906270000000007" PointY="16.25" />
-          <ConnectorPoint PointX="3.3906270000000007" PointY="16" />
-          <ConnectorPoint PointX="4.6040259648031894" PointY="16" />
-          <ConnectorPoint PointX="4.6040259648031894" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="6.3229191666666669" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="6.4895858333333329" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="10.666666666666666" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="10.833333333333334" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="13.197916666666666" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="13.364583333333334" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="18.625" PointY="20.835836588541667" />
-          <ConnectorPoint PointX="18.625" PointY="17.469674106770835" />
-          <ConnectorPoint PointX="19" PointY="17.469674106770835" />
-        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Groups_ToCountries" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Photos_ToCountries" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Places_ToCountry" ManuallyRouted="true" >
-          <ConnectorPoint PointX="4" PointY="18.343371140625003" />
-          <ConnectorPoint PointX="4.5206926314698563" PointY="18.343371140625003" />
-          <ConnectorPoint PointX="4.6873592981365224" PointY="18.343371140625003" />
-          <ConnectorPoint PointX="5" PointY="18.343371140625003" />
-          <ConnectorPoint PointX="5" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="6.3229191666666669" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="6.4895858333333329" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="10.666666666666666" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="10.833333333333334" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="13.197916666666666" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="13.364583333333334" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="19.666666666666668" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="19.833333333333332" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="21.0413853770477" PointY="20.980966362215852" />
-          <ConnectorPoint PointX="21.0413853770477" PointY="19.460999348958339" />
-          <ConnectorPoint PointX="22.235023479166667" PointY="19.460999348958339" />
-          <ConnectorPoint PointX="22.401690145833332" PointY="19.460999348958339" />
-          <ConnectorPoint PointX="22.61881569791667" PointY="19.460999348958339" />
-          <ConnectorPoint PointX="22.785482364583334" PointY="19.460999348958339" />
-          <ConnectorPoint PointX="23.08594125" PointY="19.460999348958339" />
-          <ConnectorPoint PointX="23.08594125" PointY="18.989807942708335" />
-        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Places_ToCountry" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Travelings_ToCountries" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Discussions_ToGroups" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Photos_ToDiscussions" ManuallyRouted="false" />
@@ -128,47 +62,8 @@
         <AssociationConnector Association="Model.FK_Travelings_ToPhotos" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_UsersPlaces_ToPlaces" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.UsersGroups" ManuallyRouted="true" >
-          <ConnectorPoint PointX="19" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="18.708333333333332" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="18.541666666666668" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="13.364583333333334" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="13.197916666666666" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="12.583333333333334" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="12.416666666666666" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="10.905936675" PointY="19.460999348958335" />
-          <ConnectorPoint PointX="10.905936675" PointY="19.511122298123013" />
-          <ConnectorPoint PointX="10.833333333333334" PointY="19.511122298123013" />
-          <ConnectorPoint PointX="10.666666666666666" PointY="19.511122298123013" />
-          <ConnectorPoint PointX="10.427081333333334" PointY="19.511122298123013" />
-          <ConnectorPoint PointX="10.260414666666666" PointY="19.511122298123013" />
-          <ConnectorPoint PointX="6.75" PointY="19.511122298123013" />
-        </AssociationConnector>
-        <AssociationConnector Association="Model.UsersOccasions" ManuallyRouted="true" >
-          <ConnectorPoint PointX="23.734375" PointY="13.662903645833335" />
-          <ConnectorPoint PointX="23.734375" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="23.470056458333335" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="23.303389791666671" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="23.169274583333333" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="23.002607916666669" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="22.785482364583334" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="22.61881569791667" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="22.401690145833332" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="22.235023479166667" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="18.708333333333332" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="18.541666666666668" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="13.364583333333334" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="13.197916666666666" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="12.583333333333334" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="12.416666666666666" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="10.833333333333334" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="10.666666666666666" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="10.427081333333334" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="10.260414666666666" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="6.95142126984375" PointY="19.308926884488368" />
-          <ConnectorPoint PointX="6.95142126984375" PointY="19.400031748035282" />
-          <ConnectorPoint PointX="6.75" PointY="19.400031748035282" />
-        </AssociationConnector>
+        <AssociationConnector Association="Model.UsersGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UsersOccasions" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UsersTravelings" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
