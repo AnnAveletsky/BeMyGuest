@@ -109,7 +109,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IdUserCreate" Type="int" Nullable="false" />
+    <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IdCountry" Type="int" Nullable="false" />
     <Property Name="IdCity" Type="int" Nullable="false" />
@@ -421,6 +421,18 @@
       </Principal>
       <Dependent Role="Group">
         <PropertyRef Name="IdCountry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_ToUser">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="IdUserCreate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -852,6 +864,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Group_ToCountry" Association="Self.FK_Group_ToCountry">
       <End Role="Country" EntitySet="Country" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_ToUser" Association="Self.FK_Group_ToUser">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Group" EntitySet="Group" />
     </AssociationSet>
     <AssociationSet Name="FK_MessagesInDiscussion_ToDiscussion" Association="Self.FK_MessagesInDiscussion_ToDiscussion">
