@@ -17,12 +17,14 @@ namespace BMG.Controllers
         // GET: Photos
         public ActionResult Index()
         {
-            return View(db.Photos.ToList());
+            var photos = db.Photos.Include(p => p.AspNetUser);
+            return View(photos.ToList());
         }
         public ActionResult MyPhotoAlbum()
         {
-            
-            foreach(BMG.Models.AspNetUser user in db.AspNetUsers.ToList()){
+
+            foreach (BMG.Models.AspNetUser user in db.AspNetUsers.ToList())
+            {
                 if (user.UserName == User.Identity.Name)
                 {
                     return View(user);
@@ -45,8 +47,8 @@ namespace BMG.Controllers
                     {
                         i.Photos1.Add(photo);
                         photo.AspNetUsers1.Add(i);
-                       db.Entry(i).State = EntityState.Modified;
-                       db.Entry(photo).State = EntityState.Modified;
+                        db.Entry(i).State = EntityState.Modified;
+                        db.Entry(photo).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("MyPhotoAlbum");
                     }
@@ -54,6 +56,7 @@ namespace BMG.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {
@@ -72,6 +75,7 @@ namespace BMG.Controllers
         // GET: Photos/Create
         public ActionResult Create()
         {
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -90,13 +94,19 @@ namespace BMG.Controllers
                     {
                         photo.IdUserCreate = i.Id;
                         db.Photos.Add(photo);
-                        db.SaveChanges();
-                        return RedirectToAction("MyPhotoAlbum");
+                        try
+                        {
+                            db.SaveChanges();
+                        }catch(Exception e){
+
+                            
+                        }
+                        return RedirectToAction("Index");
                     }
                 }
-                
             }
 
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             return View(photo);
         }
 
@@ -112,6 +122,7 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             return View(photo);
         }
 
@@ -128,6 +139,7 @@ namespace BMG.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             return View(photo);
         }
 

@@ -45,24 +45,24 @@
                 {
                     using (Html.BeginForm("AddToPhotoAlbum", "Photos", itemPhoto))
                     {
-                        
-                    <div class="col-lg-6">
-                        <div class="thumbnail">
-                            <img src="https://@Html.DisplayFor(modelItem => itemPhoto.Path)" alt="@Html.DisplayFor(modelItem => itemPhoto.Description)" />
-                            <div class="caption">
-                                <h3>@Html.DisplayFor(modelItem => itemPhoto.Description)</h3>
-                                <p>
-                                    @Html.AntiForgeryToken();
-                                    <input type="submit" value="Добавить в альбом" class="btn btn-default" />
-                                    <br />
-                                    @Html.ActionLink("Подробнее", "AddToPhotoAlbum", new { id = itemPhoto.Id })
-                                    @Html.ActionLink("Подробнее", "Details", new { id = itemPhoto.Id }) |
-                                    @Html.ActionLink("Редактировать", "Edit", new { id = itemPhoto.Id }) |
-                                    @Html.ActionLink("Удалить", "Delete", new { id = itemPhoto.Id })
-                                </p>
+
+                        <div class="col-lg-6">
+                            <div class="thumbnail">
+                                <img src="https://@Html.DisplayFor(modelItem => itemPhoto.Path)" alt="@Html.DisplayFor(modelItem => itemPhoto.Description)" />
+                                <div class="caption">
+                                    <h3>@Html.DisplayFor(modelItem => itemPhoto.Description)</h3>
+                                    <p>
+                                        @Html.AntiForgeryToken();
+                                        <input type="submit" value="Добавить в альбом" class="btn btn-default" />
+                                        <br />
+                                        @Html.ActionLink("Подробнее", "AddToPhotoAlbum", new { id = itemPhoto.Id })
+                                        @Html.ActionLink("Подробнее", "Details", new { id = itemPhoto.Id }) |
+                                        @Html.ActionLink("Редактировать", "Edit", new { id = itemPhoto.Id }) |
+                                        @Html.ActionLink("Удалить", "Delete", new { id = itemPhoto.Id })
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     }
                 }
             }

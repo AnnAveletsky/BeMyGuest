@@ -7,29 +7,27 @@
 <h2>Фотографии</h2>
 
 <p>
-    @Html.ActionLink("Дабавить новую фотограцию", "Create")
+    @Html.ActionLink("Добавить фотографию", "Create")
 </p>
-@foreach (var item in Model)
-{
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
             <div class="thumbnail">
                 <img src="https://@Html.DisplayFor(modelItem => item.Path)" alt="@Html.DisplayFor(modelItem => item.Description)" />
                 <div class="caption">
                     <h3>@Html.DisplayFor(modelItem => item.Description)</h3>
                     <p>
-                        @if (User.Identity.Name == item.AspNetUser.UserName)
-                        {
-                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })
-                        }
-                        @Html.ActionLink("Подроюнее", "Details", new { id = item.Id })
-                        @if (User.Identity.Name == item.AspNetUser.UserName)
-                        {
-                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
-                        }
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
                     </p>
+                    @if (item.AspNetUser.UserName == User.Identity.Name)
+                    {<p>
+                        @Html.ActionLink("Редактирование", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Удаление", "Delete", new { id = item.Id })
+                    </p>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>

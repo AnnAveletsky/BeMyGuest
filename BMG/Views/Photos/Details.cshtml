@@ -1,33 +1,24 @@
 ﻿@model BMG.Models.Photo
 
 @{
-    ViewBag.Title = "Редактирование дорографий";
+    ViewBag.Title = "Подробнее о фоторафии";
 }
 
-<h2>Редактирование дорографий</h2>
+<h2>Подробнее о фоторафии</h2>
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Путь
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Path)
-        </dd>
-
-        <dt>
-            Описание
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+    <div class="thumbnail">
+        <img src="https://@Html.DisplayFor(model => model.Path)" alt="@Html.DisplayFor(model => model.Description)" />
+        <div class="caption">
+            <h3>@Html.DisplayFor(model => model.Description)</h3>
+            <p>
+                @Html.ActionLink("Подробнее", "Details", new { id = Model.Id })
+            </p>
+            @if (Model.AspNetUser.UserName == User.Identity.Name)
+            {<p>
+                @Html.ActionLink("Удаление", "Delete", new { id = Model.Id })
+            </p>
+            }
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Редактирование", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Назад к фотографиям", "Index")
-</p>
