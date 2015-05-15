@@ -18,6 +18,8 @@ namespace BMG.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.Discussions = new HashSet<Discussion>();
+            this.Groups = new HashSet<Group>();
             this.Messages = new HashSet<Message>();
             this.Messages1 = new HashSet<Message>();
             this.Occasions = new HashSet<Occasion>();
@@ -25,12 +27,11 @@ namespace BMG.Models
             this.Photos = new HashSet<Photo>();
             this.Places = new HashSet<Place>();
             this.Travelings = new HashSet<Traveling>();
+            this.UsersDiscussions = new HashSet<UsersDiscussion>();
+            this.UsersPlaces = new HashSet<UsersPlace>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.Discussions = new HashSet<Discussion>();
-            this.Groups = new HashSet<Group>();
+            this.Groups1 = new HashSet<Group>();
             this.Occasions2 = new HashSet<Occasion>();
-            this.Photos1 = new HashSet<Photo>();
-            this.Places1 = new HashSet<Place>();
             this.Travelings1 = new HashSet<Traveling>();
         }
     
@@ -60,6 +61,8 @@ namespace BMG.Models
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
         public virtual Photo Photo { get; set; }
+        public virtual ICollection<Discussion> Discussions { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Message> Messages1 { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
@@ -67,12 +70,11 @@ namespace BMG.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places { get; set; }
         public virtual ICollection<Traveling> Travelings { get; set; }
+        public virtual ICollection<UsersDiscussion> UsersDiscussions { get; set; }
+        public virtual ICollection<UsersPlace> UsersPlaces { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        public virtual ICollection<Discussion> Discussions { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Group> Groups1 { get; set; }
         public virtual ICollection<Occasion> Occasions2 { get; set; }
-        public virtual ICollection<Photo> Photos1 { get; set; }
-        public virtual ICollection<Place> Places1 { get; set; }
         public virtual ICollection<Traveling> Travelings1 { get; set; }
     }
 }

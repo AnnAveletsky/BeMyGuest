@@ -17,7 +17,7 @@ namespace BMG.Controllers
         // GET: Occasions
         public ActionResult Index()
         {
-            var occasions = db.Occasions.Include(o => o.AspNetUser).Include(o => o.AspNetUser1);
+            var occasions = db.Occasions.Include(o => o.AspNetUser).Include(o => o.AspNetUser1).Include(o => o.Place).Include(o => o.Traveling);
             return View(occasions.ToList());
         }
 
@@ -41,6 +41,8 @@ namespace BMG.Controllers
         {
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.IdUserTraveler = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser");
+            ViewBag.IdTraveling = new SelectList(db.Travelings, "Id", "Name");
             return View();
         }
 
@@ -49,7 +51,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommintTreveler,CommintHost")] Occasion occasion)
+        public ActionResult Create([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,CommentPlaceHost")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +62,8 @@ namespace BMG.Controllers
 
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserHost);
             ViewBag.IdUserTraveler = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserTraveler);
+            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", occasion.IdPlace);
+            ViewBag.IdTraveling = new SelectList(db.Travelings, "Id", "Name", occasion.IdTraveling);
             return View(occasion);
         }
 
@@ -77,6 +81,8 @@ namespace BMG.Controllers
             }
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserHost);
             ViewBag.IdUserTraveler = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserTraveler);
+            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", occasion.IdPlace);
+            ViewBag.IdTraveling = new SelectList(db.Travelings, "Id", "Name", occasion.IdTraveling);
             return View(occasion);
         }
 
@@ -85,7 +91,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommintTreveler,CommintHost")] Occasion occasion)
+        public ActionResult Edit([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,CommentPlaceHost")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +101,8 @@ namespace BMG.Controllers
             }
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserHost);
             ViewBag.IdUserTraveler = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserTraveler);
+            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", occasion.IdPlace);
+            ViewBag.IdTraveling = new SelectList(db.Travelings, "Id", "Name", occasion.IdTraveling);
             return View(occasion);
         }
 

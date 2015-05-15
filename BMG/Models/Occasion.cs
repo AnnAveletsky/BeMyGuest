@@ -16,7 +16,6 @@ namespace BMG.Models
     {
         public Occasion()
         {
-            this.Travelings = new HashSet<Traveling>();
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
@@ -27,12 +26,16 @@ namespace BMG.Models
         public string Status { get; set; }
         public System.DateTime ArrivalDate { get; set; }
         public System.DateTime CheckOut { get; set; }
-        public string CommintTreveler { get; set; }
-        public string CommintHost { get; set; }
+        public string CommentTreveler { get; set; }
+        public string CommentHost { get; set; }
+        public Nullable<int> IdTraveling { get; set; }
+        public Nullable<int> IdPlace { get; set; }
+        public string CommentPlaceHost { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }
-        public virtual ICollection<Traveling> Travelings { get; set; }
+        public virtual Place Place { get; set; }
+        public virtual Traveling Traveling { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

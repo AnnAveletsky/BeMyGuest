@@ -16,22 +16,28 @@ namespace BMG.Models
     {
         public Discussion()
         {
-            this.MessagesInDiscussions = new HashSet<MessagesInDiscussion>();
-            this.Groups = new HashSet<Group>();
-            this.AspNetUsers = new HashSet<AspNetUser>();
+            this.Photos = new HashSet<Photo>();
+            this.Places = new HashSet<Place>();
+            this.Travelings = new HashSet<Traveling>();
+            this.UsersDiscussions = new HashSet<UsersDiscussion>();
         }
     
         public int Id { get; set; }
+        public string IdUserCreate { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
         public int IdCountry { get; set; }
         public int IdCity { get; set; }
         public System.DateTime DateTimeCreate { get; set; }
+        public Nullable<int> IdGroup { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
-        public virtual ICollection<MessagesInDiscussion> MessagesInDiscussions { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Place> Places { get; set; }
+        public virtual ICollection<Traveling> Travelings { get; set; }
+        public virtual ICollection<UsersDiscussion> UsersDiscussions { get; set; }
     }
 }

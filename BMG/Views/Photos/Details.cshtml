@@ -1,24 +1,82 @@
 ﻿@model BMG.Models.Photo
 
 @{
-    ViewBag.Title = "Подробнее о фоторафии";
+    ViewBag.Title = "Details";
 }
 
-<h2>Подробнее о фоторафии</h2>
+<h2>Details</h2>
 
 <div>
-    <div class="thumbnail">
-        <img src="https://@Html.DisplayFor(model => model.Path)" alt="@Html.DisplayFor(model => model.Description)" />
-        <div class="caption">
-            <h3>@Html.DisplayFor(model => model.Description)</h3>
-            <p>
-                @Html.ActionLink("Подробнее", "Details", new { id = Model.Id })
-            </p>
-            @if (Model.AspNetUser.UserName == User.Identity.Name)
-            {<p>
-                @Html.ActionLink("Удаление", "Delete", new { id = Model.Id })
-            </p>
-            }
-        </div>
-    </div>
+    <h4>Photo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Path)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContainsPhotoAlbum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContainsPhotoAlbum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discussion.IdUserCreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discussion.IdUserCreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place.IdUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place.IdUser)
+        </dd>
+
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

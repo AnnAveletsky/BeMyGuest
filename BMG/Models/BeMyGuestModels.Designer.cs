@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "F:\WEB\ASP.NET_MVC\BeMyGuest\BMG\Models\BeMyGuestModels.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\Ann\Documents\GitHub\BeMyGuest\BMG\Models\BeMyGuestModels.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

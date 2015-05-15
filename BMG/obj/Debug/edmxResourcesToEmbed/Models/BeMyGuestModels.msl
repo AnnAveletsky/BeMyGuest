@@ -66,7 +66,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="Cities">
       <EntityTypeMapping TypeName="Model.City">
-        <MappingFragment StoreEntitySet="City">
+        <MappingFragment StoreEntitySet="Cities">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -75,7 +75,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="Countries">
       <EntityTypeMapping TypeName="Model.Country">
-        <MappingFragment StoreEntitySet="Country">
+        <MappingFragment StoreEntitySet="Countries">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
@@ -83,25 +83,28 @@
     </EntitySetMapping>
     <EntitySetMapping Name="Discussions">
       <EntityTypeMapping TypeName="Model.Discussion">
-        <MappingFragment StoreEntitySet="Discussion">
+        <MappingFragment StoreEntitySet="Discussions">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="DateTimeCreate" ColumnName="DateTimeCreate" />
+          <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Groups">
       <EntityTypeMapping TypeName="Model.Group">
-        <MappingFragment StoreEntitySet="Group">
+        <MappingFragment StoreEntitySet="Groups">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -117,19 +120,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MessagesInDiscussions">
-      <EntityTypeMapping TypeName="Model.MessagesInDiscussion">
-        <MappingFragment StoreEntitySet="MessagesInDiscussion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
-          <ScalarProperty Name="Messages" ColumnName="Messages" />
-          <ScalarProperty Name="DataTimeCreate" ColumnName="DataTimeCreate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Occasions">
       <EntityTypeMapping TypeName="Model.Occasion">
-        <MappingFragment StoreEntitySet="Occasion">
+        <MappingFragment StoreEntitySet="Occasions">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdUserTraveler" ColumnName="IdUserTraveler" />
           <ScalarProperty Name="IdUserHost" ColumnName="IdUserHost" />
@@ -137,24 +130,32 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
           <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
-          <ScalarProperty Name="CommintTreveler" ColumnName="CommintTreveler" />
-          <ScalarProperty Name="CommintHost" ColumnName="CommintHost" />
+          <ScalarProperty Name="CommentTreveler" ColumnName="CommentTreveler" />
+          <ScalarProperty Name="CommentHost" ColumnName="CommentHost" />
+          <ScalarProperty Name="IdTraveling" ColumnName="IdTraveling" />
+          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
+          <ScalarProperty Name="CommentPlaceHost" ColumnName="CommentPlaceHost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Photos">
       <EntityTypeMapping TypeName="Model.Photo">
-        <MappingFragment StoreEntitySet="Photo">
+        <MappingFragment StoreEntitySet="Photos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
+          <ScalarProperty Name="ContainsPhotoAlbum" ColumnName="ContainsPhotoAlbum" />
+          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
+          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Places">
       <EntityTypeMapping TypeName="Model.Place">
-        <MappingFragment StoreEntitySet="Place">
+        <MappingFragment StoreEntitySet="Places">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdUser" ColumnName="IdUser" />
           <ScalarProperty Name="Adress" ColumnName="Adress" />
@@ -163,21 +164,48 @@
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
+          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
+          <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Travelings">
       <EntityTypeMapping TypeName="Model.Traveling">
-        <MappingFragment StoreEntitySet="Traveling">
-          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
+        <MappingFragment StoreEntitySet="Travelings">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DateComing" ColumnName="DateComing" />
-          <ScalarProperty Name="DateDeparture" ColumnName="DateDeparture" />
+          <ScalarProperty Name="DateTimeComing" ColumnName="DateTimeComing" />
+          <ScalarProperty Name="DateTimeDeparture" ColumnName="DateTimeDeparture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
+          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
+          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersDiscussions">
+      <EntityTypeMapping TypeName="Model.UsersDiscussion">
+        <MappingFragment StoreEntitySet="UsersDiscussions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
+          <ScalarProperty Name="DataTimeWrite" ColumnName="DataTimeWrite" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersPlaces">
+      <EntityTypeMapping TypeName="Model.UsersPlace">
+        <MappingFragment StoreEntitySet="UsersPlaces">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
+          <ScalarProperty Name="DataTimeComing" ColumnName="DataTimeComing" />
+          <ScalarProperty Name="DateTimeDeparture" ColumnName="DateTimeDeparture" />
+          <ScalarProperty Name="StatusComing" ColumnName="StatusComing" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -189,72 +217,24 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="DiscussionGroup" TypeName="Model.DiscussionGroup" StoreEntitySet="DiscussionGroup">
-      <EndProperty Name="Discussion">
-        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
-      </EndProperty>
-      <EndProperty Name="Group">
-        <ScalarProperty Name="Id" ColumnName="IdGroup" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PhotoPlace" TypeName="Model.PhotoPlace" StoreEntitySet="PhotoPlace">
-      <EndProperty Name="Photo">
-        <ScalarProperty Name="Id" ColumnName="IdPhoto" />
-      </EndProperty>
-      <EndProperty Name="Place">
-        <ScalarProperty Name="Id" ColumnName="IdPlace" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TravelingOccasion" TypeName="Model.TravelingOccasion" StoreEntitySet="TravelingOccasion">
-      <EndProperty Name="Occasion">
-        <ScalarProperty Name="Id" ColumnName="IdOccasion" />
-      </EndProperty>
-      <EndProperty Name="Traveling">
-        <ScalarProperty Name="Id" ColumnName="IdTraveling" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UserDiscussion" TypeName="Model.UserDiscussion" StoreEntitySet="UserDiscussion">
-      <EndProperty Name="Discussion">
-        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="IdUser" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UserGroup" TypeName="Model.UserGroup" StoreEntitySet="UserGroup">
-      <EndProperty Name="Group">
+    <AssociationSetMapping Name="UsersGroups" TypeName="Model.UsersGroups" StoreEntitySet="UsersGroups">
+      <EndProperty Name="Groups">
         <ScalarProperty Name="Id" ColumnName="IdGroup" />
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="IdUser" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UserOccasion" TypeName="Model.UserOccasion" StoreEntitySet="UserOccasion">
-      <EndProperty Name="Occasion">
+    <AssociationSetMapping Name="UsersOccasions" TypeName="Model.UsersOccasions" StoreEntitySet="UsersOccasions">
+      <EndProperty Name="Occasions">
         <ScalarProperty Name="Id" ColumnName="IdOccasion" />
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="IdUser" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UserPhoto" TypeName="Model.UserPhoto" StoreEntitySet="UserPhoto">
-      <EndProperty Name="Photo">
-        <ScalarProperty Name="Id" ColumnName="IdPhoto" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="IdUser" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UserPlace" TypeName="Model.UserPlace" StoreEntitySet="UserPlace">
-      <EndProperty Name="Place">
-        <ScalarProperty Name="Id" ColumnName="IdPlace" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="IdUser" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UserTraveling" TypeName="Model.UserTraveling" StoreEntitySet="UserTraveling">
-      <EndProperty Name="Traveling">
+    <AssociationSetMapping Name="UsersTravelings" TypeName="Model.UsersTravelings" StoreEntitySet="UsersTravelings">
+      <EndProperty Name="Travelings">
         <ScalarProperty Name="Id" ColumnName="IdTraveling" />
       </EndProperty>
       <EndProperty Name="AspNetUsers">

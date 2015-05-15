@@ -179,6 +179,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BeMyGuestModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -194,8 +206,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Discussion.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Group.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Occasion.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Photo.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Place.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Traveling.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersDiscussion.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersPlace.cs">
+      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -282,21 +330,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\AboutMe.cshtml" />
     <Content Include="Views\Groups\Create.cshtml" />
     <Content Include="Views\Groups\Delete.cshtml" />
     <Content Include="Views\Groups\Details.cshtml" />
     <Content Include="Views\Groups\Edit.cshtml" />
     <Content Include="Views\Groups\Index.cshtml" />
-    <Content Include="Views\Messages\Create.cshtml" />
-    <Content Include="Views\Messages\Delete.cshtml" />
-    <Content Include="Views\Messages\Details.cshtml" />
-    <Content Include="Views\Messages\Edit.cshtml" />
-    <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Places\Create.cshtml" />
     <Content Include="Views\Places\Delete.cshtml" />
     <Content Include="Views\Places\Details.cshtml" />
     <Content Include="Views\Places\Edit.cshtml" />
     <Content Include="Views\Places\Index.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Discussions\Create.cshtml" />
     <Content Include="Views\Discussions\Delete.cshtml" />
     <Content Include="Views\Discussions\Details.cshtml" />
@@ -307,20 +360,11 @@
     <Content Include="Views\Occasions\Details.cshtml" />
     <Content Include="Views\Occasions\Edit.cshtml" />
     <Content Include="Views\Occasions\Index.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\AboutMe.cshtml" />
     <Content Include="Views\Travelings\Create.cshtml" />
     <Content Include="Views\Travelings\Delete.cshtml" />
     <Content Include="Views\Travelings\Details.cshtml" />
     <Content Include="Views\Travelings\Edit.cshtml" />
     <Content Include="Views\Travelings\Index.cshtml" />
-    <Content Include="Views\Groups\MyGroups.cshtml" />
-    <Content Include="Views\Travelings\MyTravelings.cshtml" />
-    <Content Include="Views\Discussions\MyGiscussions.cshtml" />
-    <Content Include="Views\Occasions\MyOccasions.cshtml" />
     <Content Include="Views\Photos\Create.cshtml" />
     <Content Include="Views\Photos\Delete.cshtml" />
     <Content Include="Views\Photos\Details.cshtml" />

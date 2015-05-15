@@ -17,7 +17,7 @@ namespace BMG.Controllers
         // GET: Groups
         public ActionResult Index()
         {
-            var groups = db.Groups.Include(g => g.City).Include(g => g.Country);
+            var groups = db.Groups.Include(g => g.AspNetUser).Include(g => g.City).Include(g => g.Country).Include(g => g.Photo);
             return View(groups.ToList());
         }
 
@@ -39,8 +39,10 @@ namespace BMG.Controllers
         // GET: Groups/Create
         public ActionResult Create()
         {
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
+            ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path");
             return View();
         }
 
@@ -49,7 +51,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,IdUserCreate,Description,IdCountry,IdCity")] Group group)
+        public ActionResult Create([Bind(Include = "Id,Name,IdUserCreate,Description,IdCountry,IdCity,IdPhoto")] Group group)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +60,10 @@ namespace BMG.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", group.IdUserCreate);
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", group.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", group.IdCountry);
+            ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path", group.IdPhoto);
             return View(group);
         }
 
@@ -75,8 +79,10 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", group.IdUserCreate);
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", group.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", group.IdCountry);
+            ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path", group.IdPhoto);
             return View(group);
         }
 
@@ -85,7 +91,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IdUserCreate,Description,IdCountry,IdCity")] Group group)
+        public ActionResult Edit([Bind(Include = "Id,Name,IdUserCreate,Description,IdCountry,IdCity,IdPhoto")] Group group)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +99,10 @@ namespace BMG.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", group.IdUserCreate);
             ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name", group.IdCity);
             ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name", group.IdCountry);
+            ViewBag.IdPhoto = new SelectList(db.Photos, "Id", "Path", group.IdPhoto);
             return View(group);
         }
 

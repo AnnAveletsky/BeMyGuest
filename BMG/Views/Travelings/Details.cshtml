@@ -19,19 +19,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateComing)
+            @Html.DisplayNameFor(model => model.DateTimeComing)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateComing)
+            @Html.DisplayFor(model => model.DateTimeComing)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateDeparture)
+            @Html.DisplayNameFor(model => model.DateTimeDeparture)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateDeparture)
+            @Html.DisplayFor(model => model.DateTimeDeparture)
         </dd>
 
         <dt>
@@ -40,6 +40,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
         </dd>
 
         <dt>
@@ -59,11 +67,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.Discussion.IdUserCreate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
+            @Html.DisplayFor(model => model.Discussion.IdUserCreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo.Path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo.Path)
         </dd>
 
     </dl>

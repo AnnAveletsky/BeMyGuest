@@ -21,10 +21,16 @@
             @Html.DisplayNameFor(model => model.DateTimeCreate)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.City.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Country.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Group.Name)
         </th>
         <th></th>
     </tr>
@@ -41,10 +47,16 @@
             @Html.DisplayFor(modelItem => item.DateTimeCreate)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.City.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Country.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
