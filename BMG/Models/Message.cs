@@ -17,7 +17,7 @@ namespace BMG.Models
         public int Id { get; set; }
         public string Text { get; set; }
         public System.DateTime DataTimeWrite { get; set; }
-        public System.DateTime DataTimeRead { get; set; }
+        public Nullable<System.DateTime> DataTimeRead { get; set; }
         public string IdUserWrite { get; set; }
         public string IdUserRead { get; set; }
     

@@ -23,7 +23,7 @@
                     <a href="~/Groups/MyGroups" class="list-group-item list-group-item-info">Мои группы</a>
                 </tr>
                 <tr>
-                <a href="~/Occasions/MyOccasions" class="list-group-item list-group-item-info">Мои события</a>
+                    <a href="~/Occasions/MyOccasions" class="list-group-item list-group-item-info">Мои события</a>
                 </tr>
                 <tr>
                     <a href="~/Messages/MyMessages" class="list-group-item list-group-item-info">Мои сообщения</a>
@@ -122,30 +122,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 thumbnail">
-                    <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
-                    <p>
-
-                        @Html.DisplayFor(model => model.Occasions)
-                    </p>
-                </div>
-                <div class="col-lg-6 thumbnail">
-                    <h3><a href="~/Travelings/Index">Путешествия в моём городе</a></h3>
-                    <p>
-
-                    </p>
-                </div>
-                <div class="col-lg-6 thumbnail">
-                    <h3><a href="~/Groups/Index">Группы в моём городе</a></h3>
-                    <p>
-                        @Html.DisplayFor(model => model.Groups)
-                    </p>
-                </div>
-                <div class="col-lg-6 thumbnail">
-                    <h3><a href="~/Discussions/Index">Дисскусии в моём городе</a></h3>
-                    <p>
-                    </p>
-                </div>
+                @foreach (var itemComment in Model.Occasions)
+                {
+                    <div class="col-lg-4 thumbnail">
+                        <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
+                        <p>
+                            @Html.DisplayFor(model => itemComment.CommentTreveler)
+                        </p>
+                    </div>
+                }
             </div>
         </div>
     </div>

@@ -81,7 +81,6 @@
     <NavigationProperty Name="UsersPlaces" Relationship="Self.FK_UsersPlaces_ToUsers" FromRole="AspNetUsers" ToRole="UsersPlaces" />
     <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
     <NavigationProperty Name="Groups1" Relationship="Self.UsersGroups" FromRole="AspNetUsers" ToRole="Groups" />
-    <NavigationProperty Name="Occasions2" Relationship="Self.UsersOccasions" FromRole="AspNetUsers" ToRole="Occasions" />
     <NavigationProperty Name="Travelings1" Relationship="Self.UsersTravelings" FromRole="AspNetUsers" ToRole="Travelings" />
   </EntityType>
   <EntityType Name="City">
@@ -123,7 +122,7 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IdCountry" Type="Int32" Nullable="false" />
     <Property Name="IdCity" Type="Int32" Nullable="false" />
-    <Property Name="DateTimeCreate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateTimeCreate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IdGroup" Type="Int32" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Discussions_ToUsers" FromRole="Discussions" ToRole="AspNetUsers" />
     <NavigationProperty Name="City" Relationship="Self.FK_Discussions_ToCities" FromRole="Discussions" ToRole="Cities" />
@@ -160,7 +159,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DataTimeWrite" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="DataTimeRead" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DataTimeRead" Type="DateTime" Precision="3" />
     <Property Name="IdUserWrite" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IdUserRead" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_MessagesRead_ToUser" FromRole="Messages" ToRole="AspNetUsers" />
@@ -186,7 +185,6 @@
     <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_OccasionsTraveler_ToUser" FromRole="Occasions" ToRole="AspNetUsers" />
     <NavigationProperty Name="Place" Relationship="Self.FK_Occasions_ToPlaces" FromRole="Occasions" ToRole="Places" />
     <NavigationProperty Name="Traveling" Relationship="Self.FK_Occasions_ToTraveling" FromRole="Occasions" ToRole="Travelings" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.UsersOccasions" FromRole="Occasions" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="Photo">
     <Key>
@@ -779,10 +777,6 @@
     <End Role="Groups" Type="Self.Group" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
   </Association>
-  <Association Name="UsersOccasions">
-    <End Role="Occasions" Type="Self.Occasion" Multiplicity="*" />
-    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-  </Association>
   <Association Name="UsersTravelings">
     <End Role="Travelings" Type="Self.Traveling" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -970,10 +964,6 @@
     </AssociationSet>
     <AssociationSet Name="UsersGroups" Association="Self.UsersGroups">
       <End Role="Groups" EntitySet="Groups" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-    </AssociationSet>
-    <AssociationSet Name="UsersOccasions" Association="Self.UsersOccasions">
-      <End Role="Occasions" EntitySet="Occasions" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
     <AssociationSet Name="UsersTravelings" Association="Self.UsersTravelings">

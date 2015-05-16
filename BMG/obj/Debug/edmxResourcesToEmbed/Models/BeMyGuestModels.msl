@@ -225,14 +225,6 @@
         <ScalarProperty Name="Id" ColumnName="IdUser" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UsersOccasions" TypeName="Model.UsersOccasions" StoreEntitySet="UsersOccasions">
-      <EndProperty Name="Occasions">
-        <ScalarProperty Name="Id" ColumnName="IdOccasion" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="IdUser" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="UsersTravelings" TypeName="Model.UsersTravelings" StoreEntitySet="UsersTravelings">
       <EndProperty Name="Travelings">
         <ScalarProperty Name="Id" ColumnName="IdTraveling" />

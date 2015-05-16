@@ -25,7 +25,7 @@ namespace BMG.Controllers
             var groups = db.Groups.Include(g => g.AspNetUser).Include(g => g.City).Include(g => g.Country).Include(g => g.Photo);
             return View(groups.ToList());
         }
-
+        
         // GET: Groups/Details/5
         public ActionResult Details(int? id)
         {
