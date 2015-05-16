@@ -85,7 +85,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Path,Description,ContainsPhotoAlbum,IdPlace,IdCountry,IdCity")] Photo photo)
+        public ActionResult Create([Bind(Include = "Id,Path,Description,ContainsPhotoAlbum,IdPlace,IdCountry,IdCity")] Photo photo, [Bind(Include = "Id")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +93,21 @@ namespace BMG.Controllers
                 {
                     if (i.UserName == User.Identity.Name)
                     {
-                        photo.IdUserCreate = i.Id;
+                        
+                        discussion.AspNetUser = i;
+                        discussion.Type = "Для фото";
+                        discussion.Name = "Для фото" + photo.Id;
+                        discussion.IdCountry = photo.IdCountry;
+                        discussion.IdCity = photo.IdCity;
+                        discussion.DateTimeCreate = new DateTime();
+                        discussion.IdGroup = null;
+                        discussion.Photos.Add(photo);
+                        
+                        photo.AspNetUser = i;
+                        photo.Discussion = discussion;
+
                         db.Photos.Add(photo);
+                        db.Discussions.Add(discussion);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -134,7 +147,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdPlace,IdDiscussion,IdCountry,IdCity")] Photo photo)
+        public ActionResult Edit([Bind(Include = "Id,Path,Description,ContainsPhotoAlbum,IdPlace,IdDiscussion,IdCountry,IdCity")] Photo photo)
         {
             if (ModelState.IsValid)
             {

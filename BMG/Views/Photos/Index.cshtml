@@ -17,6 +17,8 @@
                 <img src="https://@Html.DisplayFor(modelItem => item.Path)" alt="@Html.DisplayFor(modelItem => item.Description)" />
                 <div class="caption">
                     <h3>@Html.DisplayFor(modelItem => item.Description)</h3>
+                    <small>из @Html.DisplayFor(modelItem => item.AspNetUser.UserName)</small>
+                    <small>из @Html.DisplayFor(modelItem => item.Country.Name) @Html.DisplayFor(modelItem => item.City.Name)</small>
                     <p>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id }) |

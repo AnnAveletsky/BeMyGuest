@@ -392,7 +392,7 @@ namespace BMG.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("AboutMe", "Users");
+            return RedirectToAction("Index", "Home");
         }
 
         //

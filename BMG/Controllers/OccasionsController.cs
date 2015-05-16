@@ -20,7 +20,11 @@ namespace BMG.Controllers
             var occasions = db.Occasions.Include(o => o.AspNetUser).Include(o => o.AspNetUser1).Include(o => o.Place).Include(o => o.Traveling);
             return View(occasions.ToList());
         }
-
+        public ActionResult MyOccasions()
+        {
+            var occasions = db.Occasions.Include(o => o.AspNetUser).Include(o => o.AspNetUser1).Include(o => o.Place).Include(o => o.Traveling);
+            return View(occasions.ToList());
+        }
         // GET: Occasions/Details/5
         public ActionResult Details(int? id)
         {

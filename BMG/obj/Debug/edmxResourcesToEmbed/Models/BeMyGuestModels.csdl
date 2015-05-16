@@ -199,8 +199,8 @@
     <Property Name="ContainsPhotoAlbum" Type="Boolean" Nullable="false" />
     <Property Name="IdPlace" Type="Int32" />
     <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
-    <Property Name="IdCountry" Type="Int32" />
-    <Property Name="IdCity" Type="Int32" />
+    <Property Name="IdCountry" Type="Int32" Nullable="false" />
+    <Property Name="IdCity" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToPhotos" FromRole="Photos" ToRole="AspNetUsers" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Photos_ToUser" FromRole="Photos" ToRole="AspNetUsers" />
     <NavigationProperty Name="City" Relationship="Self.FK_Photos_ToCities" FromRole="Photos" ToRole="Cities" />
@@ -520,7 +520,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Photos_ToCities">
-    <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Cities" Type="Self.City" Multiplicity="1" />
     <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cities">
@@ -580,7 +580,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Photos_ToCountries">
-    <End Role="Countries" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
     <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Countries">

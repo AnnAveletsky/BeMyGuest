@@ -15,7 +15,7 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Messages
-        public ActionResult Index()
+        public ActionResult MyMessages()
         {
             var messages = db.Messages.Include(m => m.AspNetUser).Include(m => m.AspNetUser1);
             return View(messages.ToList());

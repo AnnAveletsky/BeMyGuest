@@ -20,7 +20,11 @@ namespace BMG.Controllers
             var travelings = db.Travelings.Include(t => t.AspNetUser).Include(t => t.City).Include(t => t.Country).Include(t => t.Discussion).Include(t => t.Photo);
             return View(travelings.ToList());
         }
-
+        public ActionResult MyTravelings()
+        {
+            var travelings = db.Travelings.Include(t => t.AspNetUser).Include(t => t.City).Include(t => t.Country).Include(t => t.Discussion).Include(t => t.Photo);
+            return View(travelings.ToList());
+        }
         // GET: Travelings/Details/5
         public ActionResult Details(int? id)
         {
@@ -52,13 +56,33 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,DateTimeComing,DateTimeDeparture,Description,IdCountry,IdCity,IdUserCreate,IdPhoto,IdDiscussion")] Traveling traveling)
+        public ActionResult Create([Bind(Include = "Id,Name,DateTimeComing,DateTimeDeparture,Description,IdCountry,IdCity,IdPhoto")] Traveling traveling, [Bind(Include = "Id")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
-                db.Travelings.Add(traveling);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        discussion.AspNetUser = i;
+                        discussion.Type = "Для фото";
+                        discussion.Name = "Для фото" + traveling.Id;
+                        discussion.IdCountry = traveling.IdCountry;
+                        discussion.IdCity = traveling.IdCity;
+                        discussion.DateTimeCreate = new DateTime();
+                        discussion.IdGroup = null;
+                        discussion.Travelings.Add(traveling);
+
+                        traveling.AspNetUser = i;
+                        traveling.Discussion = discussion;
+
+
+                        db.Travelings.Add(traveling);
+                        db.Discussions.Add(discussion);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
             }
 
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);
@@ -94,7 +118,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DateTimeComing,DateTimeDeparture,Description,IdCountry,IdCity,IdUserCreate,IdPhoto,IdDiscussion")] Traveling traveling)
+        public ActionResult Edit([Bind(Include = "Id,Name,DateTimeComing,DateTimeDeparture,Description,IdCountry,IdCity,IdPhoto")] Traveling traveling)
         {
             if (ModelState.IsValid)
             {

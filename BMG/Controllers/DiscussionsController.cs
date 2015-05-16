@@ -20,7 +20,11 @@ namespace BMG.Controllers
             var discussions = db.Discussions.Include(d => d.AspNetUser).Include(d => d.City).Include(d => d.Country).Include(d => d.Group);
             return View(discussions.ToList());
         }
-
+        public ActionResult MyDiscussions()
+        {
+            var discussions = db.Discussions.Include(d => d.AspNetUser).Include(d => d.City).Include(d => d.Country).Include(d => d.Group);
+            return View(discussions.ToList());
+        }
         // GET: Discussions/Details/5
         public ActionResult Details(int? id)
         {

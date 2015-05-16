@@ -10,6 +10,10 @@ namespace BMG.Controllers
     {
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated == true)
+            {
+                RedirectToAction("AboutMe", "Users");
+            }
             return View();
         }
 

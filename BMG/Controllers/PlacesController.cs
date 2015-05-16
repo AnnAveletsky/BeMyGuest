@@ -20,7 +20,11 @@ namespace BMG.Controllers
             var places = db.Places.Include(p => p.AspNetUser).Include(p => p.City).Include(p => p.Country).Include(p => p.Discussion).Include(p => p.Group).Include(p => p.Photo);
             return View(places.ToList());
         }
-
+        public ActionResult MyPlaces()
+        {
+            var places = db.Places.Include(p => p.AspNetUser).Include(p => p.City).Include(p => p.Country).Include(p => p.Discussion).Include(p => p.Group).Include(p => p.Photo);
+            return View(places.ToList());
+        }
         // GET: Places/Details/5
         public ActionResult Details(int? id)
         {

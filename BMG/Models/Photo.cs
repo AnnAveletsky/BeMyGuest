@@ -29,8 +29,8 @@ namespace BMG.Models
         public bool ContainsPhotoAlbum { get; set; }
         public Nullable<int> IdPlace { get; set; }
         public int IdDiscussion { get; set; }
-        public Nullable<int> IdCountry { get; set; }
-        public Nullable<int> IdCity { get; set; }
+        public int IdCountry { get; set; }
+        public int IdCity { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
