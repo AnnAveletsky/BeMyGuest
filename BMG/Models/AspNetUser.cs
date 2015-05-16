@@ -31,7 +31,6 @@ namespace BMG.Models
             this.UsersPlaces = new HashSet<UsersPlace>();
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.Groups1 = new HashSet<Group>();
-            this.Occasions2 = new HashSet<Occasion>();
             this.Travelings1 = new HashSet<Traveling>();
         }
     
@@ -74,7 +73,6 @@ namespace BMG.Models
         public virtual ICollection<UsersPlace> UsersPlaces { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<Group> Groups1 { get; set; }
-        public virtual ICollection<Occasion> Occasions2 { get; set; }
         public virtual ICollection<Traveling> Travelings1 { get; set; }
     }
 }

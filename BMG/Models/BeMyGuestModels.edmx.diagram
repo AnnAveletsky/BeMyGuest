@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d31f4276c35e4a04bb5c188f5f8e8207" Name="Diagram1" ZoomLevel="40">
+      <Diagram DiagramId="b9dba54379d54f008f2f697a6d79d978" Name="Diagram1">
         <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Discussion" Width="1.5" PointX="10.5" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Group" Width="1.5" PointX="18" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Group" Width="1.5" PointX="18" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Message" Width="1.5" PointX="7.5" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Occasion" Width="1.5" PointX="22.5" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Photo" Width="1.5" PointX="12.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Occasion" Width="1.5" PointX="22.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Photo" Width="1.5" PointX="12.75" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Place" Width="1.5" PointX="20.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Traveling" Width="1.5" PointX="15" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Traveling" Width="1.5" PointX="15" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.UsersDiscussion" Width="1.5" PointX="15.75" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UsersPlace" Width="1.5" PointX="22.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UsersPlace" Width="1.5" PointX="22.5" PointY="17.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AspNetUsers_ToCities" ManuallyRouted="false" />
@@ -63,7 +63,6 @@
         <AssociationConnector Association="Model.FK_UsersPlaces_ToPlaces" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UsersGroups" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.UsersOccasions" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UsersTravelings" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

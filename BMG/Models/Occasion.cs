@@ -14,11 +14,6 @@ namespace BMG.Models
     
     public partial class Occasion
     {
-        public Occasion()
-        {
-            this.AspNetUsers = new HashSet<AspNetUser>();
-        }
-    
         public int Id { get; set; }
         public string IdUserTraveler { get; set; }
         public string IdUserHost { get; set; }
@@ -36,6 +31,5 @@ namespace BMG.Models
         public virtual AspNetUser AspNetUser1 { get; set; }
         public virtual Place Place { get; set; }
         public virtual Traveling Traveling { get; set; }
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

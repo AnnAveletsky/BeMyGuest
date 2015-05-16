@@ -1,62 +1,23 @@
 ﻿@model IEnumerable<BMG.Models.AspNetUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Люди";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-   
-        <th>
-            @Html.DisplayNameFor(model => model.DataBirthday)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo.Path)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-    
-        <td>
-            @Html.DisplayFor(modelItem => item.DataBirthday)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo.Path)
-        </td>
-    </tr>
-}
-
-</table>
+<h2>Люди</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item != null)
+        {
+            <div class="col-lg-2">
+                <div class="thumbnail">
+                    <img src="https://@Html.DisplayFor(modelItem => item.Photo.Path)" alt="@Html.DisplayFor(modelItem => item.Photo.Description)" width="100%">
+                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.SecondName)
+                    <br /> из @Html.DisplayFor(modelItem => item.Country.Name)
+                    @Html.DisplayFor(modelItem => item.City.Name)
+                </div>
+            </div>
+        }
+    }
+</div>
