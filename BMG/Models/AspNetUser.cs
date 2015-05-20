@@ -46,10 +46,7 @@ namespace BMG.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
-        public Nullable<int> IdPhoto { get; set; }
         public Nullable<System.DateTime> DataBirthday { get; set; }
-        public Nullable<int> IdCountry { get; set; }
-        public Nullable<int> IdCity { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string InfoAboutMe { get; set; }
@@ -57,9 +54,6 @@ namespace BMG.Models
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
-        public virtual Photo Photo { get; set; }
         public virtual ICollection<Discussion> Discussions { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

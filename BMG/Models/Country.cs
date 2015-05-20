@@ -16,22 +16,14 @@ namespace BMG.Models
     {
         public Country()
         {
-            this.AspNetUsers = new HashSet<AspNetUser>();
             this.Cities = new HashSet<City>();
-            this.Groups = new HashSet<Group>();
-            this.Photos = new HashSet<Photo>();
             this.Places = new HashSet<Place>();
-            this.Travelings = new HashSet<Traveling>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual ICollection<City> Cities { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places { get; set; }
-        public virtual ICollection<Traveling> Travelings { get; set; }
     }
 }

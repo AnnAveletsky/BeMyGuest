@@ -172,7 +172,6 @@
     <Compile Include="Controllers\OccasionsController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
-    <Compile Include="Controllers\TravelingsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
