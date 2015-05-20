@@ -165,7 +165,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DiscussionsController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -179,71 +178,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BeMyGuestModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeMyGuestModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BeMyGuestModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BeMyGuestModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\City.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Country.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Discussion.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Group.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Message.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Occasion.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Photo.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Place.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Traveling.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UsersDiscussion.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UsersPlace.cs">
-      <DependentUpon>BeMyGuestModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -262,23 +198,6 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BeMyGuestModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BeMyGuestModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\BeMyGuestModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
-      <LastGenOutput>BeMyGuestModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\BeMyGuestModels.edmx.diagram">
-      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\BeMyGuestModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BeMyGuestModels.edmx</DependentUpon>
-      <LastGenOutput>BeMyGuestModels.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -369,11 +288,6 @@
     <Content Include="Views\Places\Details.cshtml" />
     <Content Include="Views\Places\Edit.cshtml" />
     <Content Include="Views\Places\Index.cshtml" />
-    <Content Include="Views\Discussions\Create.cshtml" />
-    <Content Include="Views\Discussions\Delete.cshtml" />
-    <Content Include="Views\Discussions\Details.cshtml" />
-    <Content Include="Views\Discussions\Edit.cshtml" />
-    <Content Include="Views\Discussions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
