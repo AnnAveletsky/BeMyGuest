@@ -25,15 +25,12 @@ namespace BMG.Models
         public int Id { get; set; }
         public string IdUserCreate { get; set; }
         public string Type { get; set; }
-        public string Name { get; set; }
-        public int IdCountry { get; set; }
-        public int IdCity { get; set; }
+        public string Title { get; set; }
         public System.DateTime DateTimeCreate { get; set; }
         public Nullable<int> IdGroup { get; set; }
+        public Nullable<int> IdPlace { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
         public virtual Group Group { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places { get; set; }
