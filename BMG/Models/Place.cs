@@ -34,6 +34,7 @@ namespace BMG.Models
         public Nullable<int> IdPhoto { get; set; }
         public int IdDiscussion { get; set; }
         public Nullable<int> IdGroup { get; set; }
+        public bool Main { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual City City { get; set; }

@@ -164,6 +164,7 @@
           <Property Name="IdPhoto" Type="int" />
           <Property Name="IdDiscussion" Type="int" Nullable="false" />
           <Property Name="IdGroup" Type="int" />
+          <Property Name="Main" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Travelings">
           <Key>
@@ -1044,6 +1045,7 @@
           <Property Name="IdPhoto" Type="Int32" />
           <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
           <Property Name="IdGroup" Type="Int32" />
+          <Property Name="Main" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Places_ToUser" FromRole="Places" ToRole="AspNetUsers" />
           <NavigationProperty Name="City" Relationship="Self.FK_Places_ToCity" FromRole="Places" ToRole="Cities" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Places_ToCountry" FromRole="Places" ToRole="Countries" />
@@ -1810,6 +1812,7 @@
                 <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
                 <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="Main" ColumnName="Main" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
