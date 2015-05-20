@@ -376,6 +376,13 @@
     <Content Include="Views\UsersDiscussions\Details.cshtml" />
     <Content Include="Views\UsersDiscussions\Edit.cshtml" />
     <Content Include="Views\UsersDiscussions\Index.cshtml" />
+    <Content Include="Views\Users\AboutMe.cshtml" />
+    <Content Include="Views\Travelings\MyTravelings.cshtml" />
+    <Content Include="Views\Places\MyPlaces.cshtml" />
+    <Content Include="Views\Photos\MyPhotos.cshtml" />
+    <Content Include="Views\Occasions\MyOccasions.cshtml" />
+    <Content Include="Views\Groups\MyGroups.cshtml" />
+    <Content Include="Views\Discussions\MyDiscussions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

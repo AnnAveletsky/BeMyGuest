@@ -1,0 +1,93 @@
+﻿@model IEnumerable<BMG.Models.Occasion>
+
+@{
+    ViewBag.Title = "MyOccasions";
+}
+
+<h2>MyOccasions</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentTreveler)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentHost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentPlaceHost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place.IdUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Traveling.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrivalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckOut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentTreveler)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentHost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentPlaceHost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser1.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place.IdUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Traveling.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
