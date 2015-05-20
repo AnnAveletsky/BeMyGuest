@@ -35,15 +35,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Country.Name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discussion.IdUserCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Group.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo.Path)
-        </th>
         <th></th>
     </tr>
 
@@ -72,15 +63,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Country.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discussion.IdUserCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Group.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo.Path)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

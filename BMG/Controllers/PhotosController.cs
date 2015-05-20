@@ -20,7 +20,32 @@ namespace BMG.Controllers
             var photos = db.Photos.Include(p => p.AspNetUser).Include(p => p.Discussion);
             return View(photos.ToList());
         }
-
+        // GET: Photos/_AvatarUser/
+        public ActionResult _AvatarUser()
+        {
+            foreach (var i in db.Photos)
+            {
+                if (i.AspNetUser1!=null&&i.Main==true)
+                {
+                    Photo photo = db.Photos.Find(i.Id);
+                    return View(photo);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        // GET: Photos/_AvatarGroup/
+        public ActionResult _AvatarGroup()
+        {
+            foreach (var i in db.Photos)
+            {
+                if (i.Group != null && i.Main == true)
+                {
+                    Photo photo = db.Photos.Find(i.Id);
+                    return View(photo);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {

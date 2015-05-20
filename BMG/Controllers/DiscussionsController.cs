@@ -61,8 +61,6 @@ namespace BMG.Controllers
             }
 
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", discussion.IdUserCreate);
-            ViewBag.IdGroup = new SelectList(db.Groups, "Id", "Name", discussion.IdGroup);
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", discussion.IdPlace);
             return View(discussion);
         }
 
@@ -79,8 +77,6 @@ namespace BMG.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", discussion.IdUserCreate);
-            ViewBag.IdGroup = new SelectList(db.Groups, "Id", "Name", discussion.IdGroup);
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", discussion.IdPlace);
             return View(discussion);
         }
 
@@ -98,8 +94,6 @@ namespace BMG.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", discussion.IdUserCreate);
-            ViewBag.IdGroup = new SelectList(db.Groups, "Id", "Name", discussion.IdGroup);
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", discussion.IdPlace);
             return View(discussion);
         }
 

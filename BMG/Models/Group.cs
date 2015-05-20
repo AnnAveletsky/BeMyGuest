@@ -17,7 +17,6 @@ namespace BMG.Models
         public Group()
         {
             this.Discussions = new HashSet<Discussion>();
-            this.Places = new HashSet<Place>();
             this.Photos = new HashSet<Photo>();
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
@@ -26,14 +25,10 @@ namespace BMG.Models
         public string Name { get; set; }
         public string IdUserCreate { get; set; }
         public string Description { get; set; }
-        public int IdPhoto { get; set; }
-        public Nullable<int> IdPlace { get; set; }
+        public System.DateTime DataTimeCreate { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<Discussion> Discussions { get; set; }
-        public virtual Photo Photo { get; set; }
-        public virtual Place Place { get; set; }
-        public virtual ICollection<Place> Places { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }

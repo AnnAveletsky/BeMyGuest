@@ -6,7 +6,6 @@
 
 <h2>Create</h2>
 
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -40,18 +39,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdPhoto, "IdPhoto", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DataTimeCreate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IdPhoto", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdPhoto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdPlace, "IdPlace", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdPlace", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdPlace, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DataTimeCreate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataTimeCreate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -66,7 +57,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

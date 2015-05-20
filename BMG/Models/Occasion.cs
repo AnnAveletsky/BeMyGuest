@@ -25,7 +25,7 @@ namespace BMG.Models
         public string CommentHost { get; set; }
         public Nullable<int> IdTraveling { get; set; }
         public Nullable<int> IdPlace { get; set; }
-        public string CommentPlaceHost { get; set; }
+        public System.DateTime DataTimeCreate { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }

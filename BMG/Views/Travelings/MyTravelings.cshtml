@@ -24,13 +24,10 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.DataTimeCreate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discussion.IdUserCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo.Path)
         </th>
         <th></th>
     </tr>
@@ -50,13 +47,10 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.DataTimeCreate)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discussion.IdUserCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo.Path)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

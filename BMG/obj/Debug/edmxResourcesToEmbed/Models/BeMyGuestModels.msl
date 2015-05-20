@@ -83,11 +83,8 @@
         <MappingFragment StoreEntitySet="Discussions">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="DateTimeCreate" ColumnName="DateTimeCreate" />
-          <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -98,8 +95,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
-          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
+          <ScalarProperty Name="DataTimeCreate" ColumnName="DataTimeCreate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -129,7 +125,7 @@
           <ScalarProperty Name="CommentHost" ColumnName="CommentHost" />
           <ScalarProperty Name="IdTraveling" ColumnName="IdTraveling" />
           <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
-          <ScalarProperty Name="CommentPlaceHost" ColumnName="CommentPlaceHost" />
+          <ScalarProperty Name="DataTimeCreate" ColumnName="DataTimeCreate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -140,9 +136,9 @@
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
-          <ScalarProperty Name="ContainsPhotoAlbum" ColumnName="ContainsPhotoAlbum" />
           <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
           <ScalarProperty Name="Main" ColumnName="Main" />
+          <ScalarProperty Name="DataTimeCreate" ColumnName="DataTimeCreate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -157,9 +153,6 @@
           <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
-          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
-          <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
           <ScalarProperty Name="Main" ColumnName="Main" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -173,8 +166,7 @@
           <ScalarProperty Name="DateTimeDeparture" ColumnName="DateTimeDeparture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
-          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
-          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
+          <ScalarProperty Name="DataTimeCreate" ColumnName="DataTimeCreate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -209,6 +201,22 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="DiscussionGroup" TypeName="Model.DiscussionGroup" StoreEntitySet="DiscussionGroup">
+      <EndProperty Name="Groups">
+        <ScalarProperty Name="Id" ColumnName="IdGroup" />
+      </EndProperty>
+      <EndProperty Name="Discussions">
+        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DiscussionPlace" TypeName="Model.DiscussionPlace" StoreEntitySet="DiscussionPlace">
+      <EndProperty Name="Discussions">
+        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
+      </EndProperty>
+      <EndProperty Name="Places">
+        <ScalarProperty Name="Id" ColumnName="IdPlace" />
+      </EndProperty>
+    </AssociationSetMapping>
     <AssociationSetMapping Name="PhotoGroups" TypeName="Model.PhotoGroups" StoreEntitySet="PhotoGroups">
       <EndProperty Name="Groups">
         <ScalarProperty Name="Id" ColumnName="IdGroup" />
@@ -225,12 +233,28 @@
         <ScalarProperty Name="Id" ColumnName="IdPlace" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoTravelings" TypeName="Model.PhotoTravelings" StoreEntitySet="PhotoTravelings">
+      <EndProperty Name="Photos">
+        <ScalarProperty Name="Id" ColumnName="IdPhoto" />
+      </EndProperty>
+      <EndProperty Name="Travelings">
+        <ScalarProperty Name="Id" ColumnName="IdTravelings" />
+      </EndProperty>
+    </AssociationSetMapping>
     <AssociationSetMapping Name="PhotoUsers" TypeName="Model.PhotoUsers" StoreEntitySet="PhotoUsers">
       <EndProperty Name="Photos">
         <ScalarProperty Name="Id" ColumnName="IdPhoto" />
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="IdUser" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelingDiscussion" TypeName="Model.TravelingDiscussion" StoreEntitySet="TravelingDiscussion">
+      <EndProperty Name="Discussions">
+        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
+      </EndProperty>
+      <EndProperty Name="Travelings">
+        <ScalarProperty Name="Id" ColumnName="IdTraveling" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="UsersGroups" TypeName="Model.UsersGroups" StoreEntitySet="UsersGroups">

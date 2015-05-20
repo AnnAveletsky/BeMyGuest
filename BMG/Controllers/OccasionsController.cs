@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,20 +15,20 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Occasions
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var occasions = db.Occasions.Include(o => o.AspNetUser).Include(o => o.AspNetUser1).Include(o => o.Place).Include(o => o.Traveling);
-            return View(await occasions.ToListAsync());
+            return View(occasions.ToList());
         }
 
         // GET: Occasions/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Occasion occasion = await db.Occasions.FindAsync(id);
+            Occasion occasion = db.Occasions.Find(id);
             if (occasion == null)
             {
                 return HttpNotFound();
@@ -52,12 +51,12 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,CommentPlaceHost")] Occasion occasion)
+        public ActionResult Create([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,DataTimeCreate")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
                 db.Occasions.Add(occasion);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -69,13 +68,13 @@ namespace BMG.Controllers
         }
 
         // GET: Occasions/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Occasion occasion = await db.Occasions.FindAsync(id);
+            Occasion occasion = db.Occasions.Find(id);
             if (occasion == null)
             {
                 return HttpNotFound();
@@ -92,12 +91,12 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,CommentPlaceHost")] Occasion occasion)
+        public ActionResult Edit([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,DataTimeCreate")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(occasion).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserHost);
@@ -108,13 +107,13 @@ namespace BMG.Controllers
         }
 
         // GET: Occasions/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Occasion occasion = await db.Occasions.FindAsync(id);
+            Occasion occasion = db.Occasions.Find(id);
             if (occasion == null)
             {
                 return HttpNotFound();
@@ -125,11 +124,11 @@ namespace BMG.Controllers
         // POST: Occasions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Occasion occasion = await db.Occasions.FindAsync(id);
+            Occasion occasion = db.Occasions.Find(id);
             db.Occasions.Remove(occasion);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
