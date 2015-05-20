@@ -165,7 +165,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DiscussionsController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -350,11 +349,6 @@
     <Content Include="Views\Messages\Details.cshtml" />
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\MyMessages.cshtml" />
-    <Content Include="Views\Discussions\Create.cshtml" />
-    <Content Include="Views\Discussions\Delete.cshtml" />
-    <Content Include="Views\Discussions\Details.cshtml" />
-    <Content Include="Views\Discussions\Edit.cshtml" />
-    <Content Include="Views\Discussions\Index.cshtml" />
     <Content Include="Views\Occasions\Create.cshtml" />
     <Content Include="Views\Occasions\Delete.cshtml" />
     <Content Include="Views\Occasions\Details.cshtml" />
@@ -374,7 +368,6 @@
     <Content Include="Views\Occasions\MyOccasions.cshtml" />
     <Content Include="Views\Places\MyPlaces.cshtml" />
     <Content Include="Views\Groups\MyGroups.cshtml" />
-    <Content Include="Views\Discussions\MyDiscussions.cshtml" />
     <Content Include="Views\Travelings\MyTravelings.cshtml" />
   </ItemGroup>
   <ItemGroup>

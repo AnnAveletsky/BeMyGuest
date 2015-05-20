@@ -90,12 +90,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IdCountry" Type="int" Nullable="false" />
-    <Property Name="IdCity" Type="int" Nullable="false" />
+    <Property Name="Type" Type="nchar" MaxLength="45" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateTimeCreate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="IdGroup" Type="int" />
+    <Property Name="IdPlace" Type="int" />
   </EntityType>
   <EntityType Name="Groups">
     <Key>
@@ -324,30 +323,6 @@
       </Principal>
       <Dependent Role="AspNetUserRoles">
         <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Discussions_ToCities">
-    <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
-    <End Role="Discussions" Type="Self.Discussions" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cities">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Discussions">
-        <PropertyRef Name="IdCity" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Discussions_ToCountries">
-    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
-    <End Role="Discussions" Type="Self.Discussions" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Discussions">
-        <PropertyRef Name="IdCountry" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -834,14 +809,6 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Discussions_ToCities" Association="Self.FK_Discussions_ToCities">
-      <End Role="Cities" EntitySet="Cities" />
-      <End Role="Discussions" EntitySet="Discussions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Discussions_ToCountries" Association="Self.FK_Discussions_ToCountries">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="Discussions" EntitySet="Discussions" />
     </AssociationSet>
     <AssociationSet Name="FK_Discussions_ToGroups" Association="Self.FK_Discussions_ToGroups">
       <End Role="Groups" EntitySet="Groups" />
