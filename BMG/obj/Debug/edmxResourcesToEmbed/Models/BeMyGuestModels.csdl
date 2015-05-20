@@ -55,19 +55,13 @@
     <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
     <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="IdPhoto" Type="Int32" />
     <Property Name="DataBirthday" Type="DateTime" Precision="0" />
-    <Property Name="IdCountry" Type="Int32" />
-    <Property Name="IdCity" Type="Int32" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="InfoAboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-    <NavigationProperty Name="City" Relationship="Self.FK_AspNetUsers_ToCities" FromRole="AspNetUsers" ToRole="Cities" />
-    <NavigationProperty Name="Country" Relationship="Self.FK_AspNetUsers_ToCountries" FromRole="AspNetUsers" ToRole="Countries" />
-    <NavigationProperty Name="Photo" Relationship="Self.FK_AspNetUsers_ToPhotos" FromRole="AspNetUsers" ToRole="Photos" />
     <NavigationProperty Name="Discussions" Relationship="Self.FK_Discussions_ToUsers" FromRole="AspNetUsers" ToRole="Discussions" />
     <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_ToUsers" FromRole="AspNetUsers" ToRole="Groups" />
     <NavigationProperty Name="Messages" Relationship="Self.FK_MessagesRead_ToUser" FromRole="AspNetUsers" ToRole="Messages" />
@@ -90,12 +84,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="IdCountry" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToCities" FromRole="Cities" ToRole="AspNetUsers" />
     <NavigationProperty Name="Country" Relationship="Self.FK_Cities_ToCountries" FromRole="Cities" ToRole="Countries" />
-    <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_ToCities" FromRole="Cities" ToRole="Groups" />
-    <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_ToCities" FromRole="Cities" ToRole="Photos" />
     <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToCity" FromRole="Cities" ToRole="Places" />
-    <NavigationProperty Name="Travelings" Relationship="Self.FK_Travelings_ToCities" FromRole="Cities" ToRole="Travelings" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -103,12 +93,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToCountries" FromRole="Countries" ToRole="AspNetUsers" />
     <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_ToCountries" FromRole="Countries" ToRole="Cities" />
-    <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_ToCountries" FromRole="Countries" ToRole="Groups" />
-    <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_ToCountries" FromRole="Countries" ToRole="Photos" />
     <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToCountry" FromRole="Countries" ToRole="Places" />
-    <NavigationProperty Name="Travelings" Relationship="Self.FK_Travelings_ToCountries" FromRole="Countries" ToRole="Travelings" />
   </EntityType>
   <EntityType Name="Discussion">
     <Key>
@@ -123,6 +109,7 @@
     <Property Name="IdPlace" Type="Int32" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Discussions_ToUsers" FromRole="Discussions" ToRole="AspNetUsers" />
     <NavigationProperty Name="Group" Relationship="Self.FK_Discussions_ToGroups" FromRole="Discussions" ToRole="Groups" />
+    <NavigationProperty Name="Place" Relationship="Self.FK_Discussions_ToPlaces" FromRole="Discussions" ToRole="Places" />
     <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_ToDiscussions" FromRole="Discussions" ToRole="Photos" />
     <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToDiscussions" FromRole="Discussions" ToRole="Places" />
     <NavigationProperty Name="Travelings" Relationship="Self.FK_Travelings_ToDiscussions" FromRole="Discussions" ToRole="Travelings" />
@@ -136,14 +123,12 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="IdCountry" Type="Int32" Nullable="false" />
-    <Property Name="IdCity" Type="Int32" Nullable="false" />
     <Property Name="IdPhoto" Type="Int32" Nullable="false" />
+    <Property Name="IdPlace" Type="Int32" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Groups_ToUsers" FromRole="Groups" ToRole="AspNetUsers" />
-    <NavigationProperty Name="City" Relationship="Self.FK_Groups_ToCities" FromRole="Groups" ToRole="Cities" />
-    <NavigationProperty Name="Country" Relationship="Self.FK_Groups_ToCountries" FromRole="Groups" ToRole="Countries" />
     <NavigationProperty Name="Discussions" Relationship="Self.FK_Discussions_ToGroups" FromRole="Groups" ToRole="Discussions" />
     <NavigationProperty Name="Photo" Relationship="Self.FK_Groups_ToPhotos" FromRole="Groups" ToRole="Photos" />
+    <NavigationProperty Name="Place" Relationship="Self.FK_Groups_ToPlace" FromRole="Groups" ToRole="Places" />
     <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToGroups" FromRole="Groups" ToRole="Places" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.UsersGroups" FromRole="Groups" ToRole="AspNetUsers" />
   </EntityType>
@@ -192,12 +177,7 @@
     <Property Name="ContainsPhotoAlbum" Type="Boolean" Nullable="false" />
     <Property Name="IdPlace" Type="Int32" />
     <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
-    <Property Name="IdCountry" Type="Int32" Nullable="false" />
-    <Property Name="IdCity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_ToPhotos" FromRole="Photos" ToRole="AspNetUsers" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Photos_ToUser" FromRole="Photos" ToRole="AspNetUsers" />
-    <NavigationProperty Name="City" Relationship="Self.FK_Photos_ToCities" FromRole="Photos" ToRole="Cities" />
-    <NavigationProperty Name="Country" Relationship="Self.FK_Photos_ToCountries" FromRole="Photos" ToRole="Countries" />
     <NavigationProperty Name="Discussion" Relationship="Self.FK_Photos_ToDiscussions" FromRole="Photos" ToRole="Discussions" />
     <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_ToPhotos" FromRole="Photos" ToRole="Groups" />
     <NavigationProperty Name="Place" Relationship="Self.FK_Photos_ToPlaces" FromRole="Photos" ToRole="Places" />
@@ -219,10 +199,13 @@
     <Property Name="IdPhoto" Type="Int32" />
     <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
     <Property Name="IdGroup" Type="Int32" />
+    <Property Name="Main" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Places_ToUser" FromRole="Places" ToRole="AspNetUsers" />
     <NavigationProperty Name="City" Relationship="Self.FK_Places_ToCity" FromRole="Places" ToRole="Cities" />
     <NavigationProperty Name="Country" Relationship="Self.FK_Places_ToCountry" FromRole="Places" ToRole="Countries" />
+    <NavigationProperty Name="Discussions" Relationship="Self.FK_Discussions_ToPlaces" FromRole="Places" ToRole="Discussions" />
     <NavigationProperty Name="Discussion" Relationship="Self.FK_Places_ToDiscussions" FromRole="Places" ToRole="Discussions" />
+    <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_ToPlace" FromRole="Places" ToRole="Groups" />
     <NavigationProperty Name="Group" Relationship="Self.FK_Places_ToGroups" FromRole="Places" ToRole="Groups" />
     <NavigationProperty Name="Occasions" Relationship="Self.FK_Occasions_ToPlaces" FromRole="Places" ToRole="Occasions" />
     <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_ToPlaces" FromRole="Places" ToRole="Photos" />
@@ -238,14 +221,10 @@
     <Property Name="DateTimeComing" Type="DateTime" Precision="3" />
     <Property Name="DateTimeDeparture" Type="DateTime" Precision="3" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="IdCountry" Type="Int32" Nullable="false" />
-    <Property Name="IdCity" Type="Int32" Nullable="false" />
     <Property Name="IdUserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IdPhoto" Type="Int32" />
     <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Travelings_ToUsers" FromRole="Travelings" ToRole="AspNetUsers" />
-    <NavigationProperty Name="City" Relationship="Self.FK_Travelings_ToCities" FromRole="Travelings" ToRole="Cities" />
-    <NavigationProperty Name="Country" Relationship="Self.FK_Travelings_ToCountries" FromRole="Travelings" ToRole="Countries" />
     <NavigationProperty Name="Discussion" Relationship="Self.FK_Travelings_ToDiscussions" FromRole="Travelings" ToRole="Discussions" />
     <NavigationProperty Name="Occasions" Relationship="Self.FK_Occasions_ToTraveling" FromRole="Travelings" ToRole="Occasions" />
     <NavigationProperty Name="Photo" Relationship="Self.FK_Travelings_ToPhotos" FromRole="Travelings" ToRole="Photos" />
@@ -305,42 +284,6 @@
       </Principal>
       <Dependent Role="AspNetUserLogins">
         <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AspNetUsers_ToCities">
-    <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
-    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cities">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUsers">
-        <PropertyRef Name="IdCity" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AspNetUsers_ToCountries">
-    <End Role="Countries" Type="Self.Country" Multiplicity="0..1" />
-    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUsers">
-        <PropertyRef Name="IdCountry" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AspNetUsers_ToPhotos">
-    <End Role="Photos" Type="Self.Photo" Multiplicity="0..1" />
-    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Photos">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUsers">
-        <PropertyRef Name="IdPhoto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -488,30 +431,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Groups_ToCities">
-    <End Role="Cities" Type="Self.City" Multiplicity="1" />
-    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cities">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Groups">
-        <PropertyRef Name="IdCity" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Photos_ToCities">
-    <End Role="Cities" Type="Self.City" Multiplicity="1" />
-    <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cities">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Photos">
-        <PropertyRef Name="IdCity" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Places_ToCity">
     <End Role="Cities" Type="Self.City" Multiplicity="1" />
     <End Role="Places" Type="Self.Place" Multiplicity="*" />
@@ -521,42 +440,6 @@
       </Principal>
       <Dependent Role="Places">
         <PropertyRef Name="IdCity" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Travelings_ToCities">
-    <End Role="Cities" Type="Self.City" Multiplicity="1" />
-    <End Role="Travelings" Type="Self.Traveling" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cities">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Travelings">
-        <PropertyRef Name="IdCity" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Groups_ToCountries">
-    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
-    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Groups">
-        <PropertyRef Name="IdCountry" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Photos_ToCountries">
-    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
-    <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Photos">
-        <PropertyRef Name="IdCountry" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -572,18 +455,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Travelings_ToCountries">
-    <End Role="Countries" Type="Self.Country" Multiplicity="1" />
-    <End Role="Travelings" Type="Self.Traveling" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Travelings">
-        <PropertyRef Name="IdCountry" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Discussions_ToGroups">
     <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
     <End Role="Discussions" Type="Self.Discussion" Multiplicity="*" />
@@ -593,6 +464,18 @@
       </Principal>
       <Dependent Role="Discussions">
         <PropertyRef Name="IdGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discussions_ToPlaces">
+    <End Role="Places" Type="Self.Place" Multiplicity="0..1" />
+    <End Role="Discussions" Type="Self.Discussion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Places">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Discussions">
+        <PropertyRef Name="IdPlace" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -653,6 +536,18 @@
       </Principal>
       <Dependent Role="Groups">
         <PropertyRef Name="IdPhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_ToPlace">
+    <End Role="Places" Type="Self.Place" Multiplicity="0..1" />
+    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Places">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="IdPlace" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -777,18 +672,6 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
     </AssociationSet>
-    <AssociationSet Name="FK_AspNetUsers_ToCities" Association="Self.FK_AspNetUsers_ToCities">
-      <End Role="Cities" EntitySet="Cities" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AspNetUsers_ToCountries" Association="Self.FK_AspNetUsers_ToCountries">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AspNetUsers_ToPhotos" Association="Self.FK_AspNetUsers_ToPhotos">
-      <End Role="Photos" EntitySet="Photos" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-    </AssociationSet>
     <AssociationSet Name="FK_Discussions_ToUsers" Association="Self.FK_Discussions_ToUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Discussions" EntitySet="Discussions" />
@@ -837,40 +720,20 @@
       <End Role="Countries" EntitySet="Countries" />
       <End Role="Cities" EntitySet="Cities" />
     </AssociationSet>
-    <AssociationSet Name="FK_Groups_ToCities" Association="Self.FK_Groups_ToCities">
-      <End Role="Cities" EntitySet="Cities" />
-      <End Role="Groups" EntitySet="Groups" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Photos_ToCities" Association="Self.FK_Photos_ToCities">
-      <End Role="Cities" EntitySet="Cities" />
-      <End Role="Photos" EntitySet="Photos" />
-    </AssociationSet>
     <AssociationSet Name="FK_Places_ToCity" Association="Self.FK_Places_ToCity">
       <End Role="Cities" EntitySet="Cities" />
       <End Role="Places" EntitySet="Places" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Travelings_ToCities" Association="Self.FK_Travelings_ToCities">
-      <End Role="Cities" EntitySet="Cities" />
-      <End Role="Travelings" EntitySet="Travelings" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Groups_ToCountries" Association="Self.FK_Groups_ToCountries">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="Groups" EntitySet="Groups" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Photos_ToCountries" Association="Self.FK_Photos_ToCountries">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="Photos" EntitySet="Photos" />
     </AssociationSet>
     <AssociationSet Name="FK_Places_ToCountry" Association="Self.FK_Places_ToCountry">
       <End Role="Countries" EntitySet="Countries" />
       <End Role="Places" EntitySet="Places" />
     </AssociationSet>
-    <AssociationSet Name="FK_Travelings_ToCountries" Association="Self.FK_Travelings_ToCountries">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="Travelings" EntitySet="Travelings" />
-    </AssociationSet>
     <AssociationSet Name="FK_Discussions_ToGroups" Association="Self.FK_Discussions_ToGroups">
       <End Role="Groups" EntitySet="Groups" />
+      <End Role="Discussions" EntitySet="Discussions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discussions_ToPlaces" Association="Self.FK_Discussions_ToPlaces">
+      <End Role="Places" EntitySet="Places" />
       <End Role="Discussions" EntitySet="Discussions" />
     </AssociationSet>
     <AssociationSet Name="FK_Photos_ToDiscussions" Association="Self.FK_Photos_ToDiscussions">
@@ -891,6 +754,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Groups_ToPhotos" Association="Self.FK_Groups_ToPhotos">
       <End Role="Photos" EntitySet="Photos" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_ToPlace" Association="Self.FK_Groups_ToPlace">
+      <End Role="Places" EntitySet="Places" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
     <AssociationSet Name="FK_Places_ToGroups" Association="Self.FK_Places_ToGroups">

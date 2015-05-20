@@ -201,3 +201,4 @@ F:\WEB\ASP.NET_MVC\BeMyGuest\BMG\bin\ru\System.Web.WebPages.Deployment.resources
 F:\WEB\ASP.NET_MVC\BeMyGuest\BMG\bin\ru\System.Web.WebPages.Razor.resources.dll
 F:\WEB\ASP.NET_MVC\BeMyGuest\BMG\obj\Debug\BMG.dll
 F:\WEB\ASP.NET_MVC\BeMyGuest\BMG\obj\Debug\BMG.pdb
+F:\WEB\ASP.NET_MVC\BeMyGuest\BMG\bin\ru\Microsoft.AspNet.Identity.Owin.resources.dll

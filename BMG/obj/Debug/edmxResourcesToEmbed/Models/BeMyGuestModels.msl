@@ -53,10 +53,7 @@
           <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
           <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
           <ScalarProperty Name="DataBirthday" ColumnName="DataBirthday" />
-          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="SecondName" ColumnName="SecondName" />
           <ScalarProperty Name="InfoAboutMe" ColumnName="InfoAboutMe" />
@@ -101,9 +98,8 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
+          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -147,8 +143,6 @@
           <ScalarProperty Name="ContainsPhotoAlbum" ColumnName="ContainsPhotoAlbum" />
           <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
           <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
-          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -166,6 +160,7 @@
           <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
           <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
           <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+          <ScalarProperty Name="Main" ColumnName="Main" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -177,8 +172,6 @@
           <ScalarProperty Name="DateTimeComing" ColumnName="DateTimeComing" />
           <ScalarProperty Name="DateTimeDeparture" ColumnName="DateTimeDeparture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-          <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
           <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
