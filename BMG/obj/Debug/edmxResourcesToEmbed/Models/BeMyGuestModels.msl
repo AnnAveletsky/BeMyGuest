@@ -141,8 +141,8 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IdUserCreate" ColumnName="IdUserCreate" />
           <ScalarProperty Name="ContainsPhotoAlbum" ColumnName="ContainsPhotoAlbum" />
-          <ScalarProperty Name="IdPlace" ColumnName="IdPlace" />
           <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
+          <ScalarProperty Name="Main" ColumnName="Main" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -207,6 +207,30 @@
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoGroups" TypeName="Model.PhotoGroups" StoreEntitySet="PhotoGroups">
+      <EndProperty Name="Groups">
+        <ScalarProperty Name="Id" ColumnName="IdGroup" />
+      </EndProperty>
+      <EndProperty Name="Photos">
+        <ScalarProperty Name="Id" ColumnName="IdPhoto" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoPlaces" TypeName="Model.PhotoPlaces" StoreEntitySet="PhotoPlaces">
+      <EndProperty Name="Photos">
+        <ScalarProperty Name="Id" ColumnName="IdPhoto" />
+      </EndProperty>
+      <EndProperty Name="Places">
+        <ScalarProperty Name="Id" ColumnName="IdPlace" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoUsers" TypeName="Model.PhotoUsers" StoreEntitySet="PhotoUsers">
+      <EndProperty Name="Photos">
+        <ScalarProperty Name="Id" ColumnName="IdPhoto" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="IdUser" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="UsersGroups" TypeName="Model.UsersGroups" StoreEntitySet="UsersGroups">

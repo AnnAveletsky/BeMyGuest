@@ -21,13 +21,13 @@
             @Html.DisplayNameFor(model => model.ContainsPhotoAlbum)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Main)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Discussion.IdUserCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Place.IdUser)
         </th>
         <th></th>
     </tr>
@@ -44,13 +44,13 @@
             @Html.DisplayFor(modelItem => item.ContainsPhotoAlbum)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Main)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Discussion.IdUserCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Place.IdUser)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

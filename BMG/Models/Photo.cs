@@ -26,14 +26,16 @@ namespace BMG.Models
         public string Description { get; set; }
         public string IdUserCreate { get; set; }
         public bool ContainsPhotoAlbum { get; set; }
-        public Nullable<int> IdPlace { get; set; }
         public int IdDiscussion { get; set; }
+        public bool Main { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Discussion Discussion { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
-        public virtual Place Place { get; set; }
         public virtual ICollection<Place> Places { get; set; }
         public virtual ICollection<Traveling> Travelings { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual Place Place { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
     }
 }

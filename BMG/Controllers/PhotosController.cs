@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,20 +15,20 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Photos
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var photos = db.Photos.Include(p => p.AspNetUser).Include(p => p.Discussion).Include(p => p.Place);
-            return View(await photos.ToListAsync());
+            var photos = db.Photos.Include(p => p.AspNetUser).Include(p => p.Discussion);
+            return View(photos.ToList());
         }
 
         // GET: Photos/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = await db.Photos.FindAsync(id);
+            Photo photo = db.Photos.Find(id);
             if (photo == null)
             {
                 return HttpNotFound();
@@ -42,7 +41,6 @@ namespace BMG.Controllers
         {
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate");
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser");
             return View();
         }
 
@@ -51,36 +49,34 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdPlace,IdDiscussion")] Photo photo)
+        public ActionResult Create([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdDiscussion,Main")] Photo photo)
         {
             if (ModelState.IsValid)
             {
                 db.Photos.Add(photo);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate", photo.IdDiscussion);
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", photo.IdPlace);
             return View(photo);
         }
 
         // GET: Photos/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = await db.Photos.FindAsync(id);
+            Photo photo = db.Photos.Find(id);
             if (photo == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate", photo.IdDiscussion);
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", photo.IdPlace);
             return View(photo);
         }
 
@@ -89,28 +85,27 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdPlace,IdDiscussion")] Photo photo)
+        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdDiscussion,Main")] Photo photo)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(photo).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate", photo.IdDiscussion);
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser", photo.IdPlace);
             return View(photo);
         }
 
         // GET: Photos/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = await db.Photos.FindAsync(id);
+            Photo photo = db.Photos.Find(id);
             if (photo == null)
             {
                 return HttpNotFound();
@@ -121,11 +116,11 @@ namespace BMG.Controllers
         // POST: Photos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Photo photo = await db.Photos.FindAsync(id);
+            Photo photo = db.Photos.Find(id);
             db.Photos.Remove(photo);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

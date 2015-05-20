@@ -132,6 +132,20 @@
     <Property Name="IdPlace" Type="int" />
     <Property Name="CommentPlaceHost" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="PhotoGroups">
+    <Key>
+      <PropertyRef Name="IdPhoto" />
+    </Key>
+    <Property Name="IdPhoto" Type="int" Nullable="false" />
+    <Property Name="IdGroup" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoPlaces">
+    <Key>
+      <PropertyRef Name="IdPhoto" />
+    </Key>
+    <Property Name="IdPhoto" Type="int" Nullable="false" />
+    <Property Name="IdPlace" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Photos">
     <Key>
       <PropertyRef Name="Id" />
@@ -141,8 +155,15 @@
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="ContainsPhotoAlbum" Type="bit" Nullable="false" />
-    <Property Name="IdPlace" Type="int" />
     <Property Name="IdDiscussion" Type="int" Nullable="false" />
+    <Property Name="Main" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhotoUsers">
+    <Key>
+      <PropertyRef Name="IdPhoto" />
+    </Key>
+    <Property Name="IdPhoto" Type="int" Nullable="false" />
+    <Property Name="IdUser" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="Places">
     <Key>
@@ -427,6 +448,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PhotoGroups_ToGroups">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+    <End Role="PhotoGroups" Type="Self.PhotoGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoGroups">
+        <PropertyRef Name="IdGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoGroups_ToPhotos">
+    <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+    <End Role="PhotoGroups" Type="Self.PhotoGroups" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Photos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoGroups">
+        <PropertyRef Name="IdPhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoPlaces_ToPhotos">
+    <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+    <End Role="PhotoPlaces" Type="Self.PhotoPlaces" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Photos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoPlaces">
+        <PropertyRef Name="IdPhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoPlaces_ToPlaces">
+    <End Role="Places" Type="Self.Places" Multiplicity="1" />
+    <End Role="PhotoPlaces" Type="Self.PhotoPlaces" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Places">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoPlaces">
+        <PropertyRef Name="IdPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Photos_ToDiscussions">
     <End Role="Discussions" Type="Self.Discussions" Multiplicity="1" />
     <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
@@ -439,18 +508,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Photos_ToPlaces">
-    <End Role="Places" Type="Self.Places" Multiplicity="0..1" />
-    <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Places">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Photos">
-        <PropertyRef Name="IdPlace" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Photos_ToUser">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
@@ -460,6 +517,30 @@
       </Principal>
       <Dependent Role="Photos">
         <PropertyRef Name="IdUserCreate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoUsers_ToPhotos">
+    <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+    <End Role="PhotoUsers" Type="Self.PhotoUsers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Photos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoUsers">
+        <PropertyRef Name="IdPhoto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoUsers_ToUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="PhotoUsers" Type="Self.PhotoUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoUsers">
+        <PropertyRef Name="IdUser" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -680,7 +761,10 @@
     <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Occasions" EntityType="Self.Occasions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhotoGroups" EntityType="Self.PhotoGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhotoPlaces" EntityType="Self.PhotoPlaces" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhotoUsers" EntityType="Self.PhotoUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Travelings" EntityType="Self.Travelings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersDiscussions" EntityType="Self.UsersDiscussions" Schema="dbo" store:Type="Tables" />
@@ -755,17 +839,37 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Occasions" EntitySet="Occasions" />
     </AssociationSet>
+    <AssociationSet Name="FK_PhotoGroups_ToGroups" Association="Self.FK_PhotoGroups_ToGroups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="PhotoGroups" EntitySet="PhotoGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoGroups_ToPhotos" Association="Self.FK_PhotoGroups_ToPhotos">
+      <End Role="Photos" EntitySet="Photos" />
+      <End Role="PhotoGroups" EntitySet="PhotoGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoPlaces_ToPhotos" Association="Self.FK_PhotoPlaces_ToPhotos">
+      <End Role="Photos" EntitySet="Photos" />
+      <End Role="PhotoPlaces" EntitySet="PhotoPlaces" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoPlaces_ToPlaces" Association="Self.FK_PhotoPlaces_ToPlaces">
+      <End Role="Places" EntitySet="Places" />
+      <End Role="PhotoPlaces" EntitySet="PhotoPlaces" />
+    </AssociationSet>
     <AssociationSet Name="FK_Photos_ToDiscussions" Association="Self.FK_Photos_ToDiscussions">
       <End Role="Discussions" EntitySet="Discussions" />
-      <End Role="Photos" EntitySet="Photos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Photos_ToPlaces" Association="Self.FK_Photos_ToPlaces">
-      <End Role="Places" EntitySet="Places" />
       <End Role="Photos" EntitySet="Photos" />
     </AssociationSet>
     <AssociationSet Name="FK_Photos_ToUser" Association="Self.FK_Photos_ToUser">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Photos" EntitySet="Photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoUsers_ToPhotos" Association="Self.FK_PhotoUsers_ToPhotos">
+      <End Role="Photos" EntitySet="Photos" />
+      <End Role="PhotoUsers" EntitySet="PhotoUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoUsers_ToUsers" Association="Self.FK_PhotoUsers_ToUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="PhotoUsers" EntitySet="PhotoUsers" />
     </AssociationSet>
     <AssociationSet Name="FK_Places_ToCity" Association="Self.FK_Places_ToCity">
       <End Role="Cities" EntitySet="Cities" />

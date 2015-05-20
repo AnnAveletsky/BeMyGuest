@@ -18,6 +18,7 @@ namespace BMG.Models
         {
             this.Discussions = new HashSet<Discussion>();
             this.Places = new HashSet<Place>();
+            this.Photos = new HashSet<Photo>();
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
@@ -33,6 +34,7 @@ namespace BMG.Models
         public virtual Photo Photo { get; set; }
         public virtual Place Place { get; set; }
         public virtual ICollection<Place> Places { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }
