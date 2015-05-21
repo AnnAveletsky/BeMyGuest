@@ -336,22 +336,15 @@
     <Content Include="Views\Messages\Details.cshtml" />
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\MyMessages.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Discussions\Create.cshtml" />
-    <Content Include="Views\Discussions\Delete.cshtml" />
-    <Content Include="Views\Discussions\Details.cshtml" />
-    <Content Include="Views\Discussions\Edit.cshtml" />
-    <Content Include="Views\Discussions\Index.cshtml" />
     <Content Include="Views\UsersDiscussions\Create.cshtml" />
     <Content Include="Views\UsersDiscussions\Delete.cshtml" />
     <Content Include="Views\UsersDiscussions\Details.cshtml" />
     <Content Include="Views\UsersDiscussions\Edit.cshtml" />
     <Content Include="Views\UsersDiscussions\Index.cshtml" />
-    <Content Include="Views\Discussions\MyDiscussions.cshtml" />
     <Content Include="Views\Users\AboutMe.cshtml" />
     <Content Include="Views\Photos\Create.cshtml" />
     <Content Include="Views\Photos\Delete.cshtml" />
@@ -362,11 +355,6 @@
     <Content Include="Views\Photos\_MyPhotos.cshtml" />
     <Content Include="Views\Photos\_AvatarUser.cshtml" />
     <Content Include="Views\Photos\_AvatarGroup.cshtml" />
-    <Content Include="Views\Places\Create.cshtml" />
-    <Content Include="Views\Places\Delete.cshtml" />
-    <Content Include="Views\Places\Details.cshtml" />
-    <Content Include="Views\Places\Edit.cshtml" />
-    <Content Include="Views\Places\Index.cshtml" />
     <Content Include="Views\Groups\Create.cshtml" />
     <Content Include="Views\Groups\Delete.cshtml" />
     <Content Include="Views\Groups\Details.cshtml" />
@@ -384,8 +372,20 @@
     <Content Include="Views\Travelings\Index.cshtml" />
     <Content Include="Views\Groups\MyGroups.cshtml" />
     <Content Include="Views\Occasions\MyOccasions.cshtml" />
-    <Content Include="Views\Places\MyPlaces.cshtml" />
     <Content Include="Views\Travelings\MyTravelings.cshtml" />
+    <Content Include="Views\Places\Create.cshtml" />
+    <Content Include="Views\Places\Delete.cshtml" />
+    <Content Include="Views\Places\Details.cshtml" />
+    <Content Include="Views\Places\Edit.cshtml" />
+    <Content Include="Views\Places\Index.cshtml" />
+    <Content Include="Views\Discussions\Create.cshtml" />
+    <Content Include="Views\Discussions\Delete.cshtml" />
+    <Content Include="Views\Discussions\Details.cshtml" />
+    <Content Include="Views\Discussions\Edit.cshtml" />
+    <Content Include="Views\Discussions\Index.cshtml" />
+    <Content Include="Views\Places\MyPlaces.cshtml" />
+    <Content Include="Views\Discussions\MyDiscussions.cshtml" />
+    <Content Include="Views\Photos\_AvatarPlace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

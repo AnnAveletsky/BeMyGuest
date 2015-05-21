@@ -86,13 +86,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="DiscussionGroup">
-          <Key>
-            <PropertyRef Name="IdDiscussion" />
-          </Key>
-          <Property Name="IdDiscussion" Type="int" Nullable="false" />
-          <Property Name="IdGroup" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="DiscussionPlace">
           <Key>
             <PropertyRef Name="IdDiscussion" />
@@ -145,7 +138,6 @@
           <Property Name="CommentHost" Type="nvarchar(max)" />
           <Property Name="IdTraveling" Type="int" />
           <Property Name="IdPlace" Type="int" />
-          <Property Name="CommentPlaceHost" Type="nvarchar(max)" />
           <Property Name="DataTimeCreate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="PhotoGroups">
@@ -201,6 +193,7 @@
           <Property Name="IdCity" Type="int" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Main" Type="bit" Nullable="false" />
+          <Property Name="IdDiscussion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TravelingDiscussion">
           <Key>
@@ -327,30 +320,6 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiscussionGroup_ToGroups">
-          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
-          <End Role="DiscussionGroup" Type="Self.DiscussionGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Groups">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DiscussionGroup">
-              <PropertyRef Name="IdGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiscussionGroup_ToPhotos">
-          <End Role="Discussions" Type="Self.Discussions" Multiplicity="1" />
-          <End Role="DiscussionGroup" Type="Self.DiscussionGroup" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Discussions">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DiscussionGroup">
-              <PropertyRef Name="IdDiscussion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -618,6 +587,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Places_ToDiscussion">
+          <End Role="Discussions" Type="Self.Discussions" Multiplicity="1" />
+          <End Role="Places" Type="Self.Places" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discussions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="IdDiscussion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Places_ToUser">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Places" Type="Self.Places" Multiplicity="*" />
@@ -771,7 +752,6 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DiscussionGroup" EntityType="Self.DiscussionGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiscussionPlace" EntityType="Self.DiscussionPlace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discussions" EntityType="Self.Discussions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
@@ -808,14 +788,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiscussionGroup_ToGroups" Association="Self.FK_DiscussionGroup_ToGroups">
-            <End Role="Groups" EntitySet="Groups" />
-            <End Role="DiscussionGroup" EntitySet="DiscussionGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiscussionGroup_ToPhotos" Association="Self.FK_DiscussionGroup_ToPhotos">
-            <End Role="Discussions" EntitySet="Discussions" />
-            <End Role="DiscussionGroup" EntitySet="DiscussionGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_DiscussionPlace_ToPhotos" Association="Self.FK_DiscussionPlace_ToPhotos">
             <End Role="Discussions" EntitySet="Discussions" />
@@ -903,6 +875,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Places_ToCountry" Association="Self.FK_Places_ToCountry">
             <End Role="Countries" EntitySet="Countries" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Places_ToDiscussion" Association="Self.FK_Places_ToDiscussion">
+            <End Role="Discussions" EntitySet="Discussions" />
             <End Role="Places" EntitySet="Places" />
           </AssociationSet>
           <AssociationSet Name="FK_Places_ToUser" Association="Self.FK_Places_ToUser">
@@ -1066,8 +1042,8 @@
           <Property Name="DateTimeCreate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Discussions_ToUsers" FromRole="Discussions" ToRole="AspNetUsers" />
           <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_ToDiscussions" FromRole="Discussions" ToRole="Photos" />
+          <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToDiscussion" FromRole="Discussions" ToRole="Places" />
           <NavigationProperty Name="UsersDiscussions" Relationship="Self.FK_UsersDiscussions_ToDiscussions" FromRole="Discussions" ToRole="UsersDiscussions" />
-          <NavigationProperty Name="Group" Relationship="Self.DiscussionGroup" FromRole="Discussions" ToRole="Groups" />
           <NavigationProperty Name="Place" Relationship="Self.DiscussionPlace" FromRole="Discussions" ToRole="Places" />
           <NavigationProperty Name="Travelings" Relationship="Self.TravelingDiscussion" FromRole="Discussions" ToRole="Travelings" />
         </EntityType>
@@ -1081,7 +1057,6 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DataTimeCreate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Groups_ToUsers" FromRole="Groups" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Discussions" Relationship="Self.DiscussionGroup" FromRole="Groups" ToRole="Discussions" />
           <NavigationProperty Name="Photos" Relationship="Self.PhotoGroups" FromRole="Groups" ToRole="Photos" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UsersGroups" FromRole="Groups" ToRole="AspNetUsers" />
         </EntityType>
@@ -1150,9 +1125,11 @@
           <Property Name="IdCity" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Main" Type="Boolean" Nullable="false" />
+          <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Places_ToUser" FromRole="Places" ToRole="AspNetUsers" />
           <NavigationProperty Name="City" Relationship="Self.FK_Places_ToCity" FromRole="Places" ToRole="Cities" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Places_ToCountry" FromRole="Places" ToRole="Countries" />
+          <NavigationProperty Name="Discussion" Relationship="Self.FK_Places_ToDiscussion" FromRole="Places" ToRole="Discussions" />
           <NavigationProperty Name="Occasions" Relationship="Self.FK_Occasions_ToPlaces" FromRole="Places" ToRole="Occasions" />
           <NavigationProperty Name="UsersPlaces" Relationship="Self.FK_UsersPlaces_ToPlaces" FromRole="Places" ToRole="UsersPlaces" />
           <NavigationProperty Name="Discussions" Relationship="Self.DiscussionPlace" FromRole="Places" ToRole="Discussions" />
@@ -1412,6 +1389,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Places_ToDiscussion">
+          <End Role="Discussions" Type="Self.Discussion" Multiplicity="1" />
+          <End Role="Places" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discussions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="IdDiscussion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UsersDiscussions_ToDiscussions">
           <End Role="Discussions" Type="Self.Discussion" Multiplicity="1" />
           <End Role="UsersDiscussions" Type="Self.UsersDiscussion" Multiplicity="*" />
@@ -1463,10 +1452,6 @@
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-        </Association>
-        <Association Name="DiscussionGroup">
-          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
-          <End Role="Discussions" Type="Self.Discussion" Multiplicity="*" />
         </Association>
         <Association Name="DiscussionPlace">
           <End Role="Discussions" Type="Self.Discussion" Multiplicity="*" />
@@ -1585,6 +1570,10 @@
             <End Role="Discussions" EntitySet="Discussions" />
             <End Role="Photos" EntitySet="Photos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Places_ToDiscussion" Association="Self.FK_Places_ToDiscussion">
+            <End Role="Discussions" EntitySet="Discussions" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
           <AssociationSet Name="FK_UsersDiscussions_ToDiscussions" Association="Self.FK_UsersDiscussions_ToDiscussions">
             <End Role="Discussions" EntitySet="Discussions" />
             <End Role="UsersDiscussions" EntitySet="UsersDiscussions" />
@@ -1604,10 +1593,6 @@
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="DiscussionGroup" Association="Self.DiscussionGroup">
-            <End Role="Groups" EntitySet="Groups" />
-            <End Role="Discussions" EntitySet="Discussions" />
           </AssociationSet>
           <AssociationSet Name="DiscussionPlace" Association="Self.DiscussionPlace">
             <End Role="Discussions" EntitySet="Discussions" />
@@ -1801,6 +1786,7 @@
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Main" ColumnName="Main" />
+                <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1846,14 +1832,6 @@
             </EndProperty>
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="DiscussionGroup" TypeName="Model.DiscussionGroup" StoreEntitySet="DiscussionGroup">
-            <EndProperty Name="Groups">
-              <ScalarProperty Name="Id" ColumnName="IdGroup" />
-            </EndProperty>
-            <EndProperty Name="Discussions">
-              <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="DiscussionPlace" TypeName="Model.DiscussionPlace" StoreEntitySet="DiscussionPlace">

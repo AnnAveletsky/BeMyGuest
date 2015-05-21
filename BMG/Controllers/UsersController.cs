@@ -20,7 +20,18 @@ namespace BMG.Controllers
         {
             return View(await db.AspNetUsers.ToListAsync());
         }
-
+        // GET: Users/AboutMe
+        public async Task<ActionResult> AboutMe()
+        {
+            foreach (var i in  db.AspNetUsers.ToList())
+            {
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         // GET: Users/Details/5
         public async Task<ActionResult> Details(string id)
         {

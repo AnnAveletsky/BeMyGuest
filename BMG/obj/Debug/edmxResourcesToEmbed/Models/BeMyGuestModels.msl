@@ -154,6 +154,7 @@
           <ScalarProperty Name="IdCity" ColumnName="IdCity" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Main" ColumnName="Main" />
+          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -199,14 +200,6 @@
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="UserId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="DiscussionGroup" TypeName="Model.DiscussionGroup" StoreEntitySet="DiscussionGroup">
-      <EndProperty Name="Groups">
-        <ScalarProperty Name="Id" ColumnName="IdGroup" />
-      </EndProperty>
-      <EndProperty Name="Discussions">
-        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="DiscussionPlace" TypeName="Model.DiscussionPlace" StoreEntitySet="DiscussionPlace">

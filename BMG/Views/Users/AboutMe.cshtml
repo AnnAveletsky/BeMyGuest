@@ -6,16 +6,25 @@
         <div class="col-lg-2">
             <table class="table">
                 <tr>
-                    <a href="~/Messages/Index" class="list-group-item list-group-item-info">Мои сообщения</a>
+                    <a href="~/Messages/MyMessages" class="list-group-item list-group-item-info">Мои сообщения</a>
                 </tr>
                 <tr>
-                    <a href="~/Photos/Index" class="list-group-item list-group-item-info">Мои фотографии</a>
+                    <a href="~/Photos/MyPhotos" class="list-group-item list-group-item-info">Мои фотографии</a>
                 </tr>
                 <tr>
-                    <a href="~/Places/Index" class="list-group-item list-group-item-info">Мои места</a>
+                    <a href="~/Places/MyPlaces" class="list-group-item list-group-item-info">Мои места</a>
                 </tr>
                 <tr>
-                    <a href="~/Occasions/Index" class="list-group-item list-group-item-info">Мои события</a>
+                    <a href="~/Travelings/MyTravelings" class="list-group-item list-group-item-info">Мои путешествия</a>
+                </tr>
+                <tr>
+                    <a href="~/Occasions/MyOccasions" class="list-group-item list-group-item-info">Мои события</a>
+                </tr>
+                <tr>
+                    <a href="~/Groups/MyGroups" class="list-group-item list-group-item-info">Мои группы</a>
+                </tr>
+                <tr>
+                    <a href="~/Discussion/Discussion" class="list-group-item list-group-item-info">Мои дискуссии</a>
                 </tr>
             </table>
         </div>
@@ -25,9 +34,13 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <a class="thumbnail">
-                            <img src="https://@Html.DisplayFor(modelItem => Model.)" alt="@Html.DisplayFor(modelItem => Model.Photo.Description)" width="100%">
-                        </a>
+                        @foreach (var i in Model.Photos1)
+                        {
+                            if (i.AspNetUser1 != null && i.Main == true)
+                            {
+                                @Html.Partial("~/Views/Photos/_AvatarUser.cshtml", i);
+                            }
+                        }
                     </div>
                     <div class="col-lg-6">
                         <table class="table">
@@ -57,7 +70,7 @@
                                     - @Html.DisplayFor(model => model.DataBirthday.Value.Year)
                                 </td>
                             </tr>
-                           
+
                             <tr>
                                 <th>
                                     Статус
@@ -90,32 +103,6 @@
                             </tr>
                         </table>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <h2><a href="~/Occasions/Index">Отзывы обо мне</a></h2>
-                    <p>
-                        В разработке
-                    </p>
-                </div>
-                <div class="col-md-3">
-                    <h3><a href="~/Travelings/Index">Путешествия в моём городе</a></h3>
-                    <p>
-                        @Html.DisplayFor(model => model.Travelings)
-                    </p>
-                </div>
-                <div class="col-md-3">
-                    <h3><a href="~/Groups/Index">Группы в моём городе</a></h3>
-                    <p>
-                        В разработке
-                    </p>
-                </div>
-                <div class="col-md-3">
-                    <h3><a href="~/Discussions/Index">Дисскусии в моём городе</a></h3>
-                    <p>
-                        В разработке
-                    </p>
                 </div>
             </div>
         </div>

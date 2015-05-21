@@ -31,10 +31,12 @@ namespace BMG.Models
         public int IdCity { get; set; }
         public string Status { get; set; }
         public bool Main { get; set; }
+        public int IdDiscussion { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
+        public virtual Discussion Discussion { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<UsersPlace> UsersPlaces { get; set; }
         public virtual ICollection<Discussion> Discussions { get; set; }

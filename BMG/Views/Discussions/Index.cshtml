@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
@@ -23,20 +20,11 @@
         <th>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Group.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Place.IdUser)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
@@ -45,12 +33,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Group.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Place.IdUser)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

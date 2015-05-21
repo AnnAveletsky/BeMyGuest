@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,20 +15,20 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Discussions
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var discussions = db.Discussions.Include(d => d.AspNetUser).Include(d => d.Group).Include(d => d.Place);
-            return View(await discussions.ToListAsync());
+            var discussions = db.Discussions.Include(d => d.AspNetUser);
+            return View(discussions.ToList());
         }
 
         // GET: Discussions/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Discussion discussion = await db.Discussions.FindAsync(id);
+            Discussion discussion = db.Discussions.Find(id);
             if (discussion == null)
             {
                 return HttpNotFound();
@@ -41,8 +40,6 @@ namespace BMG.Controllers
         public ActionResult Create()
         {
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.IdGroup = new SelectList(db.Groups, "Id", "Name");
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser");
             return View();
         }
 
@@ -51,12 +48,12 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,IdUserCreate,Type,Title,DateTimeCreate,IdGroup,IdPlace")] Discussion discussion)
+        public ActionResult Create([Bind(Include = "Id,IdUserCreate,Title,DateTimeCreate")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
                 db.Discussions.Add(discussion);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,13 +62,13 @@ namespace BMG.Controllers
         }
 
         // GET: Discussions/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Discussion discussion = await db.Discussions.FindAsync(id);
+            Discussion discussion = db.Discussions.Find(id);
             if (discussion == null)
             {
                 return HttpNotFound();
@@ -85,12 +82,12 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,IdUserCreate,Type,Title,DateTimeCreate,IdGroup,IdPlace")] Discussion discussion)
+        public ActionResult Edit([Bind(Include = "Id,IdUserCreate,Title,DateTimeCreate")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(discussion).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", discussion.IdUserCreate);
@@ -98,13 +95,13 @@ namespace BMG.Controllers
         }
 
         // GET: Discussions/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Discussion discussion = await db.Discussions.FindAsync(id);
+            Discussion discussion = db.Discussions.Find(id);
             if (discussion == null)
             {
                 return HttpNotFound();
@@ -115,11 +112,11 @@ namespace BMG.Controllers
         // POST: Discussions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Discussion discussion = await db.Discussions.FindAsync(id);
+            Discussion discussion = db.Discussions.Find(id);
             db.Discussions.Remove(discussion);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
