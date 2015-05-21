@@ -20,7 +20,18 @@ namespace BMG.Controllers
             var discussions = db.Discussions.Include(d => d.AspNetUser);
             return View(discussions.ToList());
         }
-
+        // GET: Discussions/MyDiscussions
+        public ActionResult MyDiscussions()
+        {
+            foreach (var i in db.AspNetUsers)
+            {
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest); ;
+        }
         // GET: Discussions/Details/5
         public ActionResult Details(int? id)
         {

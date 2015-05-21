@@ -24,24 +24,23 @@
                     <a href="~/Groups/MyGroups" class="list-group-item list-group-item-info">Мои группы</a>
                 </tr>
                 <tr>
-                    <a href="~/Discussion/Discussion" class="list-group-item list-group-item-info">Мои дискуссии</a>
+                    <a href="~/Discussions/MyDiscussions" class="list-group-item list-group-item-info">Мои дискуссии</a>
                 </tr>
             </table>
         </div>
         <div class="col-lg-10">
             <div class="jumbotron">
                 <center><h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.SecondName)</h1></center>
-
                 <div class="row">
-                    <div class="col-lg-6">
-                        @foreach (var i in Model.Photos1)
-                        {
-                            if (i.AspNetUser1 != null && i.Main == true)
+                    @foreach (var i in Model.Photos1)
+                    {
+                        <div class="col-lg-6">
+                            @if (i.AspNetUser1 != null && i.Main == true)
                             {
-                                @Html.Partial("~/Views/Photos/_AvatarUser.cshtml", i);
+                                @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
                             }
-                        }
-                    </div>
+                        </div>
+                    }
                     <div class="col-lg-6">
                         <table class="table">
                             <tr>

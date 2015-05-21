@@ -20,7 +20,17 @@ namespace BMG.Controllers
             var photos = db.Photos.Include(p => p.AspNetUser).Include(p => p.Discussion);
             return View(photos.ToList());
         }
-      
+        // GET: Photos/MyPhotos
+        public ActionResult MyPhotos()
+        {
+            foreach(var i in db.AspNetUsers){
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {

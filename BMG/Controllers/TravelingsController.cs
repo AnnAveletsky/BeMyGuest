@@ -20,6 +20,18 @@ namespace BMG.Controllers
             var travelings = db.Travelings.Include(t => t.AspNetUser);
             return View(travelings.ToList());
         }
+        // GET: Travelings/MyTravelings
+        public ActionResult MyTravelings()
+        {
+            foreach (var i in db.AspNetUsers)
+            {
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
 
         // GET: Travelings/Details/5
         public ActionResult Details(int? id)

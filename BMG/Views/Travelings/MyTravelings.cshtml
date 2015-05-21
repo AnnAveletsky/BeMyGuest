@@ -1,63 +1,21 @@
-﻿@model IEnumerable<BMG.Models.Traveling>
+﻿@model BMG.Models.AspNetUser
 
 @{
-    ViewBag.Title = "MyTravelings";
+    ViewBag.Title = "Мои путешествия";
 }
 
-<h2>MyTravelings</h2>
+<h2>Мои путешествия</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать новое путешествие", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateTimeComing)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateTimeDeparture)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataTimeCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateTimeComing)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateTimeDeparture)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataTimeCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="row">
+    <div class="col-lg-6">
+        <h2>Я создала путешествия:</h2>
+        @Html.Partial("~/Views/Travelings/_Travelings.cshtml", Model.Travelings)
+    </div>
+    <div class="col-lg-6">
+        <h2>Я учавствую в путешествиях:</h2>
+        @Html.Partial("~/Views/Travelings/_Travelings.cshtml", Model.Travelings1)
+    </div>
+</div>

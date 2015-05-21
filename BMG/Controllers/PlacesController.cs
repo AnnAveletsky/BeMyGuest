@@ -20,7 +20,19 @@ namespace BMG.Controllers
             var places = db.Places.Include(p => p.AspNetUser).Include(p => p.City).Include(p => p.Country).Include(p => p.Discussion);
             return View(places.ToList());
         }
+        // GET: Places/MyPlaces
+        public ActionResult MyPlaces()
+        {
+            foreach (var i in db.AspNetUsers)
+            {
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i.Places);
 
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         // GET: Places/Details/5
         public ActionResult Details(int? id)
         {

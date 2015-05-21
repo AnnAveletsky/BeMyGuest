@@ -20,7 +20,18 @@ namespace BMG.Controllers
             var groups = db.Groups.Include(g => g.AspNetUser);
             return View(groups.ToList());
         }
-
+        // GET: Groups/MyGroups
+        public ActionResult MyGroups()
+        {
+            foreach (var i in db.AspNetUsers)
+            {
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         // GET: Groups/Details/5
         public ActionResult Details(int? id)
         {

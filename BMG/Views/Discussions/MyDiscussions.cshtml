@@ -1,45 +1,15 @@
-﻿@model IEnumerable<BMG.Models.Discussion>
+﻿@model BMG.Models.AspNetUser
 
 @{
-    ViewBag.Title = "MyDiscussions";
+    ViewBag.Title = "Мои дискуссии";
 }
 
-<h2>MyDiscussions</h2>
+<h2>Мои дискуссии</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создатьновую дискусию", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateTimeCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateTimeCreate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+@Html.Partial("~/Views/Discussions/_Discussions.cshtml", Model.Discussions);
+
