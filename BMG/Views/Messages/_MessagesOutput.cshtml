@@ -1,0 +1,20 @@
+﻿@model IEnumerable<BMG.Models.Message>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-12 thumbnail">
+            <div class="row">
+                <div class="col-lg-8">
+                    @Html.DisplayFor(modelItem => item.Text)
+                </div>
+                <div class="col-lg-2">
+                    @Html.DisplayFor(modelItem => item.DataTimeWrite)
+                    @Html.DisplayFor(modelItem => item.DataTimeRead)
+                </div>
+                <div class="col-lg-2">
+                    @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)
+                </div>
+            </div>
+        </div>
+    }
+</div>  

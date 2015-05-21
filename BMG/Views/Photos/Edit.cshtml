@@ -39,17 +39,6 @@
                 @Html.ValidationMessageFor(model => model.IdUserCreate, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContainsPhotoAlbum, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.ContainsPhotoAlbum)
-                    @Html.ValidationMessageFor(model => model.ContainsPhotoAlbum, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.IdDiscussion, "IdDiscussion", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

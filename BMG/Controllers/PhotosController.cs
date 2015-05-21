@@ -59,7 +59,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdDiscussion,Main")] Photo photo)
+        public ActionResult Create([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main")] Photo photo)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,ContainsPhotoAlbum,IdDiscussion,Main")] Photo photo)
+        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main")] Photo photo)
         {
             if (ModelState.IsValid)
             {
