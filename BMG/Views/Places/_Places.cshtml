@@ -3,7 +3,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-lg-6 thumbnail">
+        <div class="col-lg-3 thumbnail">
             @foreach (var i in item.Photos)
             {
                 if (i.Group != null && i.Main == true)
@@ -11,22 +11,26 @@
                     @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
                 }
             }
-            @Html.Partial("~/Views/Places/_LinkPlaces.cshtml", Model)
+            <h2>@Html.Partial("~/Views/Places/_LinkPlace.cshtml", item)</h2> 
             <small>
-                @Html.DisplayFor(modelItem => item.Type)
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.Display(item.Type.ToString())
             </small>
+                <h4>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </h4>
             @if (item.Main == true)
             {
                 <small>Это основное место @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)</small>
             }
             else
             {
-                <small>@Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)</small>
+                <small>Это место @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)</small>
             }
             <p>
                 @Html.DisplayFor(modelItem => item.City.Name)
                 @Html.DisplayFor(modelItem => item.Country.Name)
+                </p>
+            <p>
                 @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
                 @if (item.AspNetUser.UserName == User.Identity.Name)
                 {

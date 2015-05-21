@@ -64,9 +64,19 @@ namespace BMG.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Travelings.Add(traveling);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        traveling.AspNetUser = db.AspNetUsers.Find(i.Id);
+                        traveling.DataTimeCreate = DateTimeOffset.Now.DateTime;
+                        db.Travelings.Add(traveling);
+                        db.Entry(i).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", traveling.IdUserCreate);

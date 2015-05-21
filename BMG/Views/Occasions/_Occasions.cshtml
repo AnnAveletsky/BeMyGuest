@@ -3,12 +3,13 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-lg-6 thumbnail">
+        <div class="col-lg-12 thumbnail">
             <h4>
-               @Html.Partial("~/Views/Occasions/_LinkOccasions.cshtml", Model)
+               @Html.Partial("~/Views/Occasions/_LinkOccasion.cshtml", item)
             </h4>
-            <h5>Место   @Html.DisplayForModel(item.Place.IdUser)</h5>
-            <p>@Html.DisplayForModel(item.Description)
+            <p>@Html.DisplayFor(model=>item.Description)
+            </p>
+            <p>
                 @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
                 @if (item.AspNetUser1.UserName == User.Identity.Name)
                 {

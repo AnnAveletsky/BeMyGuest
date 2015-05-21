@@ -1,3 +1,3 @@
 ﻿@model BMG.Models.Place
 
-@Html.ActionLink(Model.Adress +Model.City, "Details", "Places", new { id = Model.Id })
+@Html.ActionLink(Model.Adress + " " + Model.City.Name, "/../Places/Details", new { id = Model.Id })

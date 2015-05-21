@@ -23,7 +23,7 @@ namespace BMG.Controllers
         // GET: Occasions/MyOccasions
         public ActionResult MyOccasions()
         {
-            foreach (var i in db.AspNetUsers)
+            foreach (var i in db.AspNetUsers.ToList())
             {
                 if (i.UserName == User.Identity.Name)
                 {
@@ -52,8 +52,7 @@ namespace BMG.Controllers
         {
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.IdUserTraveler = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.IdPlace = new SelectList(db.Places, "Id", "IdUser");
-            ViewBag.IdTraveling = new SelectList(db.Travelings, "Id", "Name");
+        
             return View();
         }
 
@@ -62,13 +61,28 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,DataTimeCreate")] Occasion occasion)
+        public ActionResult Create([Bind(Include = "Id,IdUserHost,Description,ArrivalDate,CheckOut")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
-                db.Occasions.Add(occasion);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+
+                        occasion.AspNetUser1 = db.AspNetUsers.Find(i.Id);
+                        occasion.DataTimeCreate = DateTimeOffset.Now.DateTime;
+                        occasion.Status = "Не состоялось";
+                        occasion.CommentHost = "";
+                        occasion.CommentTreveler="";
+
+                        db.Occasions.Add(occasion);
+                        db.SaveChanges();
+                        return RedirectToAction("MyOccasions");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
             }
 
             ViewBag.IdUserHost = new SelectList(db.AspNetUsers, "Id", "Email", occasion.IdUserHost);

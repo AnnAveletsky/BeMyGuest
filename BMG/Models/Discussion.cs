@@ -19,7 +19,6 @@ namespace BMG.Models
             this.Photos = new HashSet<Photo>();
             this.Places = new HashSet<Place>();
             this.UsersDiscussions = new HashSet<UsersDiscussion>();
-            this.Travelings = new HashSet<Traveling>();
         }
     
         public int Id { get; set; }
@@ -32,6 +31,5 @@ namespace BMG.Models
         public virtual ICollection<Place> Places { get; set; }
         public virtual ICollection<UsersDiscussion> UsersDiscussions { get; set; }
         public virtual Place Place { get; set; }
-        public virtual ICollection<Traveling> Travelings { get; set; }
     }
 }

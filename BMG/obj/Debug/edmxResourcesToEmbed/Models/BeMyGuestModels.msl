@@ -242,14 +242,6 @@
         <ScalarProperty Name="Id" ColumnName="IdUser" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="TravelingDiscussion" TypeName="Model.TravelingDiscussion" StoreEntitySet="TravelingDiscussion">
-      <EndProperty Name="Discussions">
-        <ScalarProperty Name="Id" ColumnName="IdDiscussion" />
-      </EndProperty>
-      <EndProperty Name="Travelings">
-        <ScalarProperty Name="Id" ColumnName="IdTraveling" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="UsersGroups" TypeName="Model.UsersGroups" StoreEntitySet="UsersGroups">
       <EndProperty Name="Groups">
         <ScalarProperty Name="Id" ColumnName="IdGroup" />
@@ -260,7 +252,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="UsersTravelings" TypeName="Model.UsersTravelings" StoreEntitySet="UsersTravelings">
       <EndProperty Name="Travelings">
-        <ScalarProperty Name="Id" ColumnName="IdTraveling" />
+        <ScalarProperty Name="Id" ColumnName="IdTravelings" />
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="IdUser" />

@@ -32,15 +32,17 @@
             <div class="jumbotron">
                 <center><h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.SecondName)</h1></center>
                 <div class="row">
-                    @foreach (var i in Model.Photos1)
-                    {
-                        <div class="col-lg-6">
-                            @if (i.AspNetUser1 != null && i.Main == true)
+                    <div class="col-lg-6">
+                        @foreach (var i in Model.Photos)
+                        {
+
+                            if (i.AspNetUser != null && i.Main == true)
                             {
                                 @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
                             }
-                        </div>
-                    }
+
+                        }
+                    </div>
                     <div class="col-lg-6">
                         <table class="table">
                             <tr>
@@ -51,47 +53,61 @@
                                     @Html.DisplayFor(model => model.Email)
                                 </td>
                             </tr>
-                            <tr>
-                                <th>
-                                    Номер
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(model => model.PhoneNumber)
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Дата рождения
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(model => model.DataBirthday.Value.Day)
-                                    - @Html.DisplayFor(model => model.DataBirthday.Value.Month)
-                                    - @Html.DisplayFor(model => model.DataBirthday.Value.Year)
-                                </td>
-                            </tr>
+                            @if (Model.PhoneNumber != null)
+                            {
+                                <tr>
+                                    <th>
+                                        Номер
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.PhoneNumber)
+                                    </td>
+                                </tr>
+                            }
+                            @if (Model.DataBirthday != null)
+                            {
+                                <tr>
+                                    <th>
+                                        Дата рождения
+                                    </th>
 
-                            <tr>
-                                <th>
-                                    Статус
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(model => model.Status)
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">
-                                    <center>
-                                        Подробная информация обо мне
-                                    </center>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <center>
-                                        @Html.DisplayFor(model => model.InfoAboutMe)
-                                    </center>
-                                </td>
-                            </tr>
+                                    <td>
+                                        @Html.DisplayFor(model => model.DataBirthday.Value.Day)
+                                        - @Html.DisplayFor(model => model.DataBirthday.Value.Month)
+                                        - @Html.DisplayFor(model => model.DataBirthday.Value.Year)
+                                    </td>
+
+                                </tr>
+                            }
+                            @if (Model.Status != null)
+                            {
+                                <tr>
+                                    <th>
+                                        Статус
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Status)
+                                    </td>
+                                </tr>
+                            }
+                            @if (Model.InfoAboutMe != null)
+                            {
+                                <tr>
+                                    <th colspan="2">
+                                        <center>
+                                            Подробная информация обо мне
+                                        </center>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <center>
+                                            @Html.DisplayFor(model => model.InfoAboutMe)
+                                        </center>
+                                    </td>
+                                </tr>
+                            }
                             <tr>
                                 <td colspan="2">
                                     <div class="btn-group btn-group-justified">

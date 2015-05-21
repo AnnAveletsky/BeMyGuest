@@ -59,19 +59,44 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main")] Photo photo)
+        public ActionResult Create([Bind(Include = "Id,Path,Description,Main")] Photo photo)
         {
             if (ModelState.IsValid)
             {
-                db.Photos.Add(photo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        var discussion = new Discussion();
+                        discussion.AspNetUser = i;
+                        discussion.Title = "Для фото" + i.FirstName+" "+i.SecondName;
+                        discussion.DateTimeCreate = DateTimeOffset.Now.DateTime;
 
-            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
-            ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate", photo.IdDiscussion);
+                        photo.AspNetUser = i;
+                        photo.DataTimeCreate = DateTimeOffset.Now.DateTime;
+                        photo.Discussion = discussion;
+
+                        if (photo.Main == true)
+                        {
+                           var photos= db.Photos.Where(p => p.Main == true && p.AspNetUser.Id == i.Id);
+                           foreach (var p in photos.ToList())
+                           {
+                               db.Photos.Find(p.Id).Main=false;
+                           }
+                        }
+                        db.Photos.Add(photo);
+                        db.Discussions.Add(discussion);
+                        db.AspNetUsers.Find(i.Id).Photos.Add(photo);
+                        db.SaveChanges();
+                        return RedirectToAction("MyPhotos");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    
+            }
             return View(photo);
         }
+            
 
         // GET: Photos/Edit/5
         public ActionResult Edit(int? id)

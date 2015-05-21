@@ -59,13 +59,21 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IdUserCreate,Title,DateTimeCreate")] Discussion discussion)
+        public ActionResult Create([Bind(Include = "Id,Title")] Discussion discussion)
         {
             if (ModelState.IsValid)
             {
-                db.Discussions.Add(discussion);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        discussion.AspNetUser = i;
+                        discussion.DateTimeCreate = DateTimeOffset.Now.DateTime;
+                        db.Discussions.Add(discussion);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
             }
 
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", discussion.IdUserCreate);

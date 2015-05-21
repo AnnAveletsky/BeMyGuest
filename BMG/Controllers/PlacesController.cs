@@ -66,9 +66,34 @@ namespace BMG.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Places.Add(place);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        var discussion = new Discussion();
+                        discussion.AspNetUser = i;
+                        discussion.Title = "Для места" + i.FirstName + " " + i.SecondName;
+                        discussion.DateTimeCreate = DateTimeOffset.Now.DateTime;
+
+                        place.AspNetUser = i;
+                        place.Discussion = discussion;
+
+                        if (place.Main == true)
+                        {
+                            var photos = db.Photos.Where(p => p.Main == true && p.AspNetUser.Id == i.Id);
+                            foreach (var p in photos.ToList())
+                            {
+                                db.Photos.Find(p.Id).Main = false;
+                            }
+                        }
+                        db.Places.Add(place);
+                        db.Discussions.Add(discussion);
+                        db.AspNetUsers.Find(i.Id).Places.Add(place);
+                        db.SaveChanges();
+                        return RedirectToAction("MyPlaces");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             ViewBag.IdUser = new SelectList(db.AspNetUsers, "Id", "Email", place.IdUser);

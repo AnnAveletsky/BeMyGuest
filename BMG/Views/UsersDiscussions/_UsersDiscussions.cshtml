@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<BMG.Models.UsersDiscussion>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 <div class="row">
     @foreach (var item in Model)
@@ -33,3 +30,17 @@
         </div>
     }
 </div>
+@{
+    BMG.Models.UsersDiscussion comment = new BMG.Models.UsersDiscussion();
+    comment.DataTimeWrite = DateTimeOffset.Now.DateTime;
+    foreach (var i in Model)
+    {
+        if (i.AspNetUser.UserName==User.Identity.Name)
+        {
+            comment.AspNetUser = i.AspNetUser;
+            comment.Discussion = i.Discussion;
+            break;
+        }
+    }
+}
+@Html.Partial("~/Views/UsersDiscussions/_Create.cshtml",comment)

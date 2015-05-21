@@ -3,25 +3,34 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-lg-6 thumbnail">
+        <div class="col-lg-4 thumbnail">
             @foreach (var i in item.Photos)
             {
-                if (i.Group != null && i.Main == true)
+                if (i.Traveling != null && i.Main == true)
                 {
                     @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
                 }
             }
             <h2>
-               @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", item);
+                @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", item)
             </h2>
-            <h4>
-                с @Html.DisplayFor(modelItem => item.DateTimeComing)
-                по @Html.DisplayFor(modelItem => item.DateTimeDeparture)
-            </h4>
+
+            @if (item.DateTimeComing != null)
+            {
+                <h4>
+                    с @Html.DisplayFor(modelItem => item.DateTimeComing)
+                </h4>
+            }
+            @if (item.DateTimeDeparture != null)
+            {
+                <h4>
+                    по @Html.DisplayFor(modelItem => item.DateTimeDeparture)
+                </h4>
+            }
             <p>
                 @Html.DisplayFor(modelItem => item.Description)
             </p>
-            Путешественник:@Html.DisplayForModel(item.AspNetUser.FirstName) @Html.DisplayForModel(item.AspNetUser.SecondName)
+            Путешественник: @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)
             <p>
                 @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
                 @if (item.AspNetUser.UserName == User.Identity.Name)

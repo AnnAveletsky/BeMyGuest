@@ -308,7 +308,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -336,13 +335,8 @@
     <Content Include="Views\Messages\Details.cshtml" />
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\MyMessages.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\UsersDiscussions\Create.cshtml" />
     <Content Include="Views\UsersDiscussions\Index.cshtml" />
-    <Content Include="Views\Users\AboutMe.cshtml" />
     <Content Include="Views\Photos\Create.cshtml" />
     <Content Include="Views\Photos\Delete.cshtml" />
     <Content Include="Views\Photos\Details.cshtml" />
@@ -374,9 +368,7 @@
     <Content Include="Views\Places\Edit.cshtml" />
     <Content Include="Views\Places\Index.cshtml" />
     <Content Include="Views\Discussions\Create.cshtml" />
-    <Content Include="Views\Discussions\Delete.cshtml" />
     <Content Include="Views\Discussions\Details.cshtml" />
-    <Content Include="Views\Discussions\Edit.cshtml" />
     <Content Include="Views\Discussions\Index.cshtml" />
     <Content Include="Views\Places\MyPlaces.cshtml" />
     <Content Include="Views\Discussions\MyDiscussions.cshtml" />
@@ -385,18 +377,24 @@
     <Content Include="Views\Discussions\_Discussions.cshtml" />
     <Content Include="Views\Travelings\_Travelings.cshtml" />
     <Content Include="Views\UsersDiscussions\_UsersDiscussions.cshtml" />
-    <Content Include="Views\Users\_AboutUser.cshtml" />
     <Content Include="Views\Places\_Places.cshtml" />
-    <Content Include="Views\Users\_LinkUser.cshtml" />
     <Content Include="Views\Groups\_LinkGroup.cshtml" />
     <Content Include="Views\Discussions\_LinkDiscussion.cshtml" />
     <Content Include="Views\Occasions\_LinkOccasion.cshtml" />
-    <Content Include="Views\Users\_UserPlaces.cshtml" />
     <Content Include="Views\Places\_PlaceUsers.cshtml" />
     <Content Include="Views\Travelings\_LinkTraveling.cshtml" />
     <Content Include="Views\Places\_LinkPlace.cshtml" />
     <Content Include="Views\Messages\_MessagesInput.cshtml" />
     <Content Include="Views\Messages\_MessagesOutput.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\_AboutUser.cshtml" />
+    <Content Include="Views\Users\_LinkUser.cshtml" />
+    <Content Include="Views\Users\_UserPlaces.cshtml" />
+    <Content Include="Views\Users\AboutMe.cshtml" />
+    <Content Include="Views\Discussions\_Discussion.cshtml" />
+    <Content Include="Views\UsersDiscussions\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -59,13 +59,22 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,IdUserCreate,Description,DataTimeCreate")] Group group)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Group group)
         {
             if (ModelState.IsValid)
             {
-                db.Groups.Add(group);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        group.AspNetUser = db.AspNetUsers.Find(i.Id);
+                        group.DataTimeCreate = DateTimeOffset.Now.DateTime;
+                        db.Groups.Add(group);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", group.IdUserCreate);

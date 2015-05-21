@@ -1,3 +1,9 @@
 ﻿@model BMG.Models.AspNetUser
-
-@Html.ActionLink(Model.FirstName + " " + Model.SecondName, "Details", "Users", new { id = Model.Id })
+@if (Model.FirstName == null && Model.SecondName == null)
+{
+    @Html.ActionLink(Model.UserName, "/../Users/Details", new { id = Model.Id })
+}
+else
+{
+    @Html.ActionLink(Model.FirstName + " " + Model.SecondName, "/../Users/Details", new { id = Model.Id })
+}
