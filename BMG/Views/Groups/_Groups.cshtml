@@ -11,7 +11,7 @@
                 }
             }
             <h3>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.Partial("~/Views/Groups/_LinkGroup.cshtml", Model)
             </h3>
             <p>
                 @Html.DisplayFor(modelItem => item.Description)

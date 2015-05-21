@@ -349,7 +349,7 @@
     <Content Include="Views\Photos\Edit.cshtml" />
     <Content Include="Views\Photos\Index.cshtml" />
     <Content Include="Views\Photos\MyPhotos.cshtml" />
-    <Content Include="Views\Photos\_MyPhotos.cshtml" />
+    <Content Include="Views\Photos\_Photos.cshtml" />
     <Content Include="Views\Photos\_Avatar.cshtml" />
     <Content Include="Views\Groups\Create.cshtml" />
     <Content Include="Views\Groups\Delete.cshtml" />
@@ -385,6 +385,17 @@
     <Content Include="Views\Discussions\_Discussions.cshtml" />
     <Content Include="Views\Travelings\_Travelings.cshtml" />
     <Content Include="Views\UsersDiscussions\_UsersDiscussions.cshtml" />
+    <Content Include="Views\Users\_AboutUser.cshtml" />
+    <Content Include="Views\Places\_Places.cshtml" />
+    <Content Include="Views\Users\_LinkUser.cshtml" />
+    <Content Include="Views\Groups\_LinkGroup.cshtml" />
+    <Content Include="Views\Discussions\_LinkDiscussion.cshtml" />
+    <Content Include="Views\Occasions\_LinkOccasion.cshtml" />
+    <Content Include="Views\Users\_UserPlaces.cshtml" />
+    <Content Include="Views\Places\_PlaceUsers.cshtml" />
+    <Content Include="Views\Travelings\_LinkTraveling.cshtml" />
+    <Content Include="Views\Places\_LinkPlace.cshtml" />
+    <Content Include="Views\Messages\_Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

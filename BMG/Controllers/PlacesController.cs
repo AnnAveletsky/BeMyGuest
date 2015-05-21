@@ -27,8 +27,7 @@ namespace BMG.Controllers
             {
                 if (i.UserName == User.Identity.Name)
                 {
-                    return View(i.Places);
-
+                    return View(i);
                 }
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

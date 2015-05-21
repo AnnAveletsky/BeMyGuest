@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-lg-6">
                         <h3>
-                            от @Html.DisplayFor(modelItem => item.AspNetUser.FirstName) @Html.DisplayFor(modelItem => item.AspNetUser.SecondName)
+                            от @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)
                             в @Html.DisplayFor(modelItem => item.DataTimeWrite)
                         </h3>
                     </div>

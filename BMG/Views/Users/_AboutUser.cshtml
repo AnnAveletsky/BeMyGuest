@@ -1,0 +1,13 @@
+﻿@model BMG.Models.AspNetUser
+
+<div class="thumbnail">
+    <h2>@Html.ActionLink(Model.FirstName + " " + Model.SecondName, "Details", "Users", new { id = Model.Id })</h2>
+    @foreach (var i in Model.Photos1)
+    {
+        if (i.AspNetUser1 != null && i.Main == true)
+        {
+            @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+        }
+    }
+    <h4>@Html.DisplayFor(modelItem => Model.Status)</h4>
+</div>

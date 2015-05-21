@@ -4,7 +4,7 @@
     {
         <div class="col-lg-6 thumbnail">
             <h2> @Html.DisplayFor(modelItem => item.Title)</h2>
-            <h4>от @Html.ActionLink(item.AspNetUser.FirstName + " " + item.AspNetUser.SecondName, "Details", "Users", new { id = item.AspNetUser.Id })</h4>
+            <h4>от @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)</h4>
             <p>
                 @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
                 @if (item.AspNetUser.UserName == User.Identity.Name)

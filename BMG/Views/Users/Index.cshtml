@@ -1,31 +1,17 @@
 ﻿@model IEnumerable<BMG.Models.AspNetUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Пользователи";
 }
 
-<h2>Index</h2>
+<h2>Пользователи</h2>
+<div class="row">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@foreach (var item in Model)
-{
-    <div class="thumbnail">
-        @foreach (var i in item.Photos1.ToList())
-        {
-            if (i.AspNetUser1 != null && i.Main == true)
-            {
-                @Html.Partial("~/Views/Photos/_AvatarUser.cshtml", i);
-            }
-        }
-        @Html.DisplayFor(modelItem => item.FirstName)
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            @Html.Partial("~/Views/Users/_AboutUser.cshtml", item);
+        </div>
+    }
+</div>
 
-        @Html.DisplayFor(modelItem => item.SecondName)
-        @if (item.UserName == User.Identity.Name) { 
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        }
-    </div>
-}

@@ -1,0 +1,7 @@
+﻿@model BMG.Models.Occasion
+
+@Html.ActionLink("C " + Model.ArrivalDate + 
+    " по " + Model.CheckOut + 
+    " Путешественник: " + @Html.Partial("~/Views/Users/_LinkUser.cshtml", Model.AspNetUser1) + 
+    " Принимающий гостя: " + @Html.Partial("~/Views/Users/_LinkUser.cshtml", Model.AspNetUser), 
+    "Details", "Users", new { id = Model.Id })

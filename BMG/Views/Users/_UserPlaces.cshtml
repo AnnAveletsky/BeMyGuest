@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BMG.Models.UsersPlace>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-6 thumbnail">
+            @Html.Partial("~/Views/Places/_LinkPlace.cshtml", item.Place)
+            @foreach (var i in item.Place.Photos)
+            {
+                if (i.Place != null && i.Main == true)
+                {
+                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
+                }
+            }
+            <p>
+                @Html.DisplayFor(modelItem => item.StatusComing)
+            </p>
+        </div>
+    }
+</div>
+
+
+

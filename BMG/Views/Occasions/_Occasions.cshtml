@@ -5,10 +5,7 @@
     {
         <div class="col-lg-6 thumbnail">
             <h4>
-                с @Html.DisplayForModel(item.ArrivalDate)
-                по @Html.DisplayForModel(item.CheckOut)
-                Путешественник: @Html.DisplayForModel(item.AspNetUser1.FirstName) @Html.DisplayForModel(item.AspNetUser1.SecondName)
-                Принимающий гостя:@Html.DisplayForModel(item.AspNetUser.FirstName) @Html.DisplayForModel(item.AspNetUser.SecondName)
+               @Html.Partial("~/Views/Occasions/_LinkOccasions.cshtml", Model)
             </h4>
             <h5>Место   @Html.DisplayForModel(item.Place.IdUser)</h5>
             <p>@Html.DisplayForModel(item.Description)

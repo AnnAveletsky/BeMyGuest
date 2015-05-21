@@ -12,7 +12,7 @@
                 }
             }
             <h2>
-                @Html.DisplayFor(modelItem => item.Name)
+               @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", item);
             </h2>
             <h4>
                 с @Html.DisplayFor(modelItem => item.DateTimeComing)

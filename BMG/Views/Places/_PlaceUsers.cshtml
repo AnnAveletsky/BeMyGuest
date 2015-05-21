@@ -1,0 +1,19 @@
+﻿@model IEnumerable<BMG.Models.UsersPlace>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-6 thumbnail">
+            @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)
+            @foreach (var i in item.AspNetUser.Photos)
+            {
+                if (i.AspNetUser1 != null && i.Main == true)
+                {
+                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
+                }
+            }
+            <p>
+                @Html.DisplayFor(modelItem => item.StatusComing)
+            </p>
+        </div>
+    }
+</div>

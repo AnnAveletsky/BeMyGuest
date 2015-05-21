@@ -14,11 +14,17 @@ namespace BMG.Controllers
     {
         private Entities db = new Entities();
 
-        // GET: Messages
+        // GET: Messages/MyMessages
         public ActionResult MyMessages()
         {
-            var messages = db.Messages.Include(m => m.AspNetUser).Include(m => m.AspNetUser1);
-            return View(messages.ToList());
+            foreach (var i in db.AspNetUsers)
+            {
+                if (i.UserName == User.Identity.Name)
+                {
+                    return View(i);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // GET: Messages/Details/5

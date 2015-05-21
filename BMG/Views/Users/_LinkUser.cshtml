@@ -1,0 +1,3 @@
+﻿@model BMG.Models.AspNetUser
+
+@Html.ActionLink(Model.FirstName + " " + Model.SecondName, "Details", "Users", new { id = Model.Id })
