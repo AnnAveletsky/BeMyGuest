@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BMG.Models.Group>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-6 thumbnail">
+            @foreach (var i in item.Photos)
+            {
+                if (i.Group != null && i.Main == true)
+                {
+                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+                }
+            }
+            <h3>
+                @Html.DisplayFor(modelItem => item.Name)
+            </h3>
+            <p>
+                @Html.DisplayFor(modelItem => item.Description)
+            </p>
+            <p>
+                @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
+                @if (item.AspNetUser.UserName == User.Identity.Name)
+                {
+                    @Html.ActionLink("Редактирование", "Edit", new { id = item.Id })
+                    <br />
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                }
+            </p>
+        </div>
+    }
+</div>

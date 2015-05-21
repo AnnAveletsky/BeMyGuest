@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BMG.Models.UsersDiscussion>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-lg-3 ">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @foreach (var i in item.AspNetUser.Photos1)
+                        {
+                            if (i.AspNetUser1 != null && i.Main == true)
+                            {
+                                @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-6">
+                        <h3>
+                            от @Html.DisplayFor(modelItem => item.AspNetUser.FirstName) @Html.DisplayFor(modelItem => item.AspNetUser.SecondName)
+                            в @Html.DisplayFor(modelItem => item.DataTimeWrite)
+                        </h3>
+                    </div>
+                    </div>
+                </div>
+            <div class="col-lg-9 ">
+                @Html.DisplayFor(modelItem => item.Text)
+            </div>
+        </div>
+    }
+</div>
