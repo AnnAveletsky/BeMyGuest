@@ -29,5 +29,12 @@
         }
     </p>
     @Html.Partial("~/Views/Discussions/_Discussion.cshtml", Model.Discussion)
+    @{
+        BMG.Models.UsersDiscussion comment = new BMG.Models.UsersDiscussion();
+        comment.DataTimeWrite = DateTimeOffset.Now.DateTime;
+        comment.Discussion = Model.Discussion;
+        comment.AspNetUser = Model.AspNetUser;
+    }
+    @Html.Partial("~/Views/UsersDiscussions/_Create.cshtml", comment)
 </div>
 
