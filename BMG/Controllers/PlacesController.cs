@@ -27,6 +27,7 @@ namespace BMG.Controllers
             {
                 if (i.UserName == User.Identity.Name)
                 {
+
                     return View(i);
                 }
             }
@@ -77,6 +78,7 @@ namespace BMG.Controllers
 
                         place.AspNetUser = i;
                         place.Discussion = discussion;
+                        discussion.Places.Add(place);
 
                         if (place.Main == true)
                         {
@@ -127,11 +129,19 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdUser,Adress,Type,Description,IdCountry,IdCity,Status,Main,IdDiscussion")] Place place)
+        public ActionResult Edit([Bind(Include = "Id,Adress,Type,Description,IdCountry,IdCity,Status,Main")] Place place)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(place).State = EntityState.Modified;
+                db.Places.Find(place.Id).Adress=place.Adress;
+                db.Places.Find(place.Id).Type = place.Type;
+                db.Places.Find(place.Id).Description = place.Description;
+                db.Places.Find(place.Id).IdCountry = place.IdCountry;
+                db.Places.Find(place.Id).IdCity = place.IdCity;
+                db.Places.Find(place.Id).Status = place.Status;
+                db.Places.Find(place.Id).Status = place.Status;
+                db.Places.Find(place.Id).Main = place.Main;
+                db.Entry(db.Places.Find(place.Id)).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

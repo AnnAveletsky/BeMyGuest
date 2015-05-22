@@ -14,12 +14,15 @@
             {
                 foreach (var i in item.Travelings)
                 {
-                <h2> @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", i)</h2>
+                    <h2> @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", i)</h2>
+                }
             }
-            }
-            else if (item.Place != null)
+            else if (item.Places.Count == 1)
             {
-                <h2> @Html.Partial("~/Views/Places/_LinkPlace.cshtml", item)</h2>
+                foreach (var i in item.Places)
+                {
+                    <h2> @Html.Partial("~/Views/Places/_LinkPlace.cshtml", i)</h2>
+                }
             }
             else
             {
