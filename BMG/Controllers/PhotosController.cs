@@ -140,11 +140,28 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
+        public ActionResult Edit([Bind(Include = "Id,Path,Description,Main")] Photo photo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(photo).State = EntityState.Modified;
+                db.Photos.Find(photo.Id).Path = photo.Path;
+                db.Photos.Find(photo.Id).Description = photo.Description;
+                db.Photos.Find(photo.Id).Main = photo.Main;
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        if (photo.Main == true)
+                        {
+                            var photos = db.Photos.Where(p => p.Main == true && p.AspNetUser.Id == i.Id);
+                            foreach (var p in photos.ToList())
+                            {
+                                db.Photos.Find(p.Id).Main = false;
+                            }
+                        }
+                    }
+                }
+                db.Entry(db.Photos.Find(photo.Id)).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -174,6 +191,10 @@ namespace BMG.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Photo photo = db.Photos.Find(id);
+            if (photo.Discussion != null)
+            {
+                db.Discussions.Remove(photo.Discussion);
+            }
             db.Photos.Remove(photo);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -23,9 +23,9 @@
     <p>
         @if (Model.AspNetUser.UserName == User.Identity.Name)
         {
-            @Html.ActionLink("Редактирование", "Edit", new { id = Model.AspNetUser.Id })
+            @Html.ActionLink("Редактирование", "Edit", new { id = Model.Id })
             <br />
-            @Html.ActionLink("Удалить", "Delete", new { id = Model.AspNetUser.Id })
+            @Html.ActionLink("Удалить", "Delete", new { id = Model.Id })
         }
     </p>
     @Html.Partial("~/Views/Discussions/_Discussion.cshtml", Model.Discussion)
