@@ -3,11 +3,50 @@
     @foreach (var item in Model)
     {
         <div class="col-lg-3 thumbnail">
-            <h2> @Html.DisplayFor(modelItem => item.Title)</h2>
+            @if (item.Photos.Count == 1)
+            {
+                foreach (var i in item.Photos)
+                {
+                    <h2> @Html.Partial("~/Views/Photos/_LinkPhoto.cshtml", i)</h2>
+                }
+            }
+            else if (item.Travelings.Count == 1)
+            {
+                foreach (var i in item.Travelings)
+                {
+                <h2> @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", i)</h2>
+            }
+            }
+            else if (item.Place != null)
+            {
+                <h2> @Html.Partial("~/Views/Places/_LinkPlace.cshtml", item)</h2>
+            }
+            else
+            {
+                <h2> @Html.Partial("~/Views/Discussions/_LinkDiscussion.cshtml", item)</h2>
+            }
             <h4>от @Html.Partial("~/Views/Users/_LinkUser.cshtml", item.AspNetUser)</h4>
+            @if (item.Photos.Count == 1)
+            {
+                foreach (var i in item.Photos)
+                {
+                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
+                }
+            }
+            @if (item.Place != null)
+            {
+                foreach (var i in item.Photos)
+                {
+                    if (i.Main == true)
+                    {
+                        @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+                    }
+
+                }
+            }
             <p>
                 @Html.ActionLink("Подробнее", "Details", new { id = item.Id })
-                
+
             </p>
         </div>
     }

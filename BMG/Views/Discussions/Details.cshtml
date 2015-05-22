@@ -6,36 +6,31 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Discussion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <h2> @Html.Partial("~/Views/Discussions/_LinkDiscussion.cshtml", Model)</h2>
+    <h4>от @Html.Partial("~/Views/Users/_LinkUser.cshtml", Model.AspNetUser)</h4>
+    @if (Model.Photos.Count == 1)
+    {
+        foreach (var i in Model.Photos)
+        {
+            @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
+        }
+    }
+    @if (Model.Place != null)
+    {
+        foreach (var i in Model.Photos)
+        {
+            if (i.Main == true)
+            {
+                @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        }
+    }
+    <p>
+        @Html.ActionLink("Подробнее", "Details", new { id = Model.Id })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateTimeCreate)
-        </dt>
+    </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateTimeCreate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
-
-    </dl>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

@@ -41,6 +41,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="Model.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -161,6 +162,7 @@
     <EntitySetMapping Name="Travelings">
       <EntityTypeMapping TypeName="Model.Traveling">
         <MappingFragment StoreEntitySet="Travelings">
+          <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DateTimeComing" ColumnName="DateTimeComing" />

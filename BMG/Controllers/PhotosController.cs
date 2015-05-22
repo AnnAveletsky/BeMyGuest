@@ -23,13 +23,33 @@ namespace BMG.Controllers
         // GET: Photos/MyPhotos
         public ActionResult MyPhotos()
         {
-            foreach(var i in db.AspNetUsers){
+            foreach (var i in db.AspNetUsers)
+            {
                 if (i.UserName == User.Identity.Name)
                 {
                     return View(i);
                 }
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MyPhotos([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        i.Photos1.Add(db.Photos.Find(photo.Id));
+                        db.SaveChanges();
+                        return RedirectToAction("MyPhotos");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(photo);
         }
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
@@ -120,7 +140,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main")] Photo photo)
+        public ActionResult Edit([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
         {
             if (ModelState.IsValid)
             {

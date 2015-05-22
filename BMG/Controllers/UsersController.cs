@@ -69,13 +69,27 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,DataBirthday,FirstName,SecondName,InfoAboutMe,Status")] AspNetUser aspNetUser)
+        public ActionResult Edit([Bind(Include = "Id,PhoneNumber,DataBirthday,FirstName,SecondName,InfoAboutMe,Status,Passport")] AspNetUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUser).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        i.PhoneNumber = aspNetUser.PhoneNumber;
+                        i.DataBirthday = aspNetUser.DataBirthday;
+                        i.FirstName = aspNetUser.FirstName;
+                        i.SecondName = aspNetUser.SecondName;
+                        i.InfoAboutMe = aspNetUser.InfoAboutMe;
+                        i.Status = aspNetUser.Status;
+                        i.Passport = aspNetUser.Passport;
+                        db.Entry(i).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("AboutMe");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             return View(aspNetUser);
         }

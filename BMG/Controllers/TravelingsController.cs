@@ -68,9 +68,15 @@ namespace BMG.Controllers
                 {
                     if (i.UserName == User.Identity.Name)
                     {
+                        var discussion = new Discussion();
+                        discussion.AspNetUser = i;
+                        discussion.Title = "Для фото" + i.FirstName + " " + i.SecondName;
+                        discussion.DateTimeCreate = DateTimeOffset.Now.DateTime;
                         traveling.AspNetUser = db.AspNetUsers.Find(i.Id);
                         traveling.DataTimeCreate = DateTimeOffset.Now.DateTime;
+                        traveling.Discussion = discussion;
                         db.Travelings.Add(traveling);
+                        db.Discussions.Add(discussion);
                         db.Entry(i).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index");

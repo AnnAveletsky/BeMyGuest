@@ -51,6 +51,7 @@
         <AssociationConnector Association="Model.PhotoUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UsersGroups" ManuallyRouted="false" />
         <AssociationConnector Association="Model.UsersTravelings" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Travelings_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

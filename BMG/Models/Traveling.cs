@@ -28,10 +28,12 @@ namespace BMG.Models
         public string Description { get; set; }
         public string IdUserCreate { get; set; }
         public System.DateTime DataTimeCreate { get; set; }
+        public int IdDiscussion { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual Discussion Discussion { get; set; }
     }
 }

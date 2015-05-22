@@ -19,8 +19,8 @@ namespace BMG.Models
         public string IdUserHost { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
-        public System.DateTime ArrivalDate { get; set; }
-        public System.DateTime CheckOut { get; set; }
+        public Nullable<System.DateTime> ArrivalDate { get; set; }
+        public Nullable<System.DateTime> CheckOut { get; set; }
         public string CommentTreveler { get; set; }
         public string CommentHost { get; set; }
         public Nullable<int> IdTraveling { get; set; }

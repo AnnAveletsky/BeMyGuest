@@ -102,11 +102,13 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IdUserCreate,Description,DataTimeCreate")] Group group)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Group group)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(group).State = EntityState.Modified;
+                db.Groups.Find(group.Id).Name = group.Name;
+                db.Groups.Find(group.Id).Description = group.Description;
+                db.Entry(db.Groups.Find(group.Id)).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

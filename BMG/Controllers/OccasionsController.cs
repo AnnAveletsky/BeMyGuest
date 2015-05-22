@@ -116,11 +116,18 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdUserTraveler,IdUserHost,Description,Status,ArrivalDate,CheckOut,CommentTreveler,CommentHost,IdTraveling,IdPlace,DataTimeCreate")] Occasion occasion)
+        public ActionResult Edit([Bind(Include = "Id,Description,Status,ArrivalDate,CheckOut,CommentTreveler,IdTraveling,IdPlace")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(occasion).State = EntityState.Modified;
+                db.Occasions.Find(occasion.Id).Description=occasion.Description;
+                db.Occasions.Find(occasion.Id).Status = occasion.Status;
+                db.Occasions.Find(occasion.Id).ArrivalDate = occasion.ArrivalDate;
+                db.Occasions.Find(occasion.Id).CheckOut = occasion.CheckOut;
+                db.Occasions.Find(occasion.Id).CommentTreveler = occasion.CommentTreveler;
+                db.Occasions.Find(occasion.Id).IdTraveling = occasion.IdTraveling;
+                db.Occasions.Find(occasion.Id).IdPlace = occasion.IdPlace;
+                db.Entry(db.Occasions.Find(occasion.Id)).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

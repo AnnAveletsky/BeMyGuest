@@ -70,6 +70,7 @@
           <Property Name="SecondName" Type="nvarchar" MaxLength="50" />
           <Property Name="InfoAboutMe" Type="nvarchar(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Passport" Type="int" />
         </EntityType>
         <EntityType Name="Cities">
           <Key>
@@ -132,8 +133,8 @@
           <Property Name="IdUserHost" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ArrivalDate" Type="datetime" Nullable="false" />
-          <Property Name="CheckOut" Type="datetime" Nullable="false" />
+          <Property Name="ArrivalDate" Type="datetime" />
+          <Property Name="CheckOut" Type="datetime" />
           <Property Name="CommentTreveler" Type="nvarchar(max)" />
           <Property Name="CommentHost" Type="nvarchar(max)" />
           <Property Name="IdTraveling" Type="int" />
@@ -206,6 +207,7 @@
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DataTimeCreate" Type="datetime" Nullable="false" />
+          <Property Name="IdDiscussion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UsersDiscussions">
           <Key>
@@ -604,6 +606,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Travelings_ToTable">
+          <End Role="Discussions" Type="Self.Discussions" Multiplicity="1" />
+          <End Role="Travelings" Type="Self.Travelings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discussions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Travelings">
+              <PropertyRef Name="IdDiscussion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Travelings_ToUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Travelings" Type="Self.Travelings" Multiplicity="*" />
@@ -853,6 +867,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Places" EntitySet="Places" />
           </AssociationSet>
+          <AssociationSet Name="FK_Travelings_ToTable" Association="Self.FK_Travelings_ToTable">
+            <End Role="Discussions" EntitySet="Discussions" />
+            <End Role="Travelings" EntitySet="Travelings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Travelings_ToUsers" Association="Self.FK_Travelings_ToUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Travelings" EntitySet="Travelings" />
@@ -971,6 +989,7 @@
           <NavigationProperty Name="Photos1" Relationship="Self.PhotoUsers" FromRole="AspNetUsers" ToRole="Photos" />
           <NavigationProperty Name="Groups1" Relationship="Self.UsersGroups" FromRole="AspNetUsers" ToRole="Groups" />
           <NavigationProperty Name="Travelings1" Relationship="Self.UsersTravelings" FromRole="AspNetUsers" ToRole="Travelings" />
+          <Property Name="Passport" Type="Int32" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -1004,6 +1023,7 @@
           <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToDiscussion" FromRole="Discussions" ToRole="Places" />
           <NavigationProperty Name="UsersDiscussions" Relationship="Self.FK_UsersDiscussions_ToDiscussions" FromRole="Discussions" ToRole="UsersDiscussions" />
           <NavigationProperty Name="Place" Relationship="Self.DiscussionPlace" FromRole="Discussions" ToRole="Places" />
+          <NavigationProperty Name="Travelings" Relationship="Model.FK_Travelings_ToTable" FromRole="Discussion" ToRole="Traveling" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -1040,8 +1060,8 @@
           <Property Name="IdUserHost" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CheckOut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ArrivalDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckOut" Type="DateTime" Precision="3" />
           <Property Name="CommentTreveler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CommentHost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdTraveling" Type="Int32" />
@@ -1108,6 +1128,8 @@
           <NavigationProperty Name="Occasions" Relationship="Self.FK_Occasions_ToTraveling" FromRole="Travelings" ToRole="Occasions" />
           <NavigationProperty Name="Photos" Relationship="Self.PhotoTravelings" FromRole="Travelings" ToRole="Photos" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UsersTravelings" FromRole="Travelings" ToRole="AspNetUsers" />
+          <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discussion" Relationship="Model.FK_Travelings_ToTable" FromRole="Traveling" ToRole="Discussion" />
         </EntityType>
         <EntityType Name="UsersDiscussion">
           <Key>
@@ -1575,7 +1597,23 @@
             <End Role="Travelings" EntitySet="Travelings" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Travelings_ToTable" Association="Model.FK_Travelings_ToTable">
+            <End Role="Discussion" EntitySet="Discussions" />
+            <End Role="Traveling" EntitySet="Travelings" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Travelings_ToTable">
+          <End Type="Model.Discussion" Role="Discussion" Multiplicity="1" />
+          <End Type="Model.Traveling" Role="Traveling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discussion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Traveling">
+              <PropertyRef Name="IdDiscussion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1622,6 +1660,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -1742,6 +1781,7 @@
           <EntitySetMapping Name="Travelings">
             <EntityTypeMapping TypeName="Model.Traveling">
               <MappingFragment StoreEntitySet="Travelings">
+                <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateTimeComing" ColumnName="DateTimeComing" />

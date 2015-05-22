@@ -52,6 +52,7 @@ namespace BMG.Models
         public string SecondName { get; set; }
         public string InfoAboutMe { get; set; }
         public string Status { get; set; }
+        public Nullable<int> Passport { get; set; }
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }

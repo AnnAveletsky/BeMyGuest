@@ -395,6 +395,8 @@
     <Content Include="Views\Users\AboutMe.cshtml" />
     <Content Include="Views\Discussions\_Discussion.cshtml" />
     <Content Include="Views\UsersDiscussions\_Create.cshtml" />
+    <Content Include="Views\Photos\_Photo.cshtml" />
+    <Content Include="Views\Photos\_LinkPhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

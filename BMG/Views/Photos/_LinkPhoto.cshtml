@@ -1,0 +1,4 @@
+﻿@model BMG.Models.Photo
+
+@Html.ActionLink(Model.Discussion.Title,
+        "/../Photos/Details", new { id = Model.Id })

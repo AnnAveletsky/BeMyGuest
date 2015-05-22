@@ -77,6 +77,7 @@
     <NavigationProperty Name="Photos1" Relationship="Self.PhotoUsers" FromRole="AspNetUsers" ToRole="Photos" />
     <NavigationProperty Name="Groups1" Relationship="Self.UsersGroups" FromRole="AspNetUsers" ToRole="Groups" />
     <NavigationProperty Name="Travelings1" Relationship="Self.UsersTravelings" FromRole="AspNetUsers" ToRole="Travelings" />
+    <Property Name="Passport" Type="Int32" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -110,6 +111,7 @@
     <NavigationProperty Name="Places" Relationship="Self.FK_Places_ToDiscussion" FromRole="Discussions" ToRole="Places" />
     <NavigationProperty Name="UsersDiscussions" Relationship="Self.FK_UsersDiscussions_ToDiscussions" FromRole="Discussions" ToRole="UsersDiscussions" />
     <NavigationProperty Name="Place" Relationship="Self.DiscussionPlace" FromRole="Discussions" ToRole="Places" />
+    <NavigationProperty Name="Travelings" Relationship="Model.FK_Travelings_ToTable" FromRole="Discussion" ToRole="Traveling" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -146,8 +148,8 @@
     <Property Name="IdUserHost" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CheckOut" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ArrivalDate" Type="DateTime" Precision="3" />
+    <Property Name="CheckOut" Type="DateTime" Precision="3" />
     <Property Name="CommentTreveler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CommentHost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IdTraveling" Type="Int32" />
@@ -214,6 +216,8 @@
     <NavigationProperty Name="Occasions" Relationship="Self.FK_Occasions_ToTraveling" FromRole="Travelings" ToRole="Occasions" />
     <NavigationProperty Name="Photos" Relationship="Self.PhotoTravelings" FromRole="Travelings" ToRole="Photos" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.UsersTravelings" FromRole="Travelings" ToRole="AspNetUsers" />
+    <Property Name="IdDiscussion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Discussion" Relationship="Model.FK_Travelings_ToTable" FromRole="Traveling" ToRole="Discussion" />
   </EntityType>
   <EntityType Name="UsersDiscussion">
     <Key>
@@ -681,5 +685,21 @@
       <End Role="Travelings" EntitySet="Travelings" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <AssociationSet Name="FK_Travelings_ToTable" Association="Model.FK_Travelings_ToTable">
+      <End Role="Discussion" EntitySet="Discussions" />
+      <End Role="Traveling" EntitySet="Travelings" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Travelings_ToTable">
+    <End Type="Model.Discussion" Role="Discussion" Multiplicity="1" />
+    <End Type="Model.Traveling" Role="Traveling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discussion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Traveling">
+        <PropertyRef Name="IdDiscussion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
