@@ -3,9 +3,10 @@
 <div class="thumbnail">
     
     <h2>@Html.Partial("~/Views/Users/_LinkUser.cshtml",Model)</h2>
-    @foreach (var i in Model.Photos1)
+   
+    @foreach (var i in Model.Photos)
     {
-        if (i.AspNetUser1 != null && i.Main == true)
+        if (i.AspNetUser != null && i.Main == true)
         {
             @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
         }

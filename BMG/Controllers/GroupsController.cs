@@ -15,10 +15,24 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Groups
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
             var groups = db.Groups.Include(g => g.AspNetUser);
+            if (name != null && name != "")
+            {
+                groups = groups.Where(p => p.Name == name);
+            }
             return View(groups.ToList());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "Id,Name")] Group group)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", new { group.Name });
+            }
+            return View(group);
         }
         // GET: Groups/MyGroups
         public ActionResult MyGroups()
@@ -46,7 +60,54 @@ namespace BMG.Controllers
             }
             return View(group);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DetailsAdd([Bind(Include = "Id")] Group group)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        if (!i.Groups1.Contains(db.Groups.Find(group.Id)))
+                        {
+                            i.Groups1.Add(db.Groups.Find(group.Id));
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("Details","Groups",group);
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", group.IdUserCreate);
+            return View(group);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DetailsDelete([Bind(Include = "Id")] Group group)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        if (i.Groups1.Contains(db.Groups.Find(group.Id)))
+                        {
+                            i.Groups1.Remove(db.Groups.Find(group.Id));
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("Details", "Groups", group);
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", group.IdUserCreate);
+            return View(group);
+        }
         // GET: Groups/Create
         public ActionResult Create()
         {

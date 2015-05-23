@@ -33,7 +33,9 @@
         BMG.Models.UsersDiscussion comment = new BMG.Models.UsersDiscussion();
         comment.DataTimeWrite = DateTimeOffset.Now.DateTime;
         comment.Discussion = Model.Discussion;
+        comment.IdDiscussion = Model.IdDiscussion;
         comment.AspNetUser = Model.AspNetUser;
+        comment.IdUser = Model.IdUserCreate;
     }
     @Html.Partial("~/Views/UsersDiscussions/_Create.cshtml", comment)
 </div>

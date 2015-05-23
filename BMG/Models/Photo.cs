@@ -18,7 +18,7 @@ namespace BMG.Models
         public string Path { get; set; }
         public string Description { get; set; }
         public string IdUserCreate { get; set; }
-        public Nullable<int> IdDiscussion { get; set; }
+        public int IdDiscussion { get; set; }
         public bool Main { get; set; }
         public System.DateTime DataTimeCreate { get; set; }
     

@@ -54,9 +54,11 @@ namespace BMG.Controllers
         {
             if (ModelState.IsValid)
             {
+                usersDiscussion.Id = db.UsersDiscussions.ToList().Count;
                 db.UsersDiscussions.Add(usersDiscussion);
+                    
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return Redirect(Request.UrlReferrer.AbsolutePath);
             }
 
             ViewBag.IdUser = new SelectList(db.AspNetUsers, "Id", "Email", usersDiscussion.IdUser);

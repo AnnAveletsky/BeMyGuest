@@ -15,10 +15,47 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Places
-        public ActionResult Index()
+        public ActionResult Index(string adress, string type, int? idCountry, int? IdCity,string status,bool? main)
         {
             var places = db.Places.Include(p => p.AspNetUser).Include(p => p.City).Include(p => p.Country).Include(p => p.Discussion);
-            return View(places.ToList());
+            if (idCountry != null&&db.Countries.Find(idCountry).Name!="")
+            {
+                places = places.Where(p => p.Country.Id==idCountry);
+            }
+            if (IdCity != null && db.Cities.Find(IdCity).Name != "")
+            {
+                places = places.Where(p => p.City.Id == IdCity);
+            }
+            if(adress!=null){
+                places = places.Where(p => p.Adress.Contains(adress));
+            }
+            if (type != null)
+            {
+                places = places.Where(p => p.Type.Contains(type));
+            }
+            if (status != null)
+            {
+                places = places.Where(p => p.Status.Contains(status));
+            }
+            if (main != null)
+            {
+                places = places.Where(p => p.Main==main);
+            }
+            ViewBag.IdUser = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.IdCity = new SelectList(db.Cities, "Id", "Name");
+            ViewBag.IdCountry = new SelectList(db.Countries, "Id", "Name");
+            ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate");
+            return View(places);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "Id,Adress,Type,IdCountry,IdCity,Status,Main")] Place place)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", new { place.Adress, place.Type, place.IdCountry, place.IdCity, place.Status, place.Main });
+            }
+            return View(place);
         }
         // GET: Places/MyPlaces
         public ActionResult MyPlaces()

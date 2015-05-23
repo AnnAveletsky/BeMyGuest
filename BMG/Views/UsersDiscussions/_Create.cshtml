@@ -1,6 +1,6 @@
 ﻿@model BMG.Models.UsersDiscussion
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create","UsersDiscussions",Model)) 
 {
     @Html.AntiForgeryToken()
     

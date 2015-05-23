@@ -158,7 +158,7 @@
     <Property Name="Path" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="IdUserCreate" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="IdDiscussion" Type="int" />
+    <Property Name="IdDiscussion" Type="int" Nullable="false" />
     <Property Name="Main" Type="bit" Nullable="false" />
     <Property Name="DataTimeCreate" Type="datetime" Nullable="false" />
   </EntityType>
@@ -207,8 +207,6 @@
   <EntityType Name="UsersDiscussions">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="IdUser" />
-      <PropertyRef Name="IdDiscussion" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="IdUser" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -482,7 +480,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Photos_ToDiscussions">
-    <End Role="Discussions" Type="Self.Discussions" Multiplicity="0..1" />
+    <End Role="Discussions" Type="Self.Discussions" Multiplicity="1" />
     <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Discussions">

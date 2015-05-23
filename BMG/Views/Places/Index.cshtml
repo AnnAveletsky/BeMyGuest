@@ -5,9 +5,15 @@
 }
 
 <h2>Места</h2>
-
 <p>
     @Html.ActionLink("Добавить новое место", "Create")
 </p>
-
-@Html.Partial("~/Views/Places/_Places.cshtml", Model)
+<div class="row">
+    <div class="col-lg-4">
+        @{
+            BMG.Models.Place search = new BMG.Models.Place();
+        }
+        @Html.Partial("~/Views/Places/_Search.cshtml", search)
+    </div>
+    @Html.Partial("~/Views/Places/_Places.cshtml", Model)
+</div>

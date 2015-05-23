@@ -1,10 +1,10 @@
 ﻿@model BMG.Models.AspNetUser
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Обо мне";
 }
 
-<h2>Details</h2>
+<h2>Обо мне</h2>
 
 <div class="jumbotron">
     <center><h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.SecondName)</h1></center>
@@ -99,5 +99,15 @@
                 }
             </table>
         </div>
-    </div>
+        
+        </div>
+</div>
+<h2>Мои фотографии</h2>
+<div class="row">
+        @foreach (var i in Model.Photos1)
+        {
+            <div class="col-lg-3">
+                @Html.Partial("~/Views/Photos/_Photo.cshtml", i);
+            </div>
+        }
 </div>

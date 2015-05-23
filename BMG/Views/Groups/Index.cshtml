@@ -9,4 +9,12 @@
 <p>
     @Html.ActionLink("Создать новую группу", "Create")
 </p>
-@Html.Partial("~/Views/Groups/_Groups.cshtml", Model)
+<div class="row">
+    <div class="col-lg-3 thumbnail">
+        @{
+            BMG.Models.Group search = new BMG.Models.Group();
+        }
+        @Html.Partial("~/Views/Groups/_Search.cshtml", search)
+    </div>
+    @Html.Partial("~/Views/Groups/_Groups.cshtml", Model)
+</div>

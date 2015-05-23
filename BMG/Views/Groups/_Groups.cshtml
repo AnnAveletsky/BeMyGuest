@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<BMG.Models.Group>
-<div class="row">
+
     @foreach (var item in Model)
     {
-        <div class="col-lg-6 thumbnail">
+        <div class="col-lg-4 thumbnail">
             @foreach (var i in item.Photos)
             {
                 if (i.Group != null && i.Main == true)
@@ -27,4 +27,3 @@
             </p>
         </div>
     }
-</div>

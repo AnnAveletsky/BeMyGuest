@@ -34,7 +34,7 @@ namespace BMG.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MyPhotos([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
+        public ActionResult MyPhotosAdd([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
         {
             if (ModelState.IsValid)
             {
@@ -43,6 +43,25 @@ namespace BMG.Controllers
                     if (i.UserName == User.Identity.Name)
                     {
                         i.Photos1.Add(db.Photos.Find(photo.Id));
+                        db.SaveChanges();
+                        return RedirectToAction("MyPhotos");
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(photo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MyPhotosDelete([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        i.Photos1.Remove(db.Photos.Find(photo.Id));
                         db.SaveChanges();
                         return RedirectToAction("MyPhotos");
                     }
@@ -89,7 +108,7 @@ namespace BMG.Controllers
                     {
                         var discussion = new Discussion();
                         discussion.AspNetUser = i;
-                        discussion.Title = "Для фото" + i.FirstName+" "+i.SecondName;
+                        discussion.Title = "Для фото";
                         discussion.DateTimeCreate = DateTimeOffset.Now.DateTime;
 
                         photo.AspNetUser = i;
@@ -102,11 +121,16 @@ namespace BMG.Controllers
                            foreach (var p in photos.ToList())
                            {
                                db.Photos.Find(p.Id).Main=false;
+                               db.AspNetUsers.Find(i.Id).Photos1.Add(photo);
                            }
+                        }
+                        else
+                        {
+                            db.AspNetUsers.Find(i.Id).Photos.Add(photo);
                         }
                         db.Photos.Add(photo);
                         db.Discussions.Add(discussion);
-                        db.AspNetUsers.Find(i.Id).Photos.Add(photo);
+                        
                         db.SaveChanges();
                         return RedirectToAction("MyPhotos");
                     }

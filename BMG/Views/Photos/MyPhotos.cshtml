@@ -12,7 +12,24 @@
         <center>
             <h2>Мой фотоальбом</h2>
         </center>
-        @Html.Partial("~/Views/Photos/_Photos.cshtml", Model.Photos1);
+        <div class="row">
+            @foreach (var item in Model.Photos1)
+            {
+                
+                    <div class="col-lg-4">
+
+                        @using (Html.BeginForm("MyPhotosDelete", "Photos", item))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Partial("~/Views/Photos/_Photo.cshtml", item);
+                            <div class="form-group">
+                                <input type="submit" value="Удалить из фотоальбома" class="btn btn-default" />
+                            </div>
+                        }
+                    </div>
+                
+            }
+        </div>
     </div>
 
     <div class="col-lg-6 thumbnail">
@@ -26,7 +43,7 @@
                 if (!Model.Photos1.Contains(item)) {
                 <div class="col-lg-4">
                     
-                    @using (Html.BeginForm("MyPhotos", "Photos", item))
+                    @using (Html.BeginForm("MyPhotosAdd", "Photos", item))
                     {
                         @Html.AntiForgeryToken()
                         @Html.Partial("~/Views/Photos/_Photo.cshtml", item);

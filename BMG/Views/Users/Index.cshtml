@@ -5,13 +5,23 @@
 }
 
 <h2>Пользователи</h2>
-<div class="row">
 
+    <div class="row">
+    <div class="col-lg-4">
+        @{
+            BMG.Models.AspNetUser search = new BMG.Models.AspNetUser();
+        }
+        @Html.Partial("~/Views/Users/_Search.cshtml", search)
+    </div>
     @foreach (var item in Model)
     {
-        <div class="col-lg-4">
-            @Html.Partial("~/Views/Users/_AboutUser.cshtml", item)
-        </div>
+        
+            <div class="col-lg-4">
+                @Html.Partial("~/Views/Users/_AboutUser.cshtml", item)
+            </div>
+        
     }
 </div>
+
+
 

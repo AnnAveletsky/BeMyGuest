@@ -15,11 +15,33 @@ namespace BMG.Controllers
         private Entities db = new Entities();
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index(string status,string firstName,string secondName)
         {
-            return View(db.AspNetUsers.ToList());
+            IEnumerable<AspNetUser> users = db.AspNetUsers.ToList(); ;
+            if (status != null)
+            {
+                users = users.Where(p => p.Status == status);
+            }
+            if (firstName != null)
+            {
+                users = users.Where(p => p.FirstName == firstName);
+            }
+            if (secondName != null)
+            {
+                users = users.Where(p => p.SecondName == secondName);
+            }
+            return View(users);
         }
-          
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "Status,FirstName,SecondName")] AspNetUser aspNetUser)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index",new {aspNetUser.Status,aspNetUser.FirstName,aspNetUser.SecondName});
+            }
+            return View(aspNetUser);
+        }
         // GET: Users/AboutMe
         public ActionResult AboutMe()
         {

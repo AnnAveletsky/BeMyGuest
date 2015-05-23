@@ -18,8 +18,8 @@ namespace BMG.Models
         {
             this.Photos = new HashSet<Photo>();
             this.Places = new HashSet<Place>();
-            this.UsersDiscussions = new HashSet<UsersDiscussion>();
             this.Travelings = new HashSet<Traveling>();
+            this.UsersDiscussions = new HashSet<UsersDiscussion>();
         }
     
         public int Id { get; set; }
@@ -30,8 +30,8 @@ namespace BMG.Models
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Place> Places { get; set; }
+        public virtual ICollection<Traveling> Travelings { get; set; }
         public virtual ICollection<UsersDiscussion> UsersDiscussions { get; set; }
         public virtual Place Place { get; set; }
-        public virtual ICollection<Traveling> Travelings { get; set; }
     }
 }
