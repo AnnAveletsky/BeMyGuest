@@ -5,7 +5,7 @@
         <div class="col-lg-3 thumbnail">
             @if (item.Photos.Count == 1)
             {
-                foreach (var i in item.Photos)
+                foreach (var i in item.AspNetUser.Photos)
                 {
                     <h2> @Html.Partial("~/Views/Photos/_LinkPhoto.cshtml", i)</h2>
                 }
@@ -33,7 +33,7 @@
             {
                 foreach (var i in item.Photos)
                 {
-                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
+                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i.AspNetUser)
                 }
             }
             @if (item.Place != null)
@@ -42,7 +42,7 @@
                 {
                     if (i.Main == true)
                     {
-                        @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+                        @Html.Partial("~/Views/Photos/_Avatar.cshtml", i.AspNetUser);
                     }
 
                 }

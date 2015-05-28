@@ -4,12 +4,7 @@
     
     <h2>@Html.Partial("~/Views/Users/_LinkUser.cshtml",Model)</h2>
    
-    @foreach (var i in Model.Photos)
-    {
-        if (i.AspNetUser != null && i.Main == true)
-        {
-            @Html.Partial("~/Views/Photos/_Avatar.cshtml", i)
-        }
-    }
+    @Html.Partial("~/Views/Photos/_Avatar.cshtml", Model)
+       
     <h4>@Html.DisplayFor(modelItem => Model.Status)</h4>
 </div>

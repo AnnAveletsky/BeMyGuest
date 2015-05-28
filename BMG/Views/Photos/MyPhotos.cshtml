@@ -40,7 +40,7 @@
         <div class="row">
             @foreach (var item in Model.Photos)
             {
-                if (!Model.Photos1.Contains(item)) {
+                if (!Model.Photos1.Contains(item)&&item.Traveling==null&&item.Place==null&&item.Group==null) {
                 <div class="col-lg-4">
                     
                     @using (Html.BeginForm("MyPhotosAdd", "Photos", item))

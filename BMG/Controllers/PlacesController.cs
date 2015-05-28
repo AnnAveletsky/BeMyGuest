@@ -210,7 +210,9 @@ namespace BMG.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Place place = db.Places.Find(id);
+            Discussion discussion = db.Places.Find(id).Discussion;
             db.Places.Remove(place);
+            db.Discussions.Remove(discussion);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,66 +1,143 @@
 ﻿@model BMG.Models.Traveling
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "О путешествии";
 }
 
-<h2>Details</h2>
+<h2>О путешествии</h2>
 
 <div>
-    <h4>Traveling</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <center><h2>@Html.DisplayFor(model => model.Name)</h2></center>
+    <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        @foreach (var i in Model.Photos)
+        {
+            if (i.Main == true)
+            {
+                <div class="col-lg-3">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateTimeComing)
-        </dt>
+                    @Html.Partial("~/Views/Photos/_AvatarTraveling.cshtml", Model)
+                </div>
+            }
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.DateTimeComing)
-        </dd>
+        <div class="col-md-6">
+            <dl class="dl-horizontal ">
+                <dt>
+                    Дата приезда
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateTimeDeparture)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DateTimeComing)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateTimeDeparture)
-        </dd>
+                <dt>
+                    Дата отъезда
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DateTimeDeparture)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                <dt>
+                    Описание
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DataTimeCreate)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DataTimeCreate)
-        </dd>
+                <dt>
+                    Дата и время создания
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DataTimeCreate)
+                </dd>
+            </dl>
+            <h2>Участники</h2>
+            @foreach (var i in Model.Occasions)
+            {
+                @Html.Partial("~/Views/Users/_AboutUser.cshtml", i.AspNetUser)
+            }
+            <h2>Фотографии</h2>
+            @if (Model.AspNetUser.UserName == User.Identity.Name)
+            {
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Добавление фотографии к путешествию
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row">
+                                    @foreach (var item in Model.AspNetUser.Photos)
+                                    {
+                                         if (!Model.AspNetUser.Photos1.Contains(item)&&item.Traveling==null&&item.Place==null&&item.Group==null) {
+                                        bool main = false;
+                                        using (Html.BeginForm("_AddPhotoTraveling", "Photos", new { idPhoto = item.Id, main, idTraveling = Model.Id }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div class="col-lg-4">
+                                                @Html.Partial("~/Views/Photos/_Photo.cshtml", item)
+                                                <div class="form-group row">
+                                                    <div class="control-label col-lg-8">Ава Путешествия</div>
+                                                    <div class="col-lg-2">
+                                                        <div class="checkbox">
+                                                            @Html.EditorFor(model => main)
+                                                            @Html.ValidationMessageFor(model => main, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" value="Добавить" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
+            }
+            else
+            {
+                foreach (var i in Model.AspNetUsers)
+                {
+                    @Html.Partial("~/Views/Photos/_AddPhotoTraveling.cshtml", new { id = Model.Id })
+                }
+            }
 
-    </dl>
+            @Html.Partial("~/Views/Photos/_Photos.cshtml", Model.Photos)
+
+        </div>
+        <div class="col-md-3">
+            <h3>Создатель путешествия</h3>
+            @Html.Partial("~/Views/Users/_AboutUser.cshtml", Model.AspNetUser)
+            
+            @if (Model.AspNetUser.UserName == User.Identity.Name)
+            {
+
+                @Html.ActionLink("Редактирование", "Edit", new { id = Model.Id })
+                <br />
+                @Html.ActionLink("Удалить", "Delete", new { id = Model.Id })
+                <br />
+            }
+        </div>
+        <div class="col-lg-6">
+            <p>
+                @Html.ActionLink("Перейти ко всем путешествиям", "Index")
+                <br />
+                @Html.ActionLink("Перейти к моим путешествиям", "MyTravelings")
+            </p>
+
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

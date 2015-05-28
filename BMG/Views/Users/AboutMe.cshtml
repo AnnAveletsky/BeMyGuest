@@ -33,15 +33,9 @@
                 <center><h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.SecondName)</h1></center>
                 <div class="row">
                     <div class="col-lg-6">
-                        @foreach (var i in Model.Photos)
-                        {
-
-                            if (i.AspNetUser != null && i.Main == true)
-                            {
-                                @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
-                            }
-
-                        }
+                        
+                       @Html.Partial("~/Views/Photos/_Avatar.cshtml", Model);
+                           
                     </div>
                     <div class="col-lg-6">
                         <table class="table">

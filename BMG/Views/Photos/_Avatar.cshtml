@@ -1,4 +1,9 @@
-﻿@model BMG.Models.Photo
+﻿@model BMG.Models.AspNetUser
 
-<img src="https://@Html.DisplayFor(model => model.Path)" alt="@Html.DisplayFor(model => model.Description)" width="100%"/>
-    
+@foreach (var i in Model.Photos)
+{
+    if (i.AspNetUser != null&&i.Traveling==null && i.Main == true)
+    {
+        <img src="https://@Html.DisplayFor(model => i.Path)" alt="@Html.DisplayFor(model => i.Description)" width="100%"/>
+    }
+}

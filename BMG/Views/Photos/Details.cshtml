@@ -7,10 +7,8 @@
 <h2>Подробнее о фототографии</h2>
 <div class="row">
     <hr />
-    @Html.Partial("~/Views/Photos/_Avatar.cshtml", Model);
-    <p>
-        @Html.DisplayFor(model => model.Description)
-    </p>
+    @Html.Partial("~/Views/Photos/_Photo.cshtml", Model)
+   
     @if (Model.Main == true)
     {
         <p> Является аватаркой</p>
@@ -20,14 +18,7 @@
         <p>Не является аватаркой</p>
     }
    Создана @Html.Partial("~/Views/Users/_LinkUser.cshtml", Model.AspNetUser)
-    <p>
-        @if (Model.AspNetUser.UserName == User.Identity.Name)
-        {
-            @Html.ActionLink("Редактирование", "Edit", new { id = Model.Id })
-            <br />
-            @Html.ActionLink("Удалить", "Delete", new { id = Model.Id })
-        }
-    </p>
+   
     @Html.Partial("~/Views/Discussions/_Discussion.cshtml", Model.Discussion)
     @{
         BMG.Models.UsersDiscussion comment = new BMG.Models.UsersDiscussion();

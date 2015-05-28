@@ -32,6 +32,36 @@ namespace BMG.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _AddPhotoTraveling(int idPhoto,bool main,int idTraveling)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var i in db.AspNetUsers.ToList())
+                {
+                    if (i.UserName == User.Identity.Name)
+                    {
+                        foreach (var j in db.Photos)
+                        {
+                            if (main==true&&
+                                db.Photos.Find(j.Id).Traveling != null &&
+                                db.Photos.Find(j.Id).Main==true)
+                            {
+                                db.Photos.Find(j.Id).Main = false;
+                            }
+                        }
+                        Photo photo = db.Photos.Find(idPhoto);
+                        db.Travelings.Find(idTraveling).Photos.Add(photo);
+                        db.SaveChanges();
+                        return Redirect(Request.UrlReferrer.AbsolutePath);
+                    }
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult MyPhotosAdd([Bind(Include = "Id,Path,Description,IdUserCreate,IdDiscussion,Main,DataTimeCreate")] Photo photo)
@@ -61,6 +91,10 @@ namespace BMG.Controllers
                 {
                     if (i.UserName == User.Identity.Name)
                     {
+                        if (db.Photos.Find(photo.Id).Main == true)
+                        {
+                            db.Photos.Find(photo.Id).Main = false;
+                        }
                         i.Photos1.Remove(db.Photos.Find(photo.Id));
                         db.SaveChanges();
                         return RedirectToAction("MyPhotos");
@@ -70,6 +104,7 @@ namespace BMG.Controllers
             }
             return View(photo);
         }
+        
         // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {
@@ -120,8 +155,13 @@ namespace BMG.Controllers
                            var photos= db.Photos.Where(p => p.Main == true && p.AspNetUser.Id == i.Id);
                            foreach (var p in photos.ToList())
                            {
-                               db.Photos.Find(p.Id).Main=false;
-                               db.AspNetUsers.Find(i.Id).Photos1.Add(photo);
+                               if (db.Photos.Find(p.Id).Traveling == null&&
+                                   db.Photos.Find(p.Id).Place==null&&
+                                   db.Photos.Find(p.Id).Group == null)
+                               {
+                                   db.Photos.Find(p.Id).Main = false;
+                                   db.AspNetUsers.Find(i.Id).Photos1.Add(photo);
+                               }
                            }
                         }
                         else
@@ -154,6 +194,9 @@ namespace BMG.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdGroup = new SelectList(db.Groups, photo.Group);
+            ViewBag.IdPlace = new SelectList(db.Places, photo.Place);
+            ViewBag.IdTraveling = new SelectList(db.Travelings, photo.Traveling);
             ViewBag.IdUserCreate = new SelectList(db.AspNetUsers, "Id", "Email", photo.IdUserCreate);
             ViewBag.IdDiscussion = new SelectList(db.Discussions, "Id", "IdUserCreate", photo.IdDiscussion);
             return View(photo);
@@ -164,7 +207,7 @@ namespace BMG.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Path,Description,Main")] Photo photo)
+        public ActionResult Edit([Bind(Include = "Id,Path,Description,Main,IdTraveling,IdPlace,IdGroup")] Photo photo)
         {
             if (ModelState.IsValid)
             {
@@ -180,7 +223,29 @@ namespace BMG.Controllers
                             var photos = db.Photos.Where(p => p.Main == true && p.AspNetUser.Id == i.Id);
                             foreach (var p in photos.ToList())
                             {
-                                db.Photos.Find(p.Id).Main = false;
+                                if (db.Photos.Find(photo.Id).Traveling == null &&
+                                   db.Photos.Find(photo.Id).Place == null &&
+                                   db.Photos.Find(photo.Id).Group == null&&
+                                    p.Traveling == null &&
+                                   p.Place == null &&
+                                   p.Group == null)
+                                {
+                                    db.Photos.Find(p.Id).Main = false;
+                                }
+                                else if (db.Photos.Find(photo.Id).Traveling != null&&
+                                    p.Traveling != null)
+                                {
+                                    db.Photos.Find(p.Id).Main = false;
+                                }
+                                else if (db.Photos.Find(photo.Id).Group != null &&
+                                   p.Group != null)
+                                {
+                                    db.Photos.Find(p.Id).Main = false;
+                                }else if (db.Photos.Find(photo.Id).Place != null&&
+                                    p.Place != null)
+                                {
+                                    db.Photos.Find(p.Id).Main = false;
+                                }
                             }
                         }
                     }

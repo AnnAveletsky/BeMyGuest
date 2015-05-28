@@ -143,7 +143,10 @@ namespace BMG.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Traveling traveling = db.Travelings.Find(id);
+            Discussion discussion = db.Travelings.Find(id).Discussion;
+            
             db.Travelings.Remove(traveling);
+            db.Discussions.Remove(discussion);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

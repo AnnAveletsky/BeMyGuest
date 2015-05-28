@@ -1,0 +1,9 @@
+﻿@model BMG.Models.Traveling
+
+@foreach (var i in Model.Photos)
+{
+    if (i.Main == true)
+    {
+        @Html.Partial("~/Views/Photos/_Photo.cshtml", i)
+    }
+}

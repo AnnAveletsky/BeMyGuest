@@ -3,18 +3,14 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-lg-4 thumbnail">
-            @foreach (var i in item.Photos)
-            {
-                if (i.Traveling != null && i.Main == true)
-                {
-                    @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
-                }
-            }
+        <div class="col-lg-3 thumbnail">
+            
+                    
+              
             <h2>
                 @Html.Partial("~/Views/Travelings/_LinkTraveling.cshtml", item)
             </h2>
-
+            @Html.Partial("~/Views/Photos/_AvatarTraveling.cshtml", item)
             @if (item.DateTimeComing != null)
             {
                 <h4>

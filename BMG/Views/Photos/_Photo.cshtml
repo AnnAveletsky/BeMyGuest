@@ -3,19 +3,20 @@
     
  <div class="thumbnail">
     <img src="https://@Html.DisplayFor(modelItem => Model.Path)" alt="@Html.DisplayFor(modelItem => Model.Description)" />
-    <div class="caption">
-        <h3>@Html.DisplayFor(modelItem => Model.Description)</h3>
-        <p>
-            @Html.ActionLink("Подробнее", "Details", new { id = Model.Id })
-            @if (Model.AspNetUser.UserName == User.Identity.Name)
-            {
-                @Html.ActionLink("Редактирование", "Edit", new { id = Model.Id })
-                <br />
-                @Html.ActionLink("Удалить", "Delete", new { id = Model.Id })
-            }
-        </p>
-    </div>
+    <h4>@Html.Partial("~/Views/Photos/_LinkPhoto.cshtml", Model)</h4>
+    <p>
+        @if (Model.AspNetUser.UserName == User.Identity.Name)
+        {
+            @Html.ActionLink("Редактирование", "Edit","Photos", new { id = Model.Id },null)
+            <br />
+            @Html.ActionLink("Удалить", "Delete", "Photos", new { id = Model.Id }, null)
+        }
+    </p>
 </div>
+
+
+
+
 
 
 

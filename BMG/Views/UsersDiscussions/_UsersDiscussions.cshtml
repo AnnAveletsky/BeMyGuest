@@ -10,7 +10,7 @@
                         {
                             if (i.AspNetUser != null && i.Main == true)
                             {
-                                @Html.Partial("~/Views/Photos/_Avatar.cshtml", i);
+                                @Html.Partial("~/Views/Photos/_Avatar.cshtml", i.AspNetUser);
                             }
                         }
                         <h3>
